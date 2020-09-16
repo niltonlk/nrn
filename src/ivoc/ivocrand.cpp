@@ -40,7 +40,9 @@
 #undef dmaxuint
 #define dmaxuint 4294967295.
 
-extern "C" {void nrn_random_play(); }
+//extern "C" {
+    void nrn_random_play();
+//} // extern "C"
 class RandomPlay : public Observer, public Resource {
 public:
 	RandomPlay(Rand*, double*);
@@ -57,16 +59,16 @@ declarePtrList(RandomPlayList,RandomPlay)
 implementPtrList(RandomPlayList, RandomPlay)
 static RandomPlayList* random_play_list_;
 
-extern "C" {
-double nrn_random_pick(Rand* r);
+//extern "C" {
+//double nrn_random_pick(Rand* r);
 void nrn_random_reset(Rand* r);
-Rand* nrn_random_arg(int);
+//Rand* nrn_random_arg(int);
 long nrn_get_random_sequence(Rand* r);
 void nrn_set_random_sequence(Rand* r, long seq);
-int nrn_random_isran123(Rand* r, uint32_t* id1, uint32_t* id2, uint32_t* id3);
+//int nrn_random_isran123(Rand* r, uint32_t* id1, uint32_t* id2, uint32_t* id3);
 #include <mcran4.h>
 
-}
+//} // extern "C"
 
 class NrnRandom123 : public RNG {
 public:
@@ -305,7 +307,7 @@ void nrn_set_random_sequence(Rand* r, long seq) {
 	mcr->ihigh_ = seq;
 }
 
-int nrn_random_isran123(Rand* r, uint32_t* id1, uint32_t* id2, uint32_t* id3) {
+extern "C" int nrn_random_isran123(Rand* r, uint32_t* id1, uint32_t* id2, uint32_t* id3) {
 	if (r->type_ == 4) {
 		NrnRandom123* nr = (NrnRandom123*)r->gen;
 		nrnran123_getids3(nr->s_, id1, id2, id3);
@@ -387,7 +389,7 @@ static double r_repick(void* r)
   return (*(x->rand))();
 }
 
-double nrn_random_pick(Rand* r) {
+extern "C" double nrn_random_pick(Rand* r) {
 	if (r) {
 		return (*(r->rand))();
 	}else{
@@ -401,7 +403,7 @@ void nrn_random_reset(Rand* r) {
 	}
 }
 
-Rand* nrn_random_arg(int i) {
+extern "C" Rand* nrn_random_arg(int i) {
 	Object* ob = *hoc_objgetarg(i);
 	check_obj_type(ob, "Random");
 	Rand* r = (Rand*)(ob->u.this_pointer);

@@ -33,7 +33,7 @@ cd $NSRC
 cvs update
 
 # the name of the install directory contains a version number that
-# comes from nrnversion.c
+# comes from nrnversion.cpp
 cd $NSRC
 NVER="`sh $NSRC/nrnversion.sh`"
 export NVER

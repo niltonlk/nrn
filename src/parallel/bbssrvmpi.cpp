@@ -10,11 +10,11 @@
 #define debug 0
 
 #define POLLCNT 300
-extern "C" {
+//extern "C" {
 	extern int bbs_poll_;
 	void bbs_handle();
 	extern double hoc_cross_x_;
-}
+//} // extern "C"
 
 static int bbs_poll_cnt_;
 static int bbs_msg_cnt_;
@@ -208,8 +208,8 @@ printf("unknown message\n");
 	nrnmpi_unref(recv);
 }
 #else
-extern "C" {
+//extern "C" {
 void bbs_handle(){}
-}
+//} // extern "C"
 #endif //NRNMPI
 

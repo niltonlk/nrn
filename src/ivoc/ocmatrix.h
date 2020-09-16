@@ -73,9 +73,9 @@ private:
 	int type_;
 };
 
-extern "C" {
+//extern "C" {
 	extern Matrix* matrix_arg(int);
-}
+//} // extern "C"
 
 class OcFullMatrix : public OcMatrix {	// type 1
 public:

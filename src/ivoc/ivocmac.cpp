@@ -22,7 +22,7 @@
 
 typedef void (*NrnBBSCallback)(const char*);
 
-extern "C"{
+//extern "C"{
 
 #if !defined(carbon)
 char * mktemp(char *){
@@ -54,7 +54,7 @@ void nrnbbs_wait(bool* pflag = (bool*)0){}
 bool is_mac_dll(FSSpec*);
 bool mac_open_dll(const char*, FSSpec*);
 #endif
-}
+//} // extern "C"
 
 #if !carbon
 bool is_mac_dll(FSSpec* fs) {
@@ -63,11 +63,11 @@ bool is_mac_dll(FSSpec* fs) {
 	return finfo.fdType == 'shlb';
 }
 
-extern "C" {
+//extern "C" {
 extern Symlist *hoc_symlist, *hoc_built_in_symlist;
 extern OSErr __path2fss(const char* name, FSSpec*);
 extern void hoc_nrn_load_dll();
-}
+//} // extern "C"
 
 static long fsspec2id(FSSpec* fs) {
 	CInfoPBRec ci;

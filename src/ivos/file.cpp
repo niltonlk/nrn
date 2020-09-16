@@ -70,7 +70,7 @@
 #ifdef HAVE_SYS_MMAN_H
 extern "C" {
 #include <sys/mman.h>
-}
+} // extern "C"
 #endif
 
 #ifdef WIN16
@@ -86,7 +86,7 @@ extern "C" {
 // These are the POSIX definitions.  Hopefully they won't conflict.
     extern int _close(int);
     extern int _read(int, void*, unsigned int);
-}
+} // extern "C"
 #endif
 
 #if !defined(__GNUC__) || !defined (WIN32) && !defined (MAC)
@@ -100,7 +100,7 @@ extern "C" {
 // These are the POSIX definitions.  Hopefully they won't conflict.
     extern int close(int);
     extern int read(int, void*, unsigned int);
-}
+} // extern "C"
 #endif
 //#if defined(SGI)
 //#endif

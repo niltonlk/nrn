@@ -11,7 +11,7 @@
 #include <string>
 #include <ocfile.h> // bool isDirExist(const std::string& path);
 
-extern "C" {
+//extern "C" {
 #include <hocstr.h>
 void nrnpython_real();
 void nrnpython_start(int);
@@ -46,7 +46,7 @@ extern char** nrn_global_argv;
 #if NRNPYTHON_DYNAMICLOAD
 int nrnpy_site_problem;
 #endif
-}
+//} // extern "C"
 
 void nrnpy_augment_path() {
   static int augmented = 0;
@@ -151,7 +151,7 @@ static void del_wcargv(int argc) {
 
 static void copy_argv_wcargv(int argc, char** argv) {
   del_wcargv(argc);
-  // basically a copy of code from Modules/python.c
+  // basically a copy of code from Modules/python.cpp
   wcargv = (wchar_t**)PyMem_Malloc(sizeof(wchar_t*) * argc);
   if (!wcargv) {
     fprintf(stderr, "out of memory\n");

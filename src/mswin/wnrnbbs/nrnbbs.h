@@ -3,9 +3,9 @@
 
 typedef void (*NrnBBSCallback)(const char*);
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+//#if defined(__cplusplus)
+//extern "C" {
+//#endif
 bool nrnbbs_connect();
 void nrnbbs_disconnect();
 bool nrnbbs_connected();
@@ -35,7 +35,7 @@ int nrnbbs_count();
 bool nrnbbs_query(long index);
 #endif
 
-#if defined(__cplusplus)
-}
-#endif
+//#if defined(__cplusplus)
+//}
+//#endif
 #endif

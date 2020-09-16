@@ -32,9 +32,9 @@ public:
 	static FIHList* fihlist_[4];
 };
 
-extern "C" {
+//extern "C" {
 	void nrn_fihexec(int type);
-}
+//} // extern "C"
 void nrn_fihexec(int type) {
 	FIHList* fl = FInitialHandler::fihlist_[type];
 	if (fl) {

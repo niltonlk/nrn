@@ -12,7 +12,7 @@
 #include "oc2iv.h"
 #endif
 
-extern "C" {
+//extern "C" {
 #if CABLE
 #include "membfunc.h"
 extern double* point_process_pointer(Point_process*, Symbol*, int);
@@ -23,7 +23,7 @@ extern Symlist* hoc_symlist;
 extern Objectdata* hoc_top_level_data;
 extern Symlist* hoc_built_in_symlist, *hoc_top_level_symlist;
 extern int hoc_array_index(Symbol*, Objectdata*);
-}
+//} // extern "C"
 #include "string.h"
 #include "symdir.h"
 

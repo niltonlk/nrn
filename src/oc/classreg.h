@@ -5,9 +5,9 @@
 #include <hocdec.h>
 #include <hoc_membf.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+//#if defined(__cplusplus)
+//extern "C" {
+//#
 
 extern void class2oc(const char*,
 	void* (*cons)(Object*),
@@ -18,8 +18,8 @@ extern void class2oc(const char*,
 	Member_ret_str_func*
 );
 
-#if defined(__cplusplus)
-}
-#endif
+//#if defined(__cplusplus)
+//}
+//#endif
 
 #endif

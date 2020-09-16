@@ -12,11 +12,11 @@ the prototypes be of the form "type foo(type arg, ...)"
 typedef long double longdbl;
 #if NRNMPI
 #include <stdlib.h>
-#if defined(__cplusplus)
-extern "C" {
-#endif
+//#if defined(__cplusplus)
+//extern "C" {
+//#endif
 
-/* from bbsmpipack.c */
+/* from bbsmpipack.cpp */
 typedef struct bbsmpibuf {
 	char* buf;
 	int size;
@@ -54,15 +54,15 @@ extern void nrnmpi_bbssend(int dest, int tag, bbsmpibuf* r);
 extern int nrnmpi_bbsrecv(int source, bbsmpibuf* r);
 extern int nrnmpi_bbssendrecv(int dest, int tag, bbsmpibuf* s, bbsmpibuf* r);
 
-/* from nrnmpi.c */
-extern void nrnmpi_init(int nrnmpi_under_nrncontrol, int* pargc, char*** pargv);
+/* from nrnmpi.cpp */
+void nrnmpi_init(int nrnmpi_under_nrncontrol, int* pargc, char*** pargv);
 extern int nrnmpi_wrap_mpi_init(int* flag);
 extern double nrnmpi_wtime();
 extern void nrnmpi_terminate();
 extern void nrnmpi_abort(int errcode);
 extern void nrnmpi_subworld_size(int n);
 
-/* from mpispike.c */
+/* from mpispike.cpp */
 extern void nrnmpi_spike_initialize();
 extern int nrnmpi_spike_exchange();
 extern int nrnmpi_spike_exchange_compressed();
@@ -115,8 +115,8 @@ extern int nrnmpi_bgp_single_advance(NRNMPI_Spike* spk);
 extern int nrnmpi_bgp_conserve(int nsend, int nrecv);
 #endif
 
-#if defined(__cplusplus)
-}
-#endif
+//#if defined(__cplusplus)
+//}
+//#endif
 #endif
 #endif

@@ -22,8 +22,8 @@
 static char linebuf[512], *cp;
 int lexcontext;
 
-extern int unput();
-extern int unGetc();
+extern int unput(int);
+extern int unGetc(int);
 extern int Getc();
 
 #define debug(arg1,arg2) /*printf("lex:arg1|%s|\n", arg2);*/
@@ -94,7 +94,7 @@ E	[Ee][-+]?{D}+
 	yylval.qp = putintoken(yytext, 0, NONLIN1);
 	if (lexcontext == NONLINEAR) return NONLIN1;
 	if (lexcontext == LINEAR){yylval.qp->itemsubtype = LINEAR; return LIN1;}
-	diag("equation addition can't occur in this type of block", (char *)0);
+	diag((char*)"equation addition can't occur in this type of block", (char *)0);
 	}
 
 <O>\~	{ /* syntactic sugar for equations */
@@ -113,14 +113,14 @@ E	[Ee][-+]?{D}+
 
 <O>[ \t]+	{ putintoken(yytext, SPACE, SPACE);}
 
-<O>\r\n	{ putintoken("\n", NEWLINE, 0);}
-<O>\r	{ putintoken("\n", NEWLINE, 0);}
+<O>\r\n	{ putintoken((char*) "\n", NEWLINE, 0);}
+<O>\r	{ putintoken((char*) "\n", NEWLINE, 0);}
 <O>\n	{ putintoken(yytext, NEWLINE, 0);}
 
 <O>[:\?].*	{ putintoken(yytext, STRING, STUFF);}
 
-<O>\{	{ yylval.qp = putintoken("{", 0, '{'); return yytext[0]; }
-<O>\}	{ yylval.qp = putintoken("}", 0, '}'); return yytext[0]; }
+<O>\{	{ yylval.qp = putintoken((char*) "{", 0, '{'); return yytext[0]; }
+<O>\}	{ yylval.qp = putintoken((char*) "}", 0, '}'); return yytext[0]; }
 <O>.	{ yylval.qp = putintoken(yytext, 0, yytext[0]); return yytext[0]; }
 
 <to_eocom>ENDCOMMENT {
@@ -155,7 +155,7 @@ E	[Ee][-+]?{D}+
 	}
 
 <to_par>\n {
-	diag("Units not terminated by ')'", (char *)0);
+	diag((char*)"Units not terminated by ')'", (char *)0);
 }
 
 <to_eocom,to_eoverb>\n {
@@ -200,26 +200,26 @@ int input() {
 }
 #endif
 
-int unput(c) int c; {
+int unput(int c) {
 	return unGetc(c);
 }
 
-int output(c) int c; {
+int output(int c) {
 #if LINT
 	IGNORE(c);
 #endif
-	diag("internal error: ", "called output");
+	diag((char*)"internal error: ",  (char*)"called output");
 	return 0;
 }
 
 int yywrap() {
 	if (YYSTATE == to_eoverb) {
-		diag("End of file while in VERBATIM mode.\n",
-			"Missing ENDVERBATIM?");
+		diag((char*)"End of file while in VERBATIM mode.\n",
+			 (char*)"Missing ENDVERBATIM?");
 	}
 	if (YYSTATE == to_eocom) {
-		diag("End of file while in COMMENT mode.\n",
-			"Missing ENDCOMMENT?");
+		diag((char*)"End of file while in COMMENT mode.\n",
+			 (char*)"Missing ENDCOMMENT?");
 	}
 	return 1;
 }

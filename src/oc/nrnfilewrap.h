@@ -10,9 +10,9 @@
 #define USE_NRNFILEWRAP 0
 #endif
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+//#if defined(__cplusplus)
+//extern "C" {
+//#
 
 #include "hocstr.h"
 
@@ -56,8 +56,8 @@ extern char* fgets_unlimited(HocStr* s, NrnFILEWrap* f);
 
 extern NrnFILEWrap* hoc_fin;
 
-#if defined(__cplusplus)
-}
-#endif
+//#if defined(__cplusplus)
+//}
+//#endif
 
 #endif

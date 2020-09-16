@@ -33,7 +33,15 @@ extern int emacs_docmd();
 extern int emacs_dofile();
 extern int emacs_edinit();
 extern int emacs_bsearch();
-/*extern int emacs_exit();*/
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+extern int emacs_exit();
+
+#if defined(__cplusplus)
+}
+#endif
 extern int emacs_itoa();
 extern int emacs_enlargewind();
 extern int emacs_eq();

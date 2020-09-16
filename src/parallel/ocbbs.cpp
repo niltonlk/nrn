@@ -17,9 +17,10 @@
 #undef MD
 #define MD 2147483647.
 
-extern "C" int hoc_return_type_code;
+//extern "C"
+extern int hoc_return_type_code;
 
-extern "C" {
+//extern "C" {
 	extern int vector_arg_px(int, double**);
 	Symbol* hoc_which_template(Symbol*);
 	void bbs_done();
@@ -75,7 +76,7 @@ extern "C" {
 	extern bool nrn_trajectory_request_per_time_step_;
 	extern int nrncore_is_enabled();
 	extern int nrncore_psolve(double tstop);
-}
+//} // extern "C"
 
 class OcBBS : public BBS , public Resource {
 public:

@@ -29,9 +29,9 @@ actual_v, etc.
 
 #include <membfunc.h>
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+//#if defined(__cplusplus)
+//extern "C" {
+//#endif
 
 typedef struct NrnThreadMembList{ /* patterned after CvMembList in cvodeobj.h */
 	struct NrnThreadMembList* next;
@@ -106,8 +106,8 @@ extern void nrn_thread_table_check();
 
 #define FOR_THREADS(nt) for (nt = nrn_threads; nt < nrn_threads + nrn_nthread; ++nt)
 
-#if defined(__cplusplus)
-}
-#endif
+//#if defined(__cplusplus)
+//}
+//#endif
 
 #endif

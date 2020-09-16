@@ -8,7 +8,7 @@
 #include <hoccontext.h>
 #include "nrnpy_utils.h"
 
-extern "C" {
+//extern "C" {
 #include "parse.h"
 extern void hoc_nopop();
 extern void hoc_pop_defer();
@@ -81,7 +81,7 @@ static hoc_List* dlist;
 extern int nrnpy_site_problem;
 extern int* nrnpy_site_problem_p;
 #endif
-}
+//} // extern "C"
 
 class Py2Nrn {
  public:
@@ -377,7 +377,7 @@ void nrnpy_decref_defer(PyObject* po) {
 }
 
 #if (PY_MAJOR_VERSION == 2 && PY_MINOR_VERSION == 3)
-// copied from /Modules/_ctypes/_ctypes.c
+// copied from /Modules/_ctypes/_ctypes.cpp
 static PyObject* PyTuple_Pack(int n, ...) {
   int i;
   PyObject* o;

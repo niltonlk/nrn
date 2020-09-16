@@ -19,12 +19,13 @@
 #include "graph.h"
 #endif
 #include "gui-redirect.h"
-extern "C" {
+//extern "C" {
 	extern Object** (*nrnpy_gui_helper_)(const char* name, Object* obj);
 	extern double (*nrnpy_object_to_double_)(Object*);
-}
+//} // extern "C"
 
-extern "C" int hoc_return_type_code;
+extern /*"C"*/ int hoc_return_type_code;
+
 static double dummy;
 
 static Symbol* pv_class_sym_;

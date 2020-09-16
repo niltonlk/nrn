@@ -3,6 +3,11 @@
 #include <stdio.h>
 /* too many time char* buf overruns its storage */
 
+
+//#if defined(__cplusplus)
+//extern "C" {
+//#
+
 typedef struct HocStr {
 	char* buf;
 	size_t size;
@@ -14,5 +19,8 @@ extern void hocstr_delete(HocStr*);
 void hocstr_resize(HocStr*, size_t);
 void hocstr_copy(HocStr*, const char*);
 
-#endif
+//#if defined(__cplusplus)
+//}
+//#endif
 
+#endif

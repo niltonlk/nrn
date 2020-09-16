@@ -21,10 +21,11 @@ implementPtrList(KSChanList, KSChan)
 
 static KSChanList* channels;
 
-extern "C" {
+//extern "C" {
 extern char* hoc_symbol_units(Symbol*, const char*);
 extern void nrn_mk_table_check();
-}
+extern spREAL *spGetElement(char*, int ,int);
+//} // extern "C"
 
 static Symbol* ksstate_sym;
 static Symbol* ksgate_sym;

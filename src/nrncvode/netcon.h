@@ -370,8 +370,8 @@ public:
 	int ithread_; // for pr()
 };
 
-extern "C" {
+//extern "C" {
 extern PreSyn* nrn_gid2outputpresyn(int gid);
-}
+//} // extern "C"
 
 #endif

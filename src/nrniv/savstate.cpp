@@ -13,7 +13,7 @@
 
 typedef void (*ReceiveFunc)(Point_process*, double*, double);
 
-extern "C" {
+//extern "C" {
 #include "membfunc.h"
 extern int section_count;
 extern void nrn_shape_update();
@@ -27,7 +27,7 @@ extern PlayRecList* net_cvode_instance_prl();
 extern double t;
 extern short* nrn_is_artificial_;
 static void tqcallback(const TQItem* tq, int i);
-};
+//} // extern "C";
 
 #define ASSERTfgets(a,b,c) nrn_assert(fgets(a,b,c) != 0)
 #define ASSERTfread(a,b,c,d) nrn_assert(fread(a,b,c,d) == c)

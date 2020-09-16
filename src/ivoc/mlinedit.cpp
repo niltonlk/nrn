@@ -1,6 +1,6 @@
 #include <../../nrnconf.h>
 
-extern "C" int hoc_return_type_code;
+extern /*"C"*/ int hoc_return_type_code;
 
 #include <stdio.h>
 
@@ -22,11 +22,11 @@ extern "C" int hoc_return_type_code;
 
 #include "gui-redirect.h"
 
-extern "C" {
+//extern "C" {
 	extern Object** (*nrnpy_gui_helper_)(const char* name, Object* obj);
 	extern double (*nrnpy_object_to_double_)(Object*);
 	extern char** (*nrnpy_gui_helper3_str_)(const char* name, Object* obj, int handle_strptr);
-}
+//} // extern "C"
 
 #if HAVE_IV
 class OcText : public Text {
@@ -134,7 +134,7 @@ IFGUI
 	return (void*)e;
 ENDGUI
 #endif /* HAVE_IV  */
-	return (void*)0;
+	return nullptr;
 }
 
 static void destruct(void* v) {

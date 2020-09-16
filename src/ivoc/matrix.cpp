@@ -11,9 +11,9 @@
 #define EPS hoc_epsilon
 static Symbol* smat_;
 
-extern "C" int hoc_return_type_code;
+extern /*"C"*/ int hoc_return_type_code;
 
-extern "C" {
+//extern "C" {
 	extern double hoc_scan(FILE*);
 	extern FILE* hoc_obj_file_arg(int i);
 	extern Object** hoc_temp_objptr(Object*);
@@ -28,7 +28,7 @@ extern "C" {
 	extern MAT* matrix_full(void*); // hoc_execerror if void* not right type
 	extern SPMAT* matrix_sparse(void*);
 #endif
-}
+//} // extern "C"
 
 static void check_domain(int i, int j) {
 	if (i > j || i < 0) {
@@ -738,9 +738,9 @@ static void steer_x(void* v) {
 
 
 #if WIN32 && !USEMATRIX
-extern "C" {
+//extern "C" {
 void Matrix_reg();
-}
+//} // extern "C"
 #endif
 
 void Matrix_reg() {

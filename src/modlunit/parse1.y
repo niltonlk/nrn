@@ -16,8 +16,8 @@ and a pointer to their declaration. All "used" names are marked with
 their usage for later error checking.
 */
 
-extern Symbol *checklocal();
-extern int next_intoken();
+extern Symbol *checklocal(Symbol*);
+extern int next_intoken(Item**);
 extern Item *title;
 extern int declare_level;
 extern int parse_pass, restart_pass;
@@ -35,7 +35,7 @@ extern int breakpoint_local_seen_;
 #define R1	IFR(1)
 
 static int yylex();
-static void yyerror();
+static void yyerror(char *);
 
 #if YYBISON 
 #define myerr(arg) static int ierr=0;\
@@ -117,7 +117,7 @@ extern int lexcontext;
 
 %%
 top: 	all
-	|error {diag("Illegal block", (char *)0);}
+	|error {diag((char*)"Illegal block", (char *)0);}
 	;
 all:	/*nothing*/
 	{$$ = ITEM0;}
@@ -144,7 +144,7 @@ include1: INCLUDE1 STRING
 	;
 define1: DEFINE1 NAME integer
 		{P1{define_value($2, $3);}}
-	| DEFINE1 error {myerr("syntax: DEFINE name integer");}
+	| DEFINE1 error {myerr((char*)"syntax: DEFINE name integer");}
 	;
 Name:	NAME
 		{P1{$1->element = (void *)checklocal(SYM($1));}}
@@ -172,7 +172,7 @@ constasgn: NAME '=' number units limits
 		{P1{$$ = itemarray(7, $1, $2, ITEM0,ITEM0,ITEM0,ITEM0,ITEM0); declare(modlunitCONST, $1, $$);}}
 	| NAME '[' integer ']' units limits
 		{P1{$$ = itemarray(7, $1, $5, $3, ITEM0, ITEM0,ITEM0,ITEM0); declare(modlunitCONST, $1, $$);}}
-	| error {myerr("name = number");}
+	| error {myerr((char*)"name = number");}
 	;
 units:	/*nothing*/
 		{$$ = ITEM0;}
@@ -231,7 +231,7 @@ indepbody: /*nothing*/
 	;
 indepdef: NAME FROM number TO number withby integer opstart units
 		{P1{$$ = itemarray(8, $1, $9, $3, $5, $6, $7, $8, ITEM0);}}
-	| error {myerr("name FROM number TO number WITH integer");}
+	| error {myerr((char*)"name FROM number TO number WITH integer");}
 	;
 withby:	WITH
 	;
@@ -251,8 +251,8 @@ depdef: name opstart units tolerance
 	| name '[' integer ']' FROM number TO number opstart units tolerance
 		{P1{$$ = itemarray(7, $1, $10, $3, $6, $8, $9, ITEM0);}}
 	| error {
-diag("name FROM number TO number START number\n",
-"FROM...TO and START are optional, name can be name[integer]\n");}
+diag((char*)"name FROM number TO number START number\n",
+ (char*)"FROM...TO and START are optional, name can be name[integer]\n");}
 	;
 opstart: /*nothing*/ {$$ = ITEM0;}
 	| START1 number {$$ = $2;}
@@ -265,7 +265,7 @@ statbody: /*nothing*/
 		{P1{declare(STAT, ITMA($2)[0], $2);}}
 	;
 plotdecl: PLOT pvlist VS name optindex
-	| PLOT error { myerr("PLOT namelist VS name");}
+	| PLOT error { myerr((char*)"PLOT namelist VS name");}
 	;
 pvlist:	name optindex
 	| pvlist ',' name optindex
@@ -284,7 +284,7 @@ unitbody: /*nothing*/
 	;
 unitdef: Units '=' Units
 		{P1{install_units(STR($1), STR($3));}}
-	| Units error {myerr("Unit definition syntax: (units) = (units)");}
+	| Units error {myerr((char*)"Unit definition syntax: (units) = (units)");}
 	;
 factordef: NAME '=' real Units
 		{P1{$$ = itemarray(3, $1, $4, $3); declare(UFACTOR, $1, $$);}}
@@ -293,7 +293,7 @@ factordef: NAME '=' real Units
 		    Unit_push(STR($3));
 			Unit_push(STR($4)); unit_div();
 			dimensionless();
-			Sprintf(buf, "%g", unit_mag());
+			Sprintf(buf, "%g",unit_mag());
 			$$ = itemarray(3, $1, $4, lappendstr(misc, buf));
 /*printf("%s has value %s and units (%s)\n", SYM($1)->name, buf, STR($5));*/
 		    unit_pop();
@@ -310,7 +310,7 @@ factordef: NAME '=' real Units
 		    unit_pop();
 		    declare(UFACTOR, $1, $$);
 		}}
-	| error {myerr("Unit factor syntax: examples:\n\
+	| error {myerr((char*)"Unit factor syntax: examples:\n\
 foot2inch = (foot) -> (inch)\n\
 F = 96520 (coulombs)\n\
 R = (k-mole) (joule/degC)");
@@ -374,7 +374,7 @@ conducthint: CONDUCTANCE Name
 		{$$ = ITEM0; conductance_seen_ = 1;}
         ; 
 locallist: LOCAL locallist1 { if (blocktype == BREAKPOINT) breakpoint_local_seen_ = 1; }
-	| LOCAL error {myerr("Illegal LOCAL declaration");}
+	| LOCAL error {myerr((char*)"Illegal LOCAL declaration");}
 	;
 locallist1: NAME locoptarray
 		{P1{pushlocal($1, $2);}}
@@ -417,7 +417,7 @@ stmt:	asgn
 	| watchstmt
 	| fornetcon
 	| error
-		{myerr("Illegal statement");}
+		{myerr((char*)"Illegal statement");}
 	;	
 asgn:	varname '=' expr
 		{
@@ -442,21 +442,21 @@ varname: name
 		{lastok = $1;
 		  P1{SYM($1)->usage |= DEP;}
 		  P2{ if (SYM($1)->subtype & ARRAY) {
-			myerr("variable needs an index");}
+			myerr((char*)"variable needs an index");}
 		  }
 		}
 	| name '[' intexpr ']'
 		{lastok = $4; 
 		  P1{SYM($1)->usage |= DEP;}
 		  P2{ if ((SYM($1)->subtype & ARRAY) == 0)
-			{myerr("variable is not an array");}
+			{myerr((char*)"variable is not an array");}
 		  }
 		}
 	| NAME '@' integer
 		{lastok = $3;
 		  P1{SYM($1)->usage |= DEP;}
 		  P2{ if (SYM($1)->subtype & ARRAY) {
-			myerr("variable needs an index");}
+			myerr((char*)"variable needs an index");}
 		  }
 		}
 
@@ -464,7 +464,7 @@ varname: name
 		{lastok = $6;
 		  P1{SYM($1)->usage |= DEP;}
 		  P2{ if ((SYM($1)->subtype & ARRAY) == 0)
-			{myerr("variable is not an array");}
+			{myerr((char*)"variable is not an array");}
 		  }
 		}
 	;
@@ -477,7 +477,7 @@ intexpr: Name
 	| intexpr '*' intexpr
 	| intexpr '/' intexpr
 	| INT '(' expr ')' {lastok = $4;}
-	| error {myerr("Illegal integer expression");}
+	| error {myerr((char*)"Illegal integer expression");}
 	;
 expr:	varname {P3{unit_push($1);}}
 	| real units	{P3{if ($2) {
@@ -503,9 +503,9 @@ expr:	varname {P3{unit_push($1);}}
 	| expr LE expr	{P3{unit_logic(2, $1, $2, lastok);}}
 	| expr EQ expr	{P3{unit_logic(2, $1, $2, lastok);}}
 	| expr NE expr	{P3{unit_logic(2, $1, $2, lastok);}}
-	| NOT expr	{P3{unit_pop(); Unit_push("");}}
+	| NOT expr	{P3{unit_pop(); Unit_push((char*) "");}}
 	| '-' expr %prec UNARYMINUS
-	| error {myerr("Illegal expression");}
+	| error {myerr((char*)"Illegal expression");}
 	;
 funccall: NAME  '(' {P3{unit_push_args($1);}} exprlist ')'
 		{ lastok = $5; P1{SYM($1)->usage |= FUNCT;}
@@ -524,7 +524,7 @@ exprlist1: expr {P3{unit_chk_arg($1, lastok);}}
 fromstmt: FROM NAME '=' intexpr TO intexpr opinc {P1{pushlocal($2, ITEM0);}} stmtlist
 		{P1{$$ = itemarray(6, $1, $2, $4, $6, $7, $9); poplocal();}}
 	|FROM error {
-myerr("FROM intvar = intexpr TO intexpr BY intexpr { statements }");}
+myerr((char*)"FROM intvar = intexpr TO intexpr BY intexpr { statements }");}
 	;
 opinc: /*nothing*/ {$$ = ITEM0;}
 	| BY intexpr
@@ -577,7 +577,7 @@ pareqn: PARTEQN PRIME '=' NAME '*' DEL2 '(' NAME ')' '+' NAME
 		{P3{unit_push($2); unit_swap();
 		    unit_cmp($2,$6,lastok); unit_pop();
 		}}
-	| PARTEQN error {myerr("Illeqal partial diffeq");}
+	| PARTEQN error {myerr((char*)"Illeqal partial diffeq");}
 	;
 firstlast: FIRST | LAST
 	;
@@ -616,7 +616,7 @@ arglist1: name units
 			checklocal(SYM($1))->u.str = STR($2);
 			Lappendstr((List *)$$, STR($2));
 		    }else{
-			Lappendstr((List *)$$, "");
+			Lappendstr((List *)$$, (char*)"");
 		    }
 		}}
 	| arglist1 ',' name units
@@ -627,7 +627,7 @@ arglist1: name units
 			checklocal(SYM($3))->u.str = STR($4);
 			Lappendstr((List *)$1, STR($4));
 		    }else{
-			Lappendstr((List *)$1, "");
+			Lappendstr((List *)$1, (char*)"");
 		    }
 		}}
 	;
@@ -642,22 +642,22 @@ netrecblk: NETRECEIVE '(' arglist ')'
 		{P1{
 			List* l; Item* q;
 			if ($3 == ITEM0) {
-				diag("NET_RECEIVE must have at least one argument", (char*)0);
+				diag((char*)"NET_RECEIVE must have at least one argument", (char*)0);
 			}
 			l = newlist();
-			q = lappendsym(l, install("flag", NAME));
+			q = lappendsym(l, install((char*)"flag", NAME));
 			pushlocal(q, ITEM0);
-			Lappendstr((List *)$3, "");
+			Lappendstr((List *)$3, (char*)"");
 			netreceive_arglist = args; args = (List*)0;
 		}}
 	   stmtlist
 		{ P1{poplocal();}}
-	| NETRECEIVE error { myerr("Illegal NETRECEIVE block");}
+	| NETRECEIVE error { myerr((char*)"Illegal NETRECEIVE block");}
 	;
 
 watchstmt: WATCH watch1
 	| watchstmt ',' watch1
-	| WATCH error { myerr("Illegal WATCH statement");}
+	| WATCH error { myerr((char*)"Illegal WATCH statement");}
 	;
 watch1: '(' expr ')' real
 	;
@@ -671,14 +671,14 @@ fornetcon: FOR_NETCONS '(' arglist ')'
 			if (s1->u.str) { /* s2 must be nil or same */
 				if (s2->u.str) {
 					if (strcmp(s1->u.str, s2->u.str) != 0) {
-						diag(s1->name, " in FOR_NETCONS arglist does not have same units as corresponding arg in NET_RECEIVE arglist");
+						diag(s1->name,  (char*)"in FOR_NETCONS arglist does not have same units as corresponding arg in NET_RECEIVE arglist");
 					}
 				}else{
 					s2->u.str = s1->u.str;
 				}
 			}else{ /* s2 must be nil */
 				if (s2->u.str) {
-					diag(s1->name, " in FOR_NETCONS arglist does not have same units as corresponding arg in NET_RECEIVE arglist");
+					diag(s1->name,  (char*)"in FOR_NETCONS arglist does not have same units as corresponding arg in NET_RECEIVE arglist");
 				}
 			}
 /*printf("|%s|%s|  |%s|%s|\n", s1->name, s1->u.str, s2->name, s2->u.str);*/
@@ -686,18 +686,18 @@ fornetcon: FOR_NETCONS '(' arglist ')'
 			q2 = q2->next;
 		  }
 		  if (q1 != netreceive_arglist || q2 != args) {
-			diag("NET_RECEIVE and FOR_NETCONS do not have same number of arguments", (char*)0);
+			diag((char*)"NET_RECEIVE and FOR_NETCONS do not have same number of arguments", (char*)0);
 		  }
 		}}
 	  stmtlist
-	| FOR_NETCONS error { myerr("Illegal FOR_NETCONS statement");}
+	| FOR_NETCONS error { myerr((char*)"Illegal FOR_NETCONS statement");}
 	;
 
 solveblk: SOLVE NAME ifsolerr
 		{P1{$$ = itemarray(4, $1, $2, ITEM0, $3); lappenditem(solvelist, $$);}}
 	| SOLVE NAME USING METHOD ifsolerr
 		{P1{$$ = itemarray(4, $1, $2, $3, $4); lappenditem(solvelist, $$);}}
-	| SOLVE error { myerr("Illegal SOLVE statement");}
+	| SOLVE error { myerr((char*)"Illegal SOLVE statement");}
 	;
 ifsolerr: /*nothing*/
 		{ $$ = ITEM0; }
@@ -710,27 +710,27 @@ solvefor: /*nothing*/
 	;
 solvefor1: SOLVEFOR NAME
 		{ P2{if(!(SYM($2)->subtype&STAT)){
-			myerr("Not a STATE");}
+			myerr((char*)"Not a STATE");}
 		  }
 		}
 	| solvefor1 ',' NAME
 		{ P2{if(!(SYM($2)->subtype&STAT)){
-			myerr("Not a STATE");}
+			myerr((char*)"Not a STATE");}
 		  }
 		}
-	| SOLVEFOR error {myerr("Syntax: SOLVEFOR name, name, ...");}
+	| SOLVEFOR error {myerr((char*)"Syntax: SOLVEFOR name, name, ...");}
 	;
 eqnblk: BREAKPOINT stmtlist
 	;
 terminalblk: TERMINAL stmtlist
 	;
 sens:	SENS namelist
-	|SENS error {myerr("syntax is SENS var1, var2, var3, etc");}
+	|SENS error {myerr((char*)"syntax is SENS var1, var2, var3, etc");}
 	;
 
 conserve: CONSERVE consreact '=' expr
 		{P3{unit_cmp($2, $3, lastok);}}
-	| CONSERVE error {myerr("Illegal CONSERVE syntax");}
+	| CONSERVE error {myerr((char*)"Illegal CONSERVE syntax");}
 	;
 consreact:varname {P3{consreact_push($1);}}
 	|INTEGER varname {P3{consreact_push($2);}}
@@ -785,7 +785,7 @@ reaction: REACTION react REACT1 react '(' expr ',' expr ')'
 		{P3{kinunits($3, restart_pass);}}
 	| REACTION react '-' GT '(' expr ')'
 		{P3{kinunits($3, restart_pass);}}
-	| REACTION error {myerr("Illegal reaction syntax");}
+	| REACTION error {myerr((char*)"Illegal reaction syntax");}
 	;
 react:	varname {P3{R1{ureactadd($1);} unit_push($1);}}
 	|INTEGER varname {P3{R1{ureactadd($2);} unit_push($2); Unit_push((char*)0); unit_exponent($1,$1);}}
@@ -795,7 +795,7 @@ react:	varname {P3{R1{ureactadd($1);} unit_push($1);}}
 		}
 	;
 lagstmt: LAG name BY NAME
-	| LAG error {myerr("Lag syntax is: LAG name BY const");}
+	| LAG error {myerr((char*)"Lag syntax is: LAG name BY const");}
 	;
 tablestmt: TABLE tablst dependlst FROM expr TO expr WITH integer
 		{P3{unit_pop(); unit_pop();}}
@@ -819,7 +819,7 @@ matchlist: match
 match:	name
 	| matchname '(' expr ')' '=' expr
 	| error
-		{myerr("MATCH syntax is state0 or state(expr)=expr or\
+		{myerr((char*)"MATCH syntax is state0 or state(expr)=expr or\
 state[i](expr(i)) = expr(i)");}
 	;
 matchname: name
@@ -867,14 +867,14 @@ nrnuse: USEION NAME READ nrnlist valence
 	|USEION NAME READ nrnlist WRITE nrnlist valence
 		{P1{nrn_use($2, $4, $6);}}
 	| error
-		{myerr("syntax is: USEION ion READ list WRITE list");}
+		{myerr((char*)"syntax is: USEION ion READ list WRITE list");}
 	;
 nrnlist: NAME
 		{P1{$$ = (Item *)newlist(); Lappendsym((List *)$$, SYM($1));}}
 	| nrnlist ',' NAME
 		{P1{ Lappendsym((List *)$1, SYM($3));}}
 	| error
-		{myerr("syntax is: keyword name , name, ..., name");}
+		{myerr((char*)"syntax is: keyword name , name, ..., name");}
 	;
 valence: /*nothing*/
 		{$$ = ITEM0;}
@@ -886,8 +886,7 @@ valence: /*nothing*/
 %%
 	/* end of grammar */
 
-static void yyerror(s)	/* called for yacc syntax error */
-	char *s;
+static void yyerror(char* s)	/* called for yacc syntax error */
 {
 	Fprintf(stderr, "%s:\n ", s);
 }
@@ -895,13 +894,11 @@ static void yyerror(s)	/* called for yacc syntax error */
 static int yylex() {return next_intoken(&(yylval.qp));}
 
 #if !NRNUNIT
-void nrn_list(q1, q2)
-	Item *q1, *q2;
+void nrn_list(Item *q1, Item* q2)
 {
 	/*ARGSUSED*/
 }
-void nrn_use(q1, q2, q3)
-	Item *q1, *q2, *q3;
+void nrn_use(Item* q1, Item* q2, Item* q3)
 {
 	/*ARGSUSED*/
 }

@@ -37,17 +37,23 @@
 declareActionCallback(PrintableWindow);
 implementActionCallback(PrintableWindow);
 
-extern "C" { extern void single_event_run();}
+//extern "C" {
+    extern void single_event_run();
+//} // extern "C"
 
 extern void handle_old_focus();
 
 #ifdef WIN32
 #include <windows.h>
-extern "C" { extern int iv_mere_dismiss;}
+//extern "C" {
+    extern int iv_mere_dismiss;
+//} // extern "C"
 #endif
 
 #if MAC
-extern "C" { extern void ivoc_dismiss_defer();}
+//extern "C" {
+    extern void ivoc_dismiss_defer();
+//} // extern "C"
 #endif
 
 // just because avoiding virtual resource
@@ -236,13 +242,13 @@ const char* DismissableWindow::name() const {
 }
 
 #if defined(MINGW)
-extern "C" {
+//extern "C" {
 static const char* s_;
 static void setwindowtext(void* v) {
   HWND hw = (HWND)v;
   SetWindowText(hw, s_);
 }
-}
+//} // extern "C"
 #endif
 
 void DismissableWindow::name(const char* s) {

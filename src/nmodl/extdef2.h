@@ -1,3 +1,3 @@
-"romberg",
-"legendre",
-"deflate",
+(char*)"romberg",
+(char*)"legendre",
+(char*)"deflate",

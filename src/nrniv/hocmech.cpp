@@ -5,7 +5,7 @@
 #include "nrnoc2iv.h"
 #include "nrniv_mf.h"
 
-extern "C" {
+//extern "C" {
 #include "parse.h"
 extern int point_reg_helper(Symbol*);
 extern Object* hoc_newobj1(Symbol*, int);
@@ -24,7 +24,7 @@ extern void make_mechanism();
 extern void make_pointprocess();
 extern void hoc_construct_point(Object*, int);
 extern Object* hoc_new_opoint(int);
-}
+//} // extern "C"
 
 static Object* last_created_pp_ob_;
 static bool skip_;
@@ -301,7 +301,7 @@ hoc_execerror("Can't make a template into a PointProcess when instances already 
 	// That is the one with the u.ppsym.
 	// The only reason it needs to be in slist is to find the
 	// mechanims type. And it needs to be LAST in that list.
-	// The only reason for the u.ppsym is for ndatclas.c and we
+	// The only reason for the u.ppsym is for ndatclas.cpp and we
 	// need to fill those symbols with oboff.
 	sp = hoc_table_lookup(classsym->name, slist);
 	hoc_unlink_symbol(sp, slist);

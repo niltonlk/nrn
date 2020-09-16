@@ -130,7 +130,7 @@ static int nj_load() {
 }
 
 #if USEJVM == 2
-// copied from /usr/j2se/src.jar : src/launcher/java.c
+// copied from /usr/j2se/src.jar : src/launcher/java.cpp
 /*
  * Adds a new VM option with the given given name and value.
  */
@@ -163,7 +163,7 @@ AddOption(char *str, void *info)
 }
 #endif
 
-// copied from /usr/j2se/src.jar : src/launcher/java.c
+// copied from /usr/j2se/src.jar : src/launcher/java.cpp
 /*
  * Prints the version information from the java.version and other properties.
  */
@@ -248,7 +248,7 @@ static void initialize_jvm1() {
 	args.classpath = classpath;
 	//for (int i = 0;  args.properties[i]; ++i) {
 		//printf("properties |%s|\n", args.properties[i]);
-	//}
+	} // extern "C"
 	//args.debugging = 1;
 	//args.vfprintf = myvfprintf;
 	printf("classpath |%s|\n", args.classpath);

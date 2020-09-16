@@ -13,13 +13,13 @@
 #include "objcmd.h"
 #include "oc2iv.h"
 
-extern "C" {
+//extern "C" {
 extern Object* hoc_thisobject;
 int (*nrnpy_hoccommand_exec)(Object*);
 int (*nrnpy_hoccommand_exec_strret)(Object*, char*, int);
 void (*nrnpy_cmdtool)(Object*, int type, double x, double y, int kd);
 double (*nrnpy_func_call)(Object*, int, int*);
-}
+//} // extern "C"
 
 HocCommand::HocCommand(const char* cmd) {
 	init(cmd, hoc_thisobject);

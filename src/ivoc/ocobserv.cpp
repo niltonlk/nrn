@@ -2,9 +2,9 @@
 #include "ocobserv.h"
 #include "oc2iv.h"
 
-extern "C" {
+//extern "C" {
 	extern void hoc_obj_disconnect(Object*);
-}
+//} // extern "C"
 
 void hoc_obj_disconnect(Object* ob) {
 	delete ((ObjObservable*)ob->observers);

@@ -21,10 +21,10 @@ setting up and transfer of matrix information. Note that gid information about
 the subtrees is no longer required by this implementation.
 */
 
-extern "C" {
+//extern "C" {
 void nrnmpi_splitcell_connect(int that_host); // that_host must be adjacent to nrnmpi_myid
 
-extern int structure_change_cnt;
+extern "C" int structure_change_cnt;
 
 #if PARANEURON
 void nrnmpi_split_clear();
@@ -33,7 +33,7 @@ extern void nrnmpi_send_doubles(double*, int cnt, int dest, int tag);
 extern void nrnmpi_recv_doubles(double*, int cnt, int src, int tag);
 extern double nrnmpi_splitcell_wait_;
 #endif
-}
+//} // extern "C"
 
 #if PARANEURON
 static int change_cnt_;

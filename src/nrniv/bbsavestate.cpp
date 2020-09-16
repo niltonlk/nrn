@@ -134,7 +134,7 @@ For example
   FUNCTION bbsavestate() {
     bbsavestate = 0
   VERBATIM
-    double *xdir, *xval, *hoc_pgetarg();
+    double *xdir, *xval; // , *hoc_pgetarg();
     xdir = hoc_pgetarg(1);
     if (*xdir == -1.) { *xdir = 2; return 0.0; }
     xval = hoc_pgetarg(2);
@@ -194,7 +194,7 @@ static void bbss_early(double td, TQItem* tq);
 
 typedef void (*ReceiveFunc)(Point_process*, double*, double);
 
-extern "C" {
+//extern "C" {
 #include "membfunc.h"
 extern int section_count;
 extern void nrn_shape_update();
@@ -208,12 +208,14 @@ extern cTemplate** nrn_pnt_template_;
 extern hoc_Item* net_cvode_instance_psl();
 extern PlayRecList* net_cvode_instance_prl();
 extern void nrn_netcon_event(NetCon*, double);
-extern void net_send(void**, double*, Point_process*, double, double);
 extern double t;
 typedef void (*PFIO)(int, Object*);
 extern void nrn_gidout_iter(PFIO);
 extern short* nrn_is_artificial_;
+extern "C" {
+extern void net_send(void**, double*, Point_process*, double, double);
 extern void nrn_fake_fire(int gid, double firetime, int fake_out);
+} // extern "C"
 extern Object* nrn_gid2obj(int gid);
 extern PreSyn* nrn_gid2presyn(int gid);
 extern int nrn_gid_exists(int gid);
@@ -350,7 +352,7 @@ void bbss_restore_done(void* bbss);
 // some extra setting up and cleanup.
 // when this call returns, bbss will be invalid.
 
-};
+//} // extern "C";
 
 
 // 0 no debug, 1 print to stdout, 2 read/write to IO file
@@ -910,7 +912,7 @@ static double restore_test_bin(void* v) { //assumes whole cells
 		fclose(f);
 		//if (sz != sizes[i]) {
 		//	printf("%d note sz=%d size=%d\n", nrnmpi_myid, sz, sizes[i]);
-		//}
+        //}
 
 		buf = new char[sz];
 		sprintf(fname, "binbufin/%d.%d", gids[i], sz);
@@ -1010,7 +1012,7 @@ static void ssi_def() {
 		ssi[im].callback = hoc_table_lookup("bbsavestate", ts->symtable);
 		//if (ssi[im].callback) {
 		//	printf("callback %s.%s\n", ts->sym->name, ssi[im].callback->name);
-		//}
+        //}
 	    }else{
 		// check for callback named bbsavestate in a density mechanism
 		char name[256];
@@ -1018,8 +1020,8 @@ static void ssi_def() {
 		ssi[im].callback = hoc_table_lookup(name, hoc_built_in_symlist);
 		//if (ssi[im].callback) {
 		//	printf("callback %s\n", ssi[im].callback->name);
-		//}
-	    }
+        //}
+        }
 	    delete np;
 	}
 }
@@ -1593,7 +1595,7 @@ void BBSaveState::cell(Object* c) {
 	f->s(buf);
 	if (!is_point_process(c)) { // must be cell object
 	    if (f->type() != BBSS_IO::IN) { // writing, counting
-		// from forall_section in cabcode.c
+		// from forall_section in cabcode.cpp
 		// count, and iterate from first to last
 		hoc_Item* qsec, *first, *last;
 		qsec = c->secelm_;

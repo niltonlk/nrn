@@ -1,9 +1,14 @@
 #ifndef hoc_code_h
 #define hoc_code_h
 
+//#if defined(__cplusplus)
+//extern "C" {
+//#
+
 #include "redef.h"
 
-extern void eval(void), add(void), hoc_sub(void), mul(void), hoc_div(void), hoc_cyclic(void), negate(void), power(void);
+extern void eval(void);
+extern void add(void), hoc_sub(void), mul(void), hoc_div(void), hoc_cyclic(void), negate(void), power(void);
 extern void assign(void), bltin(void), varpush(void), constpush(void), print(void), varread(void);
 extern void nopop(void), prexpr(void), prstr(void), assstr(void), pushzero(void);
 extern void gt(void), lt(void), eq(void), ge(void), le(void), ne(void), hoc_and(void), hoc_or(void), hoc_not(void);
@@ -39,5 +44,9 @@ extern void hoc_ifseclist(void), mech_uninsert(void);
 extern void simpleconnectsection(void), range_interpolate_single(void);
 extern void hoc_sec_internal_push(void);
 /* END NEWCABLE*/
+
+//#if defined(__cplusplus)
+//}
+//#endif
 
 #endif

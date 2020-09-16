@@ -24,13 +24,13 @@ static void (*register_classes[])() = {
 	,0
 };
 	
-extern "C" {
+//extern "C" {
 void hoc_class_registration(void) {
 	for (int i=0; register_classes[i]; i++) {
 		(*register_classes[i])();
 	}
 }
-}
+//} // extern "C"
 
 /*-----------------------------------------------------*/
 #if 0

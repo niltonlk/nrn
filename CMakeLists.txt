@@ -350,7 +350,7 @@ if(READLINE_FOUND)
   # this part has to be prior to adding the nrniv subdirectory.
   execute_process(COMMAND grep -q rl_event_hook ${Readline_LIBRARY} RESULT_VARIABLE result)
   if(NOT result EQUAL 0)
-    # define for src/oc/hoc.c
+    # define for src/oc/hoc.cpp
     set(DEF_RL_GETC_FUNCTION use_rl_getc_function)
   endif()
   find_package(Curses QUIET)
