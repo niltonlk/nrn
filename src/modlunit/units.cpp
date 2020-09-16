@@ -46,7 +46,7 @@ static char	*unames[NDIM];
 double	getflt();
 void fperr(int);
 int	lookup(char* name, unit* up, int den, int c);
-struct	table	*hash(char*);
+struct	table	*hash_table(char*);
 
 void chkfperror();
 void units(unit*);
@@ -275,7 +275,7 @@ void install_units(char* s1, char* s2) /* define s1 as s2 */
 	
 	IFUNITS
 	Unit_push(s2);
-	tp = hash(s1);
+	tp = hash_table(s1);
 	if (tp->name) {
 		printf("Redefinition of units (%s) to:", s1);
 		units(usp);
@@ -716,7 +716,7 @@ int lookup(char* name, unit* up, int den, int c)
 	p = up;
 	e = 1.0;
 loop:
-	q = hash(name);
+	q = hash_table(name);
 	if(q->name) {
 		l1:
 		if(den) {
@@ -786,12 +786,12 @@ void units_cpp_init()
 		*cp++ = i+'a';
 		*cp++ = '*';
 		*cp++ = 0;
-		lp = hash(np);
+		lp = hash_table(np);
 		lp->name = np;
 		lp->factor = 1.0;
 		lp->dim[i] = 1;
 	}
-	lp = hash((char*)"");
+	lp = hash_table((char*)"");
 	lp->name = cp-1;
 	lp->factor = 1.0;
 
@@ -827,7 +827,7 @@ l0:
 			goto l0;
 		if(c == '\n') {
 			*cp++ = 0;
-			tp = hash(np);
+			tp = hash_table(np);
 			if(tp->name)
 				goto redef;
 			tp->name = np;
@@ -839,7 +839,7 @@ l0:
 		}
 	}
 	*cp++ = 0;
-	lp = hash(np);
+	lp = hash_table(np);
 	if(lp->name)
 		goto redef;
 	convr((struct unit *)lp);
@@ -944,7 +944,7 @@ int get()
 	return(c);
 }
 
-struct table * hash(char* name)
+struct table * hash_table(char* name)
 {
 	register struct table *tp;
 	register char *np;
