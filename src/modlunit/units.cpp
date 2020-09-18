@@ -17,7 +17,9 @@
 
 int	unitonflag = 1;
 static int	UnitsOn = 0;
-extern double	fabs(double);
+extern "C" {
+extern double fabs(double);
+} // extern "C"
 extern void diag(char*, char*);
 #define	IFUNITS	{if (!UnitsOn) return;}
 #define OUTTOLERANCE(arg1,arg2) (fabs(arg2/arg1 - 1.) > 1.e-5)

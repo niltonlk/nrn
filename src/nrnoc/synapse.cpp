@@ -80,7 +80,7 @@ void print_syn(void) {
 }
 
 static double alpha(double x) {
-//    double exp();
+    extern double exp(double)
 
     if (x > 0.0 && x < 10.0) {
         return x * exp(-x + 1.0);
