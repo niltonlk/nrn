@@ -222,7 +222,7 @@ typedef struct _N_VectorContent_NrnParallelLD *N_VectorContent_NrnParallelLD;
  * -----------------------------------------------------------------
  */
 
-N_Vector N_VNew_NrnParallelLD(MPI_Comm comm,
+extern "C" N_Vector N_VNew_NrnParallelLD(MPI_Comm comm,
                          long int local_length,
                          long int global_length);
 

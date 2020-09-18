@@ -52,7 +52,7 @@ void hoc_spinit(void)    /* install user variables and functions */
     int i;
     Symbol *s;
 
-    hoc_register_var(scdoub, vdoub, function);
+    hoc_register_var(scdoub, vdoub, functions);
     for (i = 0; scint[i].name; i++) {
         CHECK(scint[i].name);
         s = hoc_install(scint[i].name, UNDEF, 0.0, &hoc_symlist);
@@ -100,17 +100,17 @@ void hoc_spinit(void)    /* install user variables and functions */
         s->u.pval = thredim[i].pdoub;
         s->subtype = USERDOUBLE;
     }
-    for (i = 0; function[i].name; i++) {
-        if (!strncmp(function[i].name, "init", 4)) {
-            hoc_fake_call(hoc_lookup(function[i].name));
-            (*function[i].func)();
+    for (i = 0; functions[i].name; i++) {
+        if (!strncmp(functions[i].name, "init", 4)) {
+            hoc_fake_call(hoc_lookup(functions[i].name));
+            (*functions[i].func)();
             continue;
         }
     }
     hoc_last_init();
 }
 
-extern "C" void hoc_register_var(DoubScal *scdoub, DoubVec *vdoub, VoidFunc *function) {
+void hoc_register_var(DoubScal *scdoub, DoubVec *vdoub, VoidFunc *fn) {
     int i;
     Symbol *s;
 
@@ -131,11 +131,11 @@ extern "C" void hoc_register_var(DoubScal *scdoub, DoubVec *vdoub, VoidFunc *fun
             s->u.pval = vdoub[i].pdoub;
             s->subtype = USERDOUBLE;
         }
-    if (function)
-        for (i = 0; function[i].name; i++) {
-            CHECK(function[i].name);
-            s = hoc_install(function[i].name, FUN_BLTIN, 0.0, &hoc_symlist);
-            s->u.u_proc->defn.pf = function[i].func;
+    if (fn)
+        for (i = 0; fn[i].name; i++) {
+            CHECK(fn[i].name);
+            s = hoc_install(fn[i].name, FUN_BLTIN, 0.0, &hoc_symlist);
+            s->u.u_proc->defn.pf = fn[i].func;
             s->u.u_proc->nauto = 0;
             s->u.u_proc->nobjauto = 0;
         }

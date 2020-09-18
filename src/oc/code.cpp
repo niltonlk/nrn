@@ -125,6 +125,12 @@ int tstkchk_actual(int i, int j) {
 
 #define    NSTACK    1000 /* default size */
 #define nstack hoc_nstack
+
+// TODO - ugly but workable for now
+namespace std {
+#define stack stlstack
+}
+
 static Datum *stack;    /* the stack */
 static Datum *stackp;    /* next free spot on stack */
 static Datum *stacklast; /* last stack element */

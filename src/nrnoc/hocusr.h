@@ -33,7 +33,7 @@ extern void this_section(), this_node(), parent_section(), parent_node();
 extern void parent_connection(), section_orientation();
 
 /* Functions */
-static VoidFunc function[] = {
+static VoidFunc functions[] = {
 
 "node_data", node_data,
 "disconnect", disconnect,

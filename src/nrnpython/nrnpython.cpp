@@ -35,7 +35,6 @@ static char* nrnpython_getline(FILE*, FILE*, char*);
 #else
 static char* nrnpython_getline(char*);
 #endif
-extern void rl_stuff_char(int);
 extern int nrn_global_argc;
 extern char** nrn_global_argv;
 void nrnpy_augment_path();
@@ -47,6 +46,10 @@ extern char** nrn_global_argv;
 int nrnpy_site_problem;
 #endif
 //} // extern "C"
+
+extern "C" {
+extern void rl_stuff_char(int);
+} // extern "C"
 
 void nrnpy_augment_path() {
   static int augmented = 0;

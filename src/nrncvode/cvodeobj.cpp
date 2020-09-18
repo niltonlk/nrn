@@ -76,12 +76,10 @@ extern void nrn2ncs_netcons();
 extern "C" {
 extern N_Vector N_VNew_Parallel(int comm, long int local_length,
 	long int global_length);
-} // extern "C
-#include <mpi.h>
-extern N_Vector N_VNew_NrnParallelLD(MPI_Comm comm,
+extern N_Vector N_VNew_NrnParallelLD(int comm,
 	long int local_length, long int global_length);
+} // extern "C"
 #endif
-//} // extern "C"
 
 extern bool nrn_use_fifo_queue_;
 #if BBTQ == 5

@@ -38,6 +38,7 @@ fsyng(i)
 #include "neuron.h"
 #include "section.h"
 #include "nrniv_mf.h"
+#include <math.h>
 
 //#if defined(__cplusplus)
 //extern "C" {
@@ -80,7 +81,6 @@ void print_syn(void) {
 }
 
 static double alpha(double x) {
-    extern double exp(double)
 
     if (x > 0.0 && x < 10.0) {
         return x * exp(-x + 1.0);

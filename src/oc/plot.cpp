@@ -111,8 +111,8 @@ static double xlast, ylast;
 
 #if NRNOC_X11
 extern void x11_put_text(const char*), x11_close_window(void), x11_setcolor(int);
-extern void x11_coord(), x11_vector(), x11_point(), x11_move(), x11flush();
-extern void x11_clear(), x11_cleararea(), x11_open_window(), x11_fast();
+extern void x11_coord(double, double), x11_vector(), x11_point(), x11_move(), x11flush();
+extern void x11_clear(), x11_cleararea(), x11_open_window(), x11_fast(int);
 static void hoc_x11plot(int, double, double);
 #endif
 

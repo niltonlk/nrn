@@ -177,7 +177,7 @@ N_Vector N_VNewEmpty_NrnParallelLD(MPI_Comm comm,
  * Function to create a new parallel vector
  */
 
-N_Vector N_VNew_NrnParallelLD(MPI_Comm comm,
+extern "C" N_Vector N_VNew_NrnParallelLD(MPI_Comm comm,
                          long int local_length,
                          long int global_length)
 {
