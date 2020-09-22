@@ -13,8 +13,8 @@
 
 //extern "C" {
 #include <hocstr.h>
-void nrnpython_real();
-void nrnpython_start(int);
+extern "C" void nrnpython_real();
+extern "C" void nrnpython_start(int);
 extern int hoc_get_line();
 extern HocStr* hoc_cbufstr;
 extern int nrnpy_nositeflag;
@@ -199,7 +199,7 @@ static wchar_t* mywstrdup(char* s) {
 }
 #endif
 
-void nrnpython_start(int b) {
+extern "C" void nrnpython_start(int b) {
 #if USE_PYTHON
   static int started = 0;
   //printf("nrnpython_start %d started=%d\n", b, started);
@@ -288,7 +288,7 @@ void nrnpython_start(int b) {
 #endif
 }
 
-void nrnpython_real() {
+extern "C" void nrnpython_real() {
   int retval = 0;
 #if USE_PYTHON
   HocTopContextSet

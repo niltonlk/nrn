@@ -85,9 +85,9 @@ static void* load_python();
 static void load_nrnpython(int, const char*);
 #else //!defined(NRNPYTHON_DYNAMICLOAD)
 //extern "C" {
-extern void nrnpython_start(int);
-extern void nrnpython_reg_real();
-extern void nrnpython_real();
+extern "C" void nrnpython_start(int);
+extern "C" void nrnpython_reg_real();
+extern "C" void nrnpython_real();
 //} // extern "C"
 #endif //defined(NRNPYTHON_DYNAMICLOAD)
 
