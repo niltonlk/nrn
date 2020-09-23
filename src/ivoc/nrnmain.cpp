@@ -16,7 +16,7 @@
 	extern char* nrnmpi_load(int is_python);
 #endif
 #if NRNMPI
-extern void nrnmpi_init(int nrnmpi_under_nrncontrol, int* pargc, char*** pargv);
+extern "C" void nrnmpi_init(int nrnmpi_under_nrncontrol, int* pargc, char*** pargv);
 #endif
 #if BLUEGENE_CHECKPOINT
 	void BGLCheckpointInit(char* chkptDirPath);

@@ -47,6 +47,7 @@ extern int hoc_return_type_code;
 	double nrnmpi_splitcell_wait_;
 #endif
 #if NRNMPI
+extern "C" {
 	void nrnmpi_barrier();
 	double nrnmpi_dbl_allreduce(double, int);
 	void nrnmpi_dbl_allreduce_vec(double* src, double* dest, int cnt, int type);
@@ -58,6 +59,7 @@ extern int hoc_return_type_code;
 	void nrnmpi_char_broadcast(char*, int, int);
 	void nrnmpi_dbl_broadcast(double*, int, int);
 	extern void nrnmpi_subworld_size(int n);
+} // extern "C"
 #else
 	static void nrnmpi_int_broadcast(int*, int, int){}
 	static void nrnmpi_char_broadcast(char*, int, int){}

@@ -55,7 +55,7 @@ static int nrnmpi_under_nrncontrol_;
 static int nrnmpi_is_setup_;
 #endif
 
-void nrnmpi_init(int nrnmpi_under_nrncontrol, int* pargc, char*** pargv) {
+extern "C" void nrnmpi_init(int nrnmpi_under_nrncontrol, int* pargc, char*** pargv) {
 #if NRNMPI
     int i, b, flag;
     if (nrnmpi_use) {
