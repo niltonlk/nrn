@@ -5,7 +5,7 @@
 #include "nrnmpi.h"
 #include "netcon.h"
 
-extern "C" {
+//extern "C" {
 
 extern short* nrn_is_artificial_;
 extern bool corenrn_direct;
@@ -14,7 +14,7 @@ extern void nrncore_netpar_cellgroups_helper(CellGroup*);
 extern int nrn_has_net_event_cnt_;
 extern int* nrn_has_net_event_;
 extern short* nrn_is_artificial_;
-}
+//} // extern "C"
 
 PVoid2Int CellGroup::artdata2index_;
 Deferred_Type2ArtData CellGroup::deferred_type2artdata_;

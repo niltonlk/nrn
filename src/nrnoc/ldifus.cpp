@@ -63,7 +63,7 @@ void mac_difusfunc(ldifusfunc2_t* f, int m, ldifusfunc3_t diffunc, void** v, int
 #endif
 
 
-void nrn_tree_solve(double* a, double* d, double* b, double* rhs, int* pindex, int n) {
+extern "C" void nrn_tree_solve(double* a, double* d, double* b, double* rhs, int* pindex, int n) {
     /*
         treesolver
         

@@ -2,7 +2,7 @@
 #define NRN_NRNCORE_UTILS_H
 
 #include <string>
-extern "C" {
+//extern "C" {
 
 class NrnThread;
 
@@ -10,7 +10,7 @@ void model_ready();
 int count_distinct(double *data, int len);
 extern void nrnbbcore_register_mapping();
 bool file_exist(const std::string& path);
-int nrn_dblpntr2nrncore(double* pd, NrnThread& nt, int& type, int& index);
+extern "C" int nrn_dblpntr2nrncore(double* pd, NrnThread& nt, int& type, int& index);
 
 
 #if defined(HAVE_DLFCN_H)
@@ -22,7 +22,7 @@ void check_coreneuron_compatibility(void* handle);
 
 #endif
 
-}
+//} // extern "C"
 
 #endif //NRN_NRNCORE_UTILS_H
 
