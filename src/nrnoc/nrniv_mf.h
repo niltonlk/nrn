@@ -17,8 +17,14 @@ extern Prop* need_memb_cl(Symbol*,int*,int*);
 extern Prop* prop_alloc(Prop**, int, Node*);
 
 extern double nrn_ion_charge(Symbol*);
+#if defined(__cplusplus)
+extern "C" {
+#endif
+extern Point_process *ob2pntproc(Object *);
+#if defined(__cplusplus)
+}
+#endif
 
-extern Point_process* ob2pntproc(Object*);
 extern Point_process* ob2pntproc_0(Object*);
 
 
@@ -47,13 +53,14 @@ extern int _ss_derivimplicit(int, int, int*, int*, double*, double*, double,
   int(*)(), double**);
 extern int _ss_derivimplicit_thread(int, int*, int*, double*,
    int(*)(double*, union Datum*, union Datum*, struct NrnThread*), void*, void*, void*);
-extern int euler_thread(int, int*, int*, double*,
-   int(*)(double*, union Datum*, union Datum*, struct NrnThread*), union Datum*, union Datum*, struct NrnThread*);
 
 
 #if defined(__cplusplus)
 extern "C" {
 #endif
+
+extern int euler_thread(int, int*, int*, double*,
+                        int(*)(double*, union Datum*, union Datum*, struct NrnThread*), union Datum*, union Datum*, struct NrnThread*);
 
 extern void register_mech(const char**, Pvmp, Pvmi, Pvmi, Pvmi, Pvmi, int, int);
 extern int point_register_mech(const char**, Pvmp, Pvmi, Pvmi, Pvmi, Pvmi, int, int,

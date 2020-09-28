@@ -6,7 +6,7 @@
 
 //extern "C" {
 extern int nrn_isdouble(double*, double, double);
-//}
+//} // extern "C"
 
 class Extension;
 

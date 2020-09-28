@@ -10,9 +10,9 @@ class cTemplate;
 // when the last ref disappears, disconnect is called on the Observer
 // Some objects may be written so that update gets called  on the Observer
 
-//extern "C" {
+extern "C" {
 	void hoc_obj_notify(Object* ob);
-//}
+}
 
 class ObjObservable : public Observable {
 public:
@@ -29,9 +29,9 @@ private:
 
 // For an Observer watching a cTemplate
 
-//extern "C" {
+extern "C" {
 	void hoc_template_notify(Object*, int message);
-//}
+} // extern "C"
 
 class ClassObservable : public Observable {
 public:

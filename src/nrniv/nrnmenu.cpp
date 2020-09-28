@@ -29,7 +29,7 @@ typedef void (*ReceiveFunc)(Point_process*, double*, double);
 extern Symlist *hoc_built_in_symlist;
 extern Symbol **pointsym;
 extern double* point_process_pointer(Point_process*, Symbol*, int);
-extern Point_process* ob2pntproc(Object*);
+extern "C" Point_process* ob2pntproc(Object*);
 extern ReceiveFunc* pnt_receive;
 extern int nrn_has_net_event_cnt_;
 extern int* nrn_has_net_event_;

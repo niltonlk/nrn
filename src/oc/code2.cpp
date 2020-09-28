@@ -668,7 +668,7 @@ void hoc_run_stmt(Symbol* sym) {
 	hoc_pc = pcsav;
 }
 
-Symbol* hoc_parse_stmt(const char* str, Symlist** psymlist) {
+extern "C" Symbol* hoc_parse_stmt(const char* str, Symlist** psymlist) {
 	Symbol* sp;
 	char s[BUFSIZ];
 	extern Symlist* hoc_top_level_symlist;

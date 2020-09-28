@@ -70,7 +70,7 @@ extern double t;
 extern "C" int v_structure_change;
 extern "C" int structure_change_cnt;
 extern int nrn_node_ptr_change_cnt_;
-extern double* nrn_recalc_ptr(double*);
+extern "C" double* nrn_recalc_ptr(double*);
 extern const char *bbcore_write_version;
 // see lengthy comment in ../nrnoc/fadvance.cpp
 // nrnmpi_v_transfer requires existence of nrnthread_v_transfer even if there

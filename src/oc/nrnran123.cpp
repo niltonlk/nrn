@@ -68,7 +68,7 @@ extern "C" void nrnran123_getids3(nrnran123_State* s, uint32_t* id1, uint32_t* i
 	*id2 = s->c.v[3];
 }
 
-uint32_t nrnran123_ipick(nrnran123_State* s) {
+extern "C" uint32_t nrnran123_ipick(nrnran123_State* s) {
 	uint32_t rval;
 	char which = s->which_;
 	assert (which < 4);
@@ -82,7 +82,7 @@ uint32_t nrnran123_ipick(nrnran123_State* s) {
 	return rval;
 }
 
-double nrnran123_dblpick(nrnran123_State* s) {
+extern "C" double nrnran123_dblpick(nrnran123_State* s) {
 	return nrnran123_uint2dbl(nrnran123_ipick(s));
 }
 

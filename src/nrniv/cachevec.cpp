@@ -22,7 +22,7 @@
 
 //extern "C" {
 void nrniv_recalc_ptrs();
-extern double* nrn_recalc_ptr(double*);
+extern "C" double* nrn_recalc_ptr(double*);
 extern NetCvode* net_cvode_instance;
 //} // extern "C"
 

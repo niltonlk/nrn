@@ -1441,10 +1441,10 @@ picker()->add_menu("Erase Axis", new ActionCallback(Graph)(this, &Graph::erase_a
 	}
 }
 
-//extern "C" {
+extern "C" {
 	extern void hoc_free_list(Symlist**);
 	extern double* nrn_recalc_ptr(double*);
-//} // extern "C";
+} // extern "C";
 
 Graph::~Graph() {
 //printf("~Graph\n");

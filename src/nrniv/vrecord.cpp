@@ -19,7 +19,7 @@
 //extern "C" {
 extern double t;
 extern NetCvode* net_cvode_instance;
-extern Point_process* ob2pntproc(Object*);
+extern "C" Point_process* ob2pntproc(Object*);
 //} // extern "C"
 
 //Vector.play_remove()

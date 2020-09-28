@@ -66,6 +66,11 @@ extern void vector_resize(IvocVect*, int);
 
 extern int nrnignore;
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+
 /**
  * \brief Brief explanation of hoc_obj_run
  *
@@ -94,7 +99,7 @@ extern double hoc_call_objfunc(Symbol*, int narg, Object*); /* call a fuction wi
 extern double hoc_ac_;
 extern double hoc_epsilon;
 extern int nrn_inpython_;
-extern int stoprun;
+
 extern int hoc_color;
 extern int hoc_set_color(int);
 extern void hoc_plt(int, double, double);
@@ -151,7 +156,6 @@ extern void* hoc_Erealloc(void* ptr, size_t size);
 
 extern void* nrn_cacheline_alloc(void** memptr, size_t size);
 extern void* nrn_cacheline_calloc(void** memptr, size_t nmemb, size_t size);
-extern char* cxx_char_alloc(size_t size);
 extern void nrn_exit(int);
 extern void hoc_free_list(Symlist**);
 extern int hoc_errno_check(void);
@@ -165,8 +169,7 @@ extern int hoc_xopen_run(Symbol*, const char*);
 extern void hoc_symbol_limits(Symbol*, float, float);
 extern void sym_extra_alloc(Symbol*);
 extern int hoc_chdir(const char* path);
-extern int nrn_isdouble(double*, double, double);
-extern int hoc_main1(int, const char**, const char**);
+
 extern void hoc_final_exit();
 extern void hoc_sprint1(char**, int);
 extern double hoc_scan(FILE*);
@@ -277,6 +280,15 @@ extern void hoc_free_allobjects(cTemplate*, Symlist*, Objectdata*);
 //#endif
 
 extern int nrn_is_cable(void);
+
+#if defined(__cplusplus)
+}
+#endif
+
+extern int hoc_main1(int, const char**, const char**);
+extern char* cxx_char_alloc(size_t size);
+extern int stoprun;
+extern int nrn_isdouble(double*, double, double);
 
 #endif
 

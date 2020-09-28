@@ -170,7 +170,7 @@ static String* xvalue_format;
 extern int units_on_flag_;
 extern Symbol* hoc_get_symbol(const char*);
 extern Symbol* hoc_get_last_pointer_symbol();
-extern double* nrn_recalc_ptr(double*);
+extern "C" double* nrn_recalc_ptr(double*);
 void hoc_notify_value() {
 	Oc oc;
 	oc.notify();

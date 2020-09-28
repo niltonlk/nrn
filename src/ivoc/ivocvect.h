@@ -42,7 +42,7 @@ public:
 	MUTDEC
 };
 #define Vect IvocVect
-//extern "C" {
+extern "C" {
 extern Vect* vector_new(int, Object*); // use this if possible
 extern Vect* vector_new0();
 extern Vect* vector_new1(int);
@@ -55,7 +55,7 @@ extern Object** vector_pobj(Vect*);
 extern int is_vector_arg(int);
 extern char* vector_get_label(Vect*);
 extern void vector_set_label(Vect*, char*);
-//}
+} // extern "C"
 
 #if defined(__cplusplus)
 extern "C" {

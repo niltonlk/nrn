@@ -406,7 +406,7 @@ void hoc_free_pstring(char** p) {
 	}
 }
 
-unsigned long long nrn_mallinfo(int item) {
+extern "C" unsigned long long nrn_mallinfo(int item) {
 #if BLUEGENEQ
 	/* BLUEGENE-Q ------------------------------------------------ */
     uint64_t heap = 0;

@@ -49,9 +49,9 @@
 	extern "C" int structure_change_cnt;
 	extern int section_count;
 	extern Section** secorder;
-	extern Point_process* ob2pntproc(Object*);
+	extern "C" Point_process* ob2pntproc(Object*);
 	extern Point_process* ob2pntproc_0(Object*);
-	extern double* nrn_recalc_ptr(double*);
+	extern "C" double* nrn_recalc_ptr(double*);
 	extern Object* (*nrnpy_seg_from_sec_x)(Section*, double);
 //} // extern "C"
 

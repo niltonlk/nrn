@@ -94,11 +94,11 @@ void nrn_pending_selfqueue(double tt, NrnThread*);
 static void all_pending_selfqueue(double tt);
 static void* pending_selfqueue(NrnThread*);
 //void net_event(Point_process*, double);
-void _nrn_watch_activate(Datum*, double (*)(Point_process*), int, Point_process*, int, double);
-void _nrn_free_watch(Datum*, int, int);
+extern "C" void _nrn_watch_activate(Datum*, double (*)(Point_process*), int, Point_process*, int, double);
+extern "C" void _nrn_free_watch(Datum*, int, int);
 extern int hoc_araypt(Symbol*, int);
 extern int hoc_stacktype();
-extern Point_process* ob2pntproc(Object*);
+extern "C" Point_process* ob2pntproc(Object*);
 extern Point_process* ob2pntproc_0(Object*);
 void nrn_use_daspk(int);
 extern int nrn_use_daspk_;
@@ -111,7 +111,7 @@ extern hoc_Item* net_cvode_instance_psl();
 extern PlayRecList* net_cvode_instance_prl();
 extern void nrn_update_ps2nt();
 extern void nrn_use_busywait(int);
-extern double* nrn_recalc_ptr(double*);
+extern "C" double* nrn_recalc_ptr(double*);
 void* nrn_interthread_enqueue(NrnThread*);
 extern void (*nrnthread_v_transfer_)(NrnThread*);
 Object* (*nrnpy_seg_from_sec_x)(Section*, double);
@@ -2450,7 +2450,7 @@ extern "C" void net_event(Point_process* pnt, double time) {
 	}
 }
 
-void _nrn_watch_activate(Datum* d, double (*c)(Point_process*), int i, Point_process* pnt, int r, double flag) {
+extern "C" void _nrn_watch_activate(Datum* d, double (*c)(Point_process*), int i, Point_process* pnt, int r, double flag) {
 //	printf("_nrn_cond_activate %s flag=%g first return = %g\n", hoc_object_name(pnt->ob), flag, c(pnt));
 	if (!d->_pvoid) {
 		d->_pvoid = (void*)new WatchList();
@@ -2476,7 +2476,7 @@ void _nrn_watch_activate(Datum* d, double (*c)(Point_process*), int i, Point_pro
 	wc->activate(flag);
 }
 
-void _nrn_free_watch(Datum* d, int offset, int n) {
+extern "C" void _nrn_free_watch(Datum* d, int offset, int n) {
 	int i;
 	int nn = offset + n;
 	if (d[offset]._pvoid) {

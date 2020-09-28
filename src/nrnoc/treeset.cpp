@@ -2147,7 +2147,7 @@ void nrn_old_thread_save(void) {
 
 static double* (*recalc_ptr_)(double*);
 
-double* nrn_recalc_ptr(double* old) {
+extern "C" double* nrn_recalc_ptr(double* old) {
 	if (recalc_ptr_) { return (*recalc_ptr_)(old); }
 	if (!recalc_ptr_old_vp_) { return old; }
 	if (nrn_isdouble(old, 0.0, (double)recalc_cnt_)) {
@@ -2159,7 +2159,7 @@ double* nrn_recalc_ptr(double* old) {
 	return old;
 }
 
-void nrn_register_recalc_ptr_callback(Pfrv f) {
+extern "C" void nrn_register_recalc_ptr_callback(Pfrv f) {
 	if (n_recalc_ptr_callback >= 20) {
 		Printf("More than 20 recalc_ptr_callback functions\n");
 		exit(1);

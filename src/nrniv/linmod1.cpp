@@ -10,7 +10,7 @@
 #include "nrnoc2iv.h"
 
 //extern "C" {
-extern double* nrn_recalc_ptr(double*);
+extern "C" double* nrn_recalc_ptr(double*);
 //} // extern "C"
 //hoc interface to a LinearModelAddition
 // remember that the policy for equation additions to the tree matrix is

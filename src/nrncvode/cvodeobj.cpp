@@ -60,7 +60,7 @@ extern int nrn_modeltype();
 extern int nrn_use_selfqueue_;
 extern int use_cachevec;
 extern void nrn_cachevec(int);
-extern Point_process* ob2pntproc(Object*);
+extern "C" Point_process* ob2pntproc(Object*);
 extern void (*nrnthread_v_transfer_)(NrnThread*);
 extern void (*nrnmpi_v_transfer_)();
 
