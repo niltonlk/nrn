@@ -533,7 +533,7 @@ void printitem(Item* q) {
 			}
 			Fprintf(fcout, " %s", SYM(q)->name);
 		} else if (q->itemtype == VERBATIM) {
-			Fprintf(fcout, "%s", STR(q));
+			verbatim_adjust(STR(q));
 		} else if (q->itemtype == ITEM) {
 			printitem(ITM(q));
 		}else {

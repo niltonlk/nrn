@@ -328,4 +328,6 @@ extern Item    *qlint;
 #define Free(arg)	free((void *)(arg))
 #endif
 
+
+void verbatim_adjust(char* q);
 /** @} */  // end of hoc_functions

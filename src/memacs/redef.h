@@ -14,7 +14,7 @@ redef.h,v
 
 /*Publics by module*/
 
-//#define exit emacs_exit // TODO - why was this here?
+#define exit emacs_exit
 
 /*ANSI size = 250*/
 #define ansibeep emacs_ansibeep

@@ -53,6 +53,7 @@ static struct { /* Keywords */
     (char*)"read",		READ,
     (char*)"debug",	DEBUG,
     (char*)"double",	parseDOUBLE,
+    (char*)"em",	EDIT,
     (char*)"depvar",	DEPENDENT,
     (char*)"eqn",		EQUATION,
     (char*)"local",	LOCAL,

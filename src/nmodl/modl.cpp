@@ -31,7 +31,9 @@
  * allowed which gives the complete input filename.  The first argument
  * still gives the prefix of the .c and .var files.
  */
- 
+
+#include <regex>
+
 /* the first arg may also be a file.mod (containing the .mod suffix)*/
 #if MAC
 #include <sioux.h>
@@ -299,4 +301,10 @@ void openfiles(int argc, char* argv[])
 		diag((char*)"Can't create C file: ", s);
 	}
 #endif
+}
+
+
+void verbatim_adjust(char* q) {
+    const std::string repl = std::regex_replace(q, std::regex("u\\.template"), "u.ctemplate");
+    Fprintf(fcout, "%s", repl.c_str());
 }
