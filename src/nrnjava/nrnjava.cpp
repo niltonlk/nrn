@@ -25,9 +25,10 @@
 #include "parse.h"
 
 #include "njvm.h"
- 
-extern "C" {
+
 extern Symlist* hoc_top_level_symlist;
+
+extern "C" {
 
 // Hooks in nrn-5.0.0/src/oc/hoc_oop.cpp for filling in cTemplate structure
 extern void* (*p_java2nrn_cons)(Object*); /* returns pointer to java object */
