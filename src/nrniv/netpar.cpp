@@ -1238,7 +1238,8 @@ void BBS::netpar_solve(double tstop) {
 	// temporary check to be eventually replaced by verify_structure()
 	extern int tree_changed, v_structure_change, diam_changed;
 	if (tree_changed || v_structure_change) {
-	  hoc_execerror("NEURON model internal structures are out of date",NULL);
+	  //hoc_execerror("NEURON model internal structures are out of date",NULL);
+		std::cerr << "NEURON model internal structures are out of date" << std::endl;
         }
 	if (diam_changed) {
 	  recalc_diam();
