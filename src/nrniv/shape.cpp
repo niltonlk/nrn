@@ -43,17 +43,17 @@
 #define Shape_Rotate_			"Rotate3D PlotShape"
 #define Shape_Style_			"ShapeStyle PlotShape"
 
-extern "C" {
+//extern "C" {
 	void nrn_define_shape();
 	extern int nrn_shape_changed_;
-	extern int structure_change_cnt;
+	extern "C" int structure_change_cnt;
 	extern int section_count;
 	extern Section** secorder;
-	extern Point_process* ob2pntproc(Object*);
+	extern "C" Point_process* ob2pntproc(Object*);
 	extern Point_process* ob2pntproc_0(Object*);
-	extern double* nrn_recalc_ptr(double*);
+	extern "C" double* nrn_recalc_ptr(double*);
 	extern Object* (*nrnpy_seg_from_sec_x)(Section*, double);
-}
+//} // extern "C"
 
 #if BEVELJOIN
 static long beveljoin_ = 0;
@@ -168,10 +168,10 @@ bool OcShapeHandler::event(Event&) {
 }
 #endif //HAVE_IV
 
-extern "C" {
+//extern "C" {
 	extern Object** (*nrnpy_gui_helper_)(const char* name, Object* obj);
 	extern double (*nrnpy_object_to_double_)(Object*);
-}
+//} // extern "C"
 
 // Shape class registration for oc
 static double sh_view(void* v) {

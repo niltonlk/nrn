@@ -6,9 +6,9 @@
 #include <kschan.h>
 #include <netcon.h>
 
-extern "C" {
+//extern "C" {
 #include <mcran4.h>
-}
+//} // extern "C"
 
 class KSSingleTrans;
 class KSSingleState;

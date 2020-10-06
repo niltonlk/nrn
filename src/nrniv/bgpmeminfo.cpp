@@ -4,7 +4,7 @@
    for an unknown reason now causes a bug in the functionality of pc.cell .
 */
 
-/* from curl -k -O https://wiki.alcf.anl.gov/images/8/8d/Meminfo.c */
+/* from curl -k -O https://wiki.alcf.anl.gov/images/8/8d/Meminfo.cpp */
 /* compile with -I/bgsys/drivers/ppcfloor/arch/include */
 
 #undef STR

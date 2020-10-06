@@ -27,9 +27,9 @@
 /* for NRNMPI_DYNAMICLOAD */
 #include <nrnmpiuse.h>
 #if NRNMPI_DYNAMICLOAD
-extern void nrnmpi_dbl_allreduce_vec(double* src, double* dest, int cnt, int type);
-extern void nrnmpi_longdbl_allreduce_vec(long double* src, long double* dest, int cnt, int type);
-extern void nrnmpi_long_allreduce_vec(long* src, long* dest, int cnt, int type);
+extern "C" void nrnmpi_dbl_allreduce_vec(double* src, double* dest, int cnt, int type);
+extern "C" void nrnmpi_longdbl_allreduce_vec(long double* src, long double* dest, int cnt, int type);
+extern "C" void nrnmpi_long_allreduce_vec(long* src, long* dest, int cnt, int type);
 extern int nrnmpi_numprocs;
 #endif
 
@@ -100,7 +100,7 @@ static void VScaleBy_NrnParallelLD(realtype a, N_Vector x);
  * Function to create a new parallel vector with empty data array
  */
 
-N_Vector N_VNewEmpty_NrnParallelLD(MPI_Comm comm, 
+N_Vector N_VNewEmpty_NrnParallelLD(MPI_Comm comm,
                               long int local_length,
                               long int global_length)
 {
@@ -177,7 +177,7 @@ N_Vector N_VNewEmpty_NrnParallelLD(MPI_Comm comm,
  * Function to create a new parallel vector
  */
 
-N_Vector N_VNew_NrnParallelLD(MPI_Comm comm, 
+extern "C" N_Vector N_VNew_NrnParallelLD(MPI_Comm comm,
                          long int local_length,
                          long int global_length)
 {

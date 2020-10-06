@@ -6,14 +6,14 @@
 #include "nrnoc2iv.h"
 #include "ivocvect.h"
 
-extern "C" {
+//extern "C" {
 #include "spmatrix.h"
-}
+//} // extern "C"
 
-extern "C" {
+//extern "C" {
 	//extern double dt;
 	extern double celsius;
-}
+//} // extern "C"
 
 class KSState;
 class KSChan;

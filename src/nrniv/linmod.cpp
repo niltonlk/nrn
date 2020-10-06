@@ -25,9 +25,9 @@
 #include <cstdio>
 #include "linmod.h"
 
-extern "C" {
+//extern "C" {
     extern int (*nrnpy_hoccommand_exec)(Object*);
-}
+//} // extern "C"
 
 
 LinearModelAddition::LinearModelAddition(Matrix* cmat, Matrix* gmat,

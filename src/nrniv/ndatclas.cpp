@@ -4,17 +4,17 @@
 #include "nrnoc2iv.h"
 #include "classreg.h"
 
-extern "C" {
+//extern "C" {
 #include "membfunc.h"
 #include "parse.h"
-}
+//} // extern "C"
 
-extern "C" {
+//extern "C" {
 extern Prop* prop_alloc(Prop**, int, Node*);
 extern void single_prop_free(Prop*);
 extern Symlist* hoc_built_in_symlist;
 extern Symlist* hoc_top_level_symlist;
-}
+//} // extern "C"
 
 //----------------------------------------------------
 /* static */ class NrnPropertyImpl {

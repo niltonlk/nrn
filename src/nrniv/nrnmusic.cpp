@@ -1,7 +1,7 @@
 #define NO_PYTHON_H 1
 #include <../neuronmusic/nrnmusic.h>
 
-extern "C" {
+//extern "C" {
 extern int nrnmusic;
 extern MPI_Comm nrnmusic_comm;
 
@@ -15,7 +15,7 @@ void nrnmusic_spikehandle(void* vport, double tt, int gindex);
 extern Object* nrnpy_po2ho(PyObject*);
 extern PyObject* nrnpy_ho2po(Object*);
 extern Object* hoc_new_object(Symbol*, void*);
-}
+//} // extern "C"
 
 MUSIC::Setup* nrnmusic_setup;
 MUSIC::Runtime* nrnmusic_runtime;

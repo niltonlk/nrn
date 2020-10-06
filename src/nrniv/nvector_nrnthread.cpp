@@ -448,7 +448,7 @@ void N_VSetArrayPointer_NrnThread(realtype *v_data, N_Vector v)
 static void* vlinearsum(NrnThread* nt) {
   int i = nt->id;
   N_VLinearSum_Serial(aarg, xarg(i), barg, yarg(i), zarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VLinearSum_NrnThread(realtype a, N_Vector x, realtype b, N_Vector y, N_Vector z)
 {
@@ -461,7 +461,7 @@ mydebug("vlinearsum\n");
 static void* vconst(NrnThread* nt) {
   int i = nt->id;
   N_VConst_Serial(carg, zarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VConst_NrnThread(realtype c, N_Vector z)
 {
@@ -473,7 +473,7 @@ mydebug("vconst\n");
 static void* vprod(NrnThread* nt) {
   int i = nt->id;
   N_VProd_Serial(xarg(i), yarg(i), zarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VProd_NrnThread(N_Vector x, N_Vector y, N_Vector z)
 {
@@ -485,7 +485,7 @@ mydebug("vprod\n");
 static void* vdiv(NrnThread* nt) {
   int i = nt->id;
   N_VDiv_Serial(xarg(i), yarg(i), zarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VDiv_NrnThread(N_Vector x, N_Vector y, N_Vector z)
 {
@@ -497,7 +497,7 @@ mydebug("vdiv\n");
 static void* vscale(NrnThread* nt) {
   int i = nt->id;
   N_VScale_Serial(carg, xarg(i), zarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VScale_NrnThread(realtype c, N_Vector x, N_Vector z)
 {
@@ -510,7 +510,7 @@ mydebug("vscale\n");
 static void* vabs(NrnThread* nt) {
   int i = nt->id;
   N_VAbs_Serial(xarg(i), zarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VAbs_NrnThread(N_Vector x, N_Vector z)
 {
@@ -522,7 +522,7 @@ mydebug("vabs\n");
 static void* vinv(NrnThread* nt) {
   int i = nt->id;
   N_VInv_Serial(xarg(i), zarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VInv_NrnThread(N_Vector x, N_Vector z)
 {
@@ -534,7 +534,7 @@ mydebug("vinv\n");
 static void* vaddconst(NrnThread* nt) {
   int i = nt->id;
   N_VAddConst_Serial(xarg(i), barg, zarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VAddConst_NrnThread(N_Vector x, realtype b, N_Vector z)
 {
@@ -548,7 +548,7 @@ static void* vdotprod(NrnThread* nt) {
   int i = nt->id;
   s = N_VDotProd_Serial(xarg(i), yarg(i));
   lockadd(s);
-  return (void*)0;
+  return nullptr;
 }
 realtype N_VDotProd_NrnThread(N_Vector x, N_Vector y)
 {
@@ -564,7 +564,7 @@ static void* vmaxnorm(NrnThread* nt) {
   int i = nt->id;
   max = N_VMaxNorm_Serial(xarg(i));
   lockmax(max);
-  return (void*)0;
+  return nullptr;
 }
 realtype N_VMaxNorm_NrnThread(N_Vector x)
 {
@@ -598,7 +598,7 @@ static void* vwrmsnorm(NrnThread* nt) {
   int i = nt->id;
   s = vwrmsnorm_help(xarg(i), warg(i));
   locklongdadd(s);
-  return (void*)0;
+  return nullptr;
 }
 realtype N_VWrmsNorm_NrnThread(N_Vector x, N_Vector w)
 {
@@ -642,7 +642,7 @@ static void* vwrmsnormmask(NrnThread* nt) {
   int i = nt->id;
   s = vwrmsnormmask_help(xarg(i), warg(i), idarg(i));
   lockadd(s);
-  return (void*)0;
+  return nullptr;
 }
 realtype N_VWrmsNormMask_NrnThread(N_Vector x, N_Vector w, N_Vector id)
 {
@@ -662,7 +662,7 @@ static void* vmin(NrnThread* nt) {
 	  min = N_VMin_Serial(xarg(i));
 	  lockmin(min);
 }
-  return (void*)0;
+  return nullptr;
 }
 realtype N_VMin_NrnThread(N_Vector x)
 {
@@ -694,7 +694,7 @@ static void* vwl2norm(NrnThread* nt) {
   int i = nt->id;
   sum = N_VWL2Norm_helper(xarg(i), warg(i));
   lockadd(sum);
-  return (void*)0;
+  return nullptr;
 }
 realtype N_VWL2Norm_NrnThread(N_Vector x, N_Vector w)
 {
@@ -712,7 +712,7 @@ static void* vl1norm(NrnThread* nt) {
   int i = nt->id;
   sum = N_VL1Norm_Serial(xarg(i));
   lockadd(sum);
-  return (void*)0;
+  return nullptr;
 }
 realtype N_VL1Norm_NrnThread(N_Vector x)
 {
@@ -726,7 +726,7 @@ mydebug2("vl1norm %.20g\n", retval);
 static void* v1mask(NrnThread* nt) {
   int i = nt->id;
   N_VOneMask_Serial(xarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VOneMask_NrnThread(N_Vector x)
 {
@@ -737,7 +737,7 @@ void N_VOneMask_NrnThread(N_Vector x)
 static void* vcompare(NrnThread* nt) {
   int i = nt->id;
   N_VCompare_Serial(carg, xarg(i), zarg(i));
-  return (void*)0;
+  return nullptr;
 }
 void N_VCompare_NrnThread(realtype c, N_Vector x, N_Vector z)
 {
@@ -751,7 +751,7 @@ static void* vinvtest(NrnThread* nt) {
   int i = nt->id;
   b = N_VInvTest_Serial(xarg(i), zarg(i));
   if (!b) { lockfalse; }
-  return (void*)0;
+  return nullptr;
 }
 booleantype N_VInvTest_NrnThread(N_Vector x, N_Vector z)
 {
@@ -767,7 +767,7 @@ static void* vconstrmask(NrnThread* nt) {
   int i = nt->id;
   b = N_VConstrMask_Serial(yarg(i), xarg(i), zarg(i));
   if (!b) { lockfalse; }
-  return (void*)0;
+  return nullptr;
 }
 booleantype N_VConstrMask_NrnThread(N_Vector y, N_Vector x, N_Vector z)
 {
@@ -783,7 +783,7 @@ static void* vminquotient(NrnThread* nt) {
   int i = nt->id;
   min = N_VMinQuotient_Serial(xarg(i), yarg(i));
   lockmin(min);
-  return (void*)0;
+  return nullptr;
 }
 realtype N_VMinQuotient_NrnThread(N_Vector x, N_Vector y) /* num, denom */
 {

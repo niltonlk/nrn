@@ -5,21 +5,22 @@
 #include "nonlinz.h"
 #include "nrnoc2iv.h"
 #include "nrnmpi.h"
-extern "C" {
+//extern "C" {
 #include "cspmatrix.h"
 #include "membfunc.h"
-}
+//} // extern "C"
 
 typedef int (*Pfridot)(...);
 
-extern "C" {
-extern int structure_change_cnt;
+//extern "C" {
+extern "C" int structure_change_cnt;
 extern void v_setup_vectors();
 extern void nrn_rhs(NrnThread*);
 extern int nrndae_extra_eqn_count();
 extern Symlist *hoc_built_in_symlist;
 extern void (*nrnthread_v_transfer_)(NrnThread*);
-}
+extern spREAL *spGetElement(char*, int ,int);
+//} // extern "C"
 
 extern void pargap_jacobi_rhs(double*, double*);
 extern void pargap_jacobi_setup(int mode);

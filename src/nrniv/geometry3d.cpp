@@ -10,7 +10,7 @@
 #include <cassert>
 //#include <nrnpython.h>
 
-extern "C" {
+//extern "C" {
     int geometry3d_find_triangles(double value0, double value1, double value2,
                                   double value3, double value4, double value5,
                                   double value6, double value7, double x0,
@@ -19,7 +19,7 @@ extern "C" {
 
     double geometry3d_llgramarea(double* p0, double* p1, double* p2) ;
     double geometry3d_sum_area_of_triangles(double* tri_vec, int len);
-}
+//} // extern "C"
 
 inline double max(double a, double b) {
     return a > b ? a : b;
@@ -477,7 +477,7 @@ double geometry3d_Cylinder::signed_distance(double px, double py, double pz) {
     }
 }
 
-extern "C" {
+//extern "C" {
     void* geometry3d_new_Cylinder(double x0, double y0, double z0, double x1, double y1, double z1, double r) {
         return new geometry3d_Cylinder(x0, y0, z0, x1, y1, z1, r);
     }
@@ -488,7 +488,7 @@ extern "C" {
     double geometry3d_Cylinder_signed_distance(void* ptr, double px, double py, double pz) {
         return ((geometry3d_Cylinder*) ptr) -> signed_distance(px, py, pz);
     }
-}
+//} // extern "C"
 
 
 
@@ -561,7 +561,7 @@ double geometry3d_Cone::signed_distance(double px, double py, double pz) {
 }
 
 
-extern "C" {
+//extern "C" {
     void* geometry3d_new_Cone(double x0, double y0, double z0, double r0, double x1, double y1, double z1, double r1) {
         return new geometry3d_Cone(x0, y0, z0, r0, x1, y1, z1, r1);
     }
@@ -572,7 +572,7 @@ extern "C" {
     double geometry3d_Cone_signed_distance(void* ptr, double px, double py, double pz) {
         return ((geometry3d_Cone*) ptr) -> signed_distance(px, py, pz);
     }
-}
+//} // extern "C"
 
 
 class geometry3d_Sphere {
@@ -590,7 +590,7 @@ double geometry3d_Sphere::signed_distance(double px, double py, double pz) {
     return sqrt(pow(x - px, 2) + pow(y - py, 2) + pow(z - pz, 2)) - r;
 }
 
-extern "C" {
+//extern "C" {
     void* geometry3d_new_Sphere(double x, double y, double z, double r) {
         return new geometry3d_Sphere(x, y, z, r);
     }
@@ -601,7 +601,7 @@ extern "C" {
     double geometry3d_Sphere_signed_distance(void* ptr, double px, double py, double pz) {
         return ((geometry3d_Sphere*) ptr) -> signed_distance(px, py, pz);
     }
-}
+//} // extern "C"
 
 class geometry3d_Plane {
     public:
@@ -620,7 +620,7 @@ double geometry3d_Plane::signed_distance(double px, double py, double pz) {
     return (nx * px + ny * py + nz * pz + d) * mul;
 }
 
-extern "C" {
+//extern "C" {
     void* geometry3d_new_Plane(double x, double y, double z, double nx, double ny, double nz) {
         return new geometry3d_Plane(x, y, z, nx, ny, nz);
     }
@@ -631,10 +631,10 @@ extern "C" {
     double geometry3d_Plane_signed_distance(void* ptr, double px, double py, double pz) {
         return ((geometry3d_Plane*) ptr) -> signed_distance(px, py, pz);
     }
-}
+//} // extern "C"
 
 /*
-extern "C" {
+//extern "C" {
     PyObject* nrnpy_pyCallObject(PyObject*, PyObject*);
 
     void print_numbers(PyObject *p) {

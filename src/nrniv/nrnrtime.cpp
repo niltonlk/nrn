@@ -7,11 +7,11 @@
 #include "nrnoc2iv.h"
 #include "parse.h"
 
-extern "C" {
+//extern "C" {
 	extern int stoprun;
 	extern double t;
 	extern void nrn_fixed_step();
-}
+//} // extern "C"
 
 class NrnRealTime {
 public:

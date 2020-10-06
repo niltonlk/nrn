@@ -3,7 +3,7 @@
 #include "nrndae.h"
 #include "nrnoc2iv.h"
 
-extern "C" {
+//extern "C" {
 	extern void nrndae_alloc();
 	extern int nrndae_extra_eqn_count();
 	extern void nrndae_init();
@@ -18,7 +18,7 @@ extern "C" {
 	extern int nrn_use_daspk_;
 	extern int secondorder;
 	extern int nrndae_list_is_empty();
-}
+//} // extern "C"
 
 static NrnDAEPtrList nrndae_list;
 
