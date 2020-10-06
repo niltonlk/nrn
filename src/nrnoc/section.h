@@ -24,9 +24,9 @@
    d and rhs is calculated from the property list.
 */
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+//#if defined(__cplusplus)
+//extern "C" {
+//#endif
 
 #include "nrnredef.h"
 #include "options.h"
@@ -100,7 +100,7 @@ typedef struct Info3Val {	/* storage to help build matrix efficiently */
 #endif
 
 /* if any double is added after area then think about changing
-the notify_free_val parameter in node_free in solve.c
+the notify_free_val parameter in node_free in solve.cpp
 */
 
 #define NODED(n) (*((n)->_d))
@@ -135,12 +135,12 @@ extern int cvode_active_;
 typedef struct Node {
 #if CACHEVEC == 0
 	double	_v;			/* membrane potential */
-	double _area;			/* area in um^2 but see treesetup.c */
+	double _area;			/* area in um^2 but see treesetup.cpp */
 	double	_a;			/* effect of node in parent equation */
 	double	_b;			/* effect of parent in node equation */
 #else /* CACHEVEC */
 	double	*_v;			/* membrane potential */
-	double _area;			/* area in um^2 but see treesetup.c */
+	double _area;			/* area in um^2 but see treesetup.cpp */
 	double _rinv;			/* conductance uS from node to parent */
 	double _v_temp;			/* vile necessity til actual_v allocated */
 #endif /* CACHEVEC */
@@ -189,7 +189,7 @@ typedef struct Node {
 #define  nlayer (EXTRACELLULAR)	/* first (0) layer is extracellular next to membrane */
 /*
 changing nlayer here means you have to change the explicit numbers
-nlayer-1 in the mechanism structure in extcell.c
+nlayer-1 in the mechanism structure in extcell.cpp
 */
 typedef struct Extnode {
 	double	*param;	/* points to extracellular parameter vector */
@@ -229,10 +229,18 @@ typedef struct Prop {
 	Object* ob;	/* nil if normal property, otherwise the object containing the data*/
 } Prop;
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 extern double* nrn_prop_data_alloc(int type, int count, Prop* p);
 extern Datum* nrn_prop_datum_alloc(int type, int count, Prop* p);
 extern void nrn_prop_data_free(int type, double* pd);
 extern void nrn_prop_datum_free(int type, Datum* ppd);
+
+#if defined(__cplusplus)
+}
+#endif
 
 /* a point process is computed just like regular mechanisms. Ie it appears
 in the property list whose type specifies which allocation, current, and
@@ -327,9 +335,9 @@ extern int stoprun;
 /* of any hoc call for integration and before returning to hoc */
 
 
-#if defined(__cplusplus)
-}
-#endif
+//#if defined(__cplusplus)
+//}
+//#endif
 
 #include "nrn_ansi.h"
 
