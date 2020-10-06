@@ -96,7 +96,7 @@ IFGUI
 		tb->Insert(0, s, strlen(s));
 	}
 	char** p = hoc_temp_charptr();
-	*p = tb->Text();
+	*p = (char*)tb->Text();
 	return (const char**)p;
 ENDGUI
 #endif

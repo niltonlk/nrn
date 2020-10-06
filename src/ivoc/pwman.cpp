@@ -560,7 +560,7 @@ IFGUI
 	ScreenItem* si = (ScreenItem*)p->screen()->component(i);	
 	char** ps = hoc_temp_charptr();
 	if (si->window()) {
-		*ps = si->window()->name();
+		*ps = (char*)si->window()->name();
 	}else{
 		*ps = si->jwindow()->title;
 	}

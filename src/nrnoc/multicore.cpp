@@ -411,16 +411,16 @@ static void threads_free_pthread(){
 			pthread_cond_destroy(cond + i);
 			pthread_mutex_destroy(mut + i);
 		}
-		free(slave_threads);
-		free(cond);
-		free(mut);
-		free(&wc);
+		free((char*)slave_threads);
+		free((char*)cond);
+		free((char*)mut);
+		free((char*)wc);
 		slave_threads = (pthread_t*)0;
 		cond = (pthread_cond_t*)0;
 		mut = (pthread_mutex_t*)0;
 		wc = (slave_conf_t*)0;
 #else
-		free(slave_threads);
+		free((char*)slave_threads);
 		slave_threads = (pthread_t*)0;
 #endif /*PERMANENT*/
 	}
@@ -634,29 +634,29 @@ void nrn_threads_free() {
 		for (tml = nt->tml; tml; tml = tml2) {
 			Memb_list* ml = tml->ml;
 			tml2 = tml->next;
-			free(ml->nodelist);
-			free(ml->nodeindices);
+			free((char*)ml->nodelist);
+			free((char*)ml->nodeindices);
 			if (memb_func[tml->index].hoc_mech) {
-				free(ml->prop);
+				free((char*)ml->prop);
 			}else{
-				free(ml->data);
-				free(ml->pdata);
+				free((char*)ml->data);
+				free((char*)ml->pdata);
 			}
 			if (ml->_thread) {
 				if (memb_func[tml->index].thread_cleanup_) {
 	(*memb_func[tml->index].thread_cleanup_)(ml->_thread);
 				}
-				free(ml->_thread);
+				free((char*)ml->_thread);
 			}
-			free(ml);
-			free(tml);
+			free((char*)ml);
+			free((char*)tml);
 		}
-		if (nt->_ml_list) { free(nt->_ml_list); nt->_ml_list = NULL; }
+		if (nt->_ml_list) { free((char*)nt->_ml_list); nt->_ml_list = NULL; }
 		for (i=0; i < BEFORE_AFTER_SIZE; ++i) {
 			NrnThreadBAList* tbl, *tbl2;
 			for (tbl = nt->tbl[i]; tbl; tbl = tbl2) {
 				tbl2 = tbl->next;
-				free(tbl);
+				free((char*)tbl);
 			}
 			nt->tbl[i] = (NrnThreadBAList*)0;
 		}
@@ -665,13 +665,13 @@ void nrn_threads_free() {
 			hoc_l_freelist(&nt->roots);
 			nt->ncell = 0;
 		}
-		if (nt->_actual_rhs) {free(nt->_actual_rhs); nt->_actual_rhs = 0;}
-		if (nt->_actual_d) {free(nt->_actual_d); nt->_actual_d = 0;}
-		if (nt->_actual_a) {free(nt->_actual_a); nt->_actual_a = 0;}
-		if (nt->_actual_b) {free(nt->_actual_b); nt->_actual_b = 0;}
-		if (nt->_v_parent_index) {free(nt->_v_parent_index); nt->_v_parent_index = 0;}
-		if (nt->_v_node) {free(nt->_v_node); nt->_v_node = 0;}
-		if (nt->_v_parent) {free(nt->_v_parent); nt->_v_parent = 0;}
+		if (nt->_actual_rhs) {free((char*)nt->_actual_rhs); nt->_actual_rhs = 0;}
+		if (nt->_actual_d) {free((char*)nt->_actual_d); nt->_actual_d = 0;}
+		if (nt->_actual_a) {free((char*)nt->_actual_a); nt->_actual_a = 0;}
+		if (nt->_actual_b) {free((char*)nt->_actual_b); nt->_actual_b = 0;}
+		if (nt->_v_parent_index) {free((char*)nt->_v_parent_index); nt->_v_parent_index = 0;}
+		if (nt->_v_node) {free((char*)nt->_v_node); nt->_v_node = 0;}
+		if (nt->_v_parent) {free((char*)nt->_v_parent); nt->_v_parent = 0;}
 		nt->_ecell_memb_list = 0;
 		if (nt->_ecell_children) {
 			nt->_ecell_child_cnt = 0;
@@ -864,8 +864,8 @@ static void nrn_thread_memblist_setup() {
 		thread_memblist_setup(nrn_threads + it, mlcnt, vmap);
 	}
 	nrn_fast_imem_alloc();
-	free(vmap);
-	free(mlcnt);
+	free((char*)vmap);
+	free((char*)mlcnt);
 	nrn_mk_table_check();
 	if (nrn_mk_transfer_thread_data_) { (*nrn_mk_transfer_thread_data_)(); }
 }
@@ -1281,7 +1281,7 @@ static double trial(int ip) {
 		pthread_join(th[i], nullptr);
 	}
 	t = nrn_timeus() - t;
-	free(th);
+	free((char*)th);
 	return t;	
 }
 #endif

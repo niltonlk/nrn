@@ -80,7 +80,7 @@ char* nrnmpi_load(int is_python) {
 	int ismes=0;
 	char* pmes;
 	void* handle = NULL;
-	pmes = malloc(4096);
+	pmes = static_cast<char*>(malloc(4096));
 	assert(pmes);
 	pmes[0]='\0';
 #if DARWIN
