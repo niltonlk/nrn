@@ -25,10 +25,10 @@ private:
 
 #include "gui-redirect.h"
 
-extern "C" {
+//extern "C" {
 	extern Object** (*nrnpy_gui_helper_)(const char* name, Object* obj);
 	extern double (*nrnpy_object_to_double_)(Object*);
-}
+//} // extern "C"
 
 double gr_addglyph(void* v) {
 	TRY_GUI_REDIRECT_ACTUAL_DOUBLE("Graph.addglyph", v);

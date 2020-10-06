@@ -2,7 +2,7 @@
 #include "gui-redirect.h"
 
 extern char* ivoc_get_temp_file();
-extern "C" int hoc_return_type_code;
+extern /*"C"*/ int hoc_return_type_code;
 
 #if HAVE_IV
 #if (MAC && !defined(carbon)) || defined(WIN32)
@@ -31,16 +31,18 @@ extern "C" int hoc_return_type_code;
 #if HAVE_IV
 #include "utility.h"
 
-extern "C" {
+//extern "C" {
 	void single_event_run();
 	extern char **hoc_strpop();
-}
+//} // extern "C"
 
 #if defined(CYGWIN)
 #include <IV-Win/mprinter.h>
 void iv_display_scale(float);
 void iv_display_scale(Coord, Coord); // Make if fit into the screen
-extern "C" {char* hoc_back2forward(char*);}
+//extern "C" {
+    char* hoc_back2forward(char*);
+//} // extern "C"
 #endif
 
 #if defined(WIN32) && !defined(CYGWIN)
@@ -50,10 +52,10 @@ void iv_display_scale(float);
 void iv_display_scale(Coord, Coord); // Make if fit into the screen
 #if defined(__MWERKS__)
 #include <OS/dirent.h>
-extern "C"{
+//extern "C"{
 	extern char * mktemp(char *);
 	extern int unlink(const char *);
-}
+//} // extern "C"
 #else //!__MWERKS__
 #include <dir.h>
 #endif // __MWERKS__
@@ -63,19 +65,23 @@ extern "C"{
 // but any existing trailing info remains! So be sure to unlink first.
 #undef IOS_OUT
 #define IOS_OUT (ios::out)
-extern "C" {char* hoc_back2forward(char*);}
+//extern "C" {
+    char* hoc_back2forward(char*);
+//} // extern "C"
 #else //!WIN32
 #if MAC && !defined(carbon)
 #include <fstream.h>
 #include <file_io.h>
 #undef IOS_OUT
 #define IOS_OUT (ios::out | ios::trunc)
-extern "C"{
+//extern "C"{
 	extern char * mktemp(char *);
 	extern int unlink(const char *);
-}
+//} // extern "C"
 #include <IV-Mac/mprinter.h>
-extern "C" {extern void debugfile(const char*, ...);}
+//extern "C" {
+    extern void debugfile(const char*, ...);
+//} // extern "C"
 #else //!MAC
 #include <unistd.h>
 #define Output output
@@ -188,12 +194,12 @@ private:
 	Coord x_, y_;
 };
 
-extern "C" {
+//extern "C" {
 	extern double (*p_java2nrn_dmeth)(Object* ho, Symbol* method);
 	extern char** (*p_java2nrn_smeth)(Object* ho, Symbol* method);
 	const char* (*p_java2nrn_classname)(Object* ho);
 	bool (*p_java2nrn_identity)(Object* o1, Object* o2);
-}
+//} // extern "C"
 
 //just enough info to get a java window represented in the PWM.
 // The distinction is that window() is NULL for these.
@@ -458,15 +464,17 @@ void PWMDismiss::execute() {
 
 #else //!HAVE_IV
 #if defined(CYGWIN)
-extern "C" {char* hoc_back2forward(char*);}
+//extern "C" {
+    char* hoc_back2forward(char*);
+//} // extern "C"
 #endif
 #endif //HAVE_IV
 
-extern "C" {
+//extern "C" {
 	extern Object** (*nrnpy_gui_helper_)(const char* name, Object* obj);
 	extern double (*nrnpy_object_to_double_)(Object*);
 	extern char** (*nrnpy_gui_helper3_str_)(const char* name, Object* obj, int handle_strptr);
-}
+//} // extern "C"
 
 static void* pwman_cons(Object*) {
 	TRY_GUI_REDIRECT_OBJ("PWManager", NULL);
@@ -552,7 +560,7 @@ IFGUI
 	ScreenItem* si = (ScreenItem*)p->screen()->component(i);	
 	char** ps = hoc_temp_charptr();
 	if (si->window()) {
-		*ps = (char*)si->window()->name();
+		*ps = si->window()->name();
 	}else{
 		*ps = si->jwindow()->title;
 	}
@@ -1439,7 +1447,7 @@ PrintableWindowManager::~PrintableWindowManager() {
 	}
 }
 
-extern "C" {
+//extern "C" {
 void hoc_pwman_place() {
 	TRY_GUI_REDIRECT_DOUBLE("pwman_place", NULL);
 #if HAVE_IV
@@ -1493,7 +1501,7 @@ ENDGUI
 	hoc_ret();
 	hoc_pushx(0.);
 }
-}
+//} // extern "C"
 
 void PrintableWindowManager::xplace(int left, int top, bool m) {
 	PrintableWindow* w = pwm_impl->window();
@@ -1966,7 +1974,9 @@ float yoff = pageheight*72/2/sfac - (e.top() + e.bottom() + 23.)/2.;
 }
 
 #ifdef WIN32
-extern "C" { extern bool hoc_copyfile(const char*, const char*);}
+//extern "C" {
+    extern bool hoc_copyfile(const char*, const char*);
+//} // extern "C"
 #endif
 
 #if MACPRINT
@@ -2694,7 +2704,7 @@ void PWMImpl::virt_screen() {
 	VirtualWindow::makeVirtualWindow();
 }
 
-//grabbed from unidraw dialogs.c
+//grabbed from unidraw dialogs.cpp
 static const char* DefaultPrintCmd () {
 #ifdef WIN32
 	Style* style = Session::instance()->style();

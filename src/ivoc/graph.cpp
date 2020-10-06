@@ -6,7 +6,7 @@
 #include <math.h>
 #include <assert.h>
 
-extern "C" int hoc_return_type_code;
+extern /*"C"*/ int hoc_return_type_code;
 
 #if HAVE_IV
 #include <InterViews/glyph.h>
@@ -49,10 +49,10 @@ extern Image* gif_image(const char*);
 #include "classreg.h"
 #include "gui-redirect.h"
 
-extern "C" {
+//extern "C" {
 	extern Object** (*nrnpy_gui_helper_)(const char* name, Object* obj);
 	extern double (*nrnpy_object_to_double_)(Object*);
-}
+//} // extern "C"
 
 #if HAVE_IV  
 #define Graph_Crosshair_		"Crosshair Graph"
@@ -1184,7 +1184,7 @@ IFGUI
 ENDGUI
 	return (void*)g;
 #else 
-	return (void*)0;
+	return nullptr;
 #endif /* HAVE_IV  */
 }
 static void gr_destruct(void* v) {
@@ -1444,7 +1444,7 @@ picker()->add_menu("Erase Axis", new ActionCallback(Graph)(this, &Graph::erase_a
 extern "C" {
 	extern void hoc_free_list(Symlist**);
 	extern double* nrn_recalc_ptr(double*);
-};
+} // extern "C";
 
 Graph::~Graph() {
 //printf("~Graph\n");
@@ -1597,7 +1597,7 @@ void Graph::draw(Canvas* c, const Allocation& a) const {
 	long i, cnt = line_list_.count();
 //if (!extension_flushed_) {
 	Scene::draw(c, a);
-//}
+//} // extern "C"
 	if (extension_flushed_) {
 		for (i = 0; i < cnt; ++i) {
 			line_list_.item(i)->extension()->draw(c, a);
@@ -1930,7 +1930,9 @@ hoc_execerror(expr, "is invalid left hand side of assignment statement");
 	}
 }
 
-extern "C" { extern int hoc_execerror_messages; }
+//extern "C" {
+    extern int hoc_execerror_messages;
+//} // extern "C"
 void Graph::begin() {
 	if (keep_lines_toggle_->test(TelltaleState::is_chosen)) {
 		keep_lines();

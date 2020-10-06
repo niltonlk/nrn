@@ -1,4 +1,4 @@
-/* fft/hc_radix2.c
+/* fft/hc_radix2.cpp
  * 
  * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Brian Gough
  * 

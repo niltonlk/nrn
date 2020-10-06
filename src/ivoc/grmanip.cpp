@@ -25,7 +25,9 @@
 #define LinePicker_event_	"Pick Graph"
 #define MoveLabelBand_press_	"MoveText Graph"
 
-extern "C" {extern double hoc_cross_x_, hoc_cross_y_;}
+//extern "C" {
+    extern double hoc_cross_x_, hoc_cross_y_;
+//} // extern "C"
 
 class LineRubberMarker : public Rubberband {
 public:

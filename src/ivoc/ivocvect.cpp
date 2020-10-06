@@ -35,7 +35,9 @@
 #endif
 
 #if defined(SVR4)
-extern "C" {extern void exit(int status);};
+//extern "C" {
+    extern void exit(int status);
+//} // extern "C";
 #endif
 
 #include "classreg.h"
@@ -47,10 +49,10 @@ extern "C" {extern void exit(int status);};
 
 #include "gui-redirect.h"
 
-extern "C" {
+//extern "C" {
 	extern Object** (*nrnpy_gui_helper_)(const char* name, Object* obj);
 	extern double (*nrnpy_object_to_double_)(Object*);
-}
+//} // extern "C"
 
 #ifndef PI
 #ifndef M_PI
@@ -60,8 +62,8 @@ extern "C" {
 #endif
 #define BrainDamaged 0  //The Sun CC compiler but it doesn't hurt to leave it in
 #if BrainDamaged
-#define FWrite(arg1,arg2,arg3,arg4) if (fwrite((char*)(arg1),arg2,arg3,arg4) != arg3) { hoc_execerror("fwrite error", 0); }
-#define FRead(arg1,arg2,arg3,arg4) if (fread((char*)(arg1),arg2,arg3,arg4) != arg3) { hoc_execerror("fread error", 0); }
+#define FWrite(arg1,arg2,arg3,arg4) if (fwrite((arg1),arg2,arg3,arg4) != arg3) { hoc_execerror("fwrite error", 0); }
+#define FRead(arg1,arg2,arg3,arg4) if (fread((arg1),arg2,arg3,arg4) != arg3) { hoc_execerror("fread error", 0); }
 #else
 #define FWrite(arg1,arg2,arg3,arg4) if (fwrite(arg1,arg2,arg3,arg4) != arg3){}
 #define FRead(arg1,arg2,arg3,arg4) if (fread(arg1,arg2,arg3,arg4) != arg3) {}
@@ -104,24 +106,28 @@ static double dmaxint_;
 #include "parse.h"
 #include "ocfile.h"
 
-extern "C" {
+//extern "C" {
 extern Object* hoc_thisobject;
 extern Symlist* hoc_top_level_symlist;
 extern void nrn_exit(int);
 IvocVect* (*nrnpy_vec_from_python_p_)(void*);
 Object** (*nrnpy_vec_to_python_p_)(void*);
 Object** (*nrnpy_vec_as_numpy_helper_)(int, double*);
-};
+//} // extern "C";
 
 
 int cmpfcn(double a, double b) { return ((a) <= (b))? (((a) == (b))? 0 : -1) : 1; }
 
 
-// math functions with error checking defined in oc/SRC/math.c
-extern "C" {
-  extern double hoc_Log(double x), hoc_Log10(double x), hoc_Exp(double x), hoc_Sqrt(double x);
+// math functions with error checking defined in oc/SRC/math.cpp
+//extern "C" {
+  extern double hoc_Log(double x), hoc_Log10(double x), /*hoc_Exp(double x), */hoc_Sqrt(double x);
   extern double hoc_scan(FILE*);
-}
+//} // extern "C"
+
+extern "C" {
+    extern double hoc_Exp(double);
+} // extern "C"
 
 static int narg() {
   int i=0;
@@ -138,14 +144,15 @@ static int narg() {
 #define EPSILON 1e-9
 
 extern "C" {
-	extern void notify_freed_val_array(double*, size_t);
-	extern void install_vector_method(const char* name, Pfrd_vp);
-	extern int vector_instance_px(void*, double**);
-	extern int vector_arg_px(int, double**);
-        extern int nrn_mlh_gsort (double* vec, int *base_ptr, int total_elems, doubleComparator cmp);
-};
+extern void install_vector_method(const char* name, Pfrd_vp);
+extern int vector_instance_px(void*, double**);
+} // extern "C"
 
-extern "C" int hoc_return_type_code;
+extern int vector_arg_px(int, double**);
+extern void notify_freed_val_array(double*, size_t);
+extern int nrn_mlh_gsort (double* vec, int *base_ptr, int total_elems, doubleComparator cmp);
+
+extern /*"C"*/ int hoc_return_type_code;
 
 IvocVect::IvocVect(Object* o) : ParentVect(){obj_ = o; label_ = NULL; MUTCONSTRUCT(0)}
 IvocVect::IvocVect(int l, Object* o) : ParentVect(l){obj_ = o; label_ = NULL; MUTCONSTRUCT(0)}
@@ -297,7 +304,9 @@ void vector_append(Vect* v, double x){
 #ifdef WIN32
 #if !defined(USEMATRIX) || USEMATRIX == 0
 #include "../windll/dll.h"
-extern "C" {extern char* neuron_home;}
+//extern "C" {
+    extern char* neuron_home;
+//} // extern "C"
 
 void load_ocmatrix() {
 	struct DLL* dll = NULL;
@@ -339,15 +348,15 @@ void install_vector_method(const char* name, double (*f)(void*)) {
 #define PUBLIC_TYPE 1
 	s_meth->cpublic = PUBLIC_TYPE;
 }
-}
+} // extern "C"
 
-int vector_instance_px(void* v, double** px) {
+extern "C" int vector_instance_px(void* v, double** px) {
 	Vect* x = (Vect*)v;
 	*px = x->vec();
 	return x->capacity();
 }
 
-Vect* vector_arg(int i) {
+extern "C" Vect* vector_arg(int i) {
 	Object* ob = *hoc_objgetarg(i);
 	if (!ob || ob->ctemplate != svec_->u.ctemplate) {
 		check_obj_type(ob, "Vector");
@@ -1246,9 +1255,9 @@ static Object** v_smhist(void* v) {
 	v1->fill(0.,0,size);
 	for (i=0;i<size;i++) if (ans[i] > EPSILON) v1->elem(i) = ans[i];
 
-	free((char*) series);
-	free((char*) gauss);
-	free((char*) ans);
+	free( series);
+	free( gauss);
+	free( ans);
 	
 	return v1->temp_objvar();
 }
@@ -2664,10 +2673,10 @@ Label3:;
 	}
 
 	for(i=0;i<n;i++) p[i]=vortex[eminp*n+i];
-	free((char*) gvortex );
-	free((char*) evortex );
-	free((char*) vortex );
-	free((char*) nvortex );
+	free( gvortex );
+	free( evortex );
+	free( vortex );
+	free( nvortex );
 	return( emin );
 }
 
@@ -3750,9 +3759,9 @@ static Member_ret_str_func v_retstr_members[] = {
 	0,0
 };
 
-extern "C" {
+//extern "C" {
 extern int hoc_araypt(Symbol*, int);
-}
+//} // extern "C"
 
 int ivoc_vector_size(Object* o) {
 	Vect* vp = (Vect*)o->u.this_pointer;

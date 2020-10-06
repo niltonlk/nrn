@@ -24,12 +24,12 @@
 
 #include "gui-redirect.h"
 
-extern "C" int hoc_return_type_code;
+extern /*"C"*/ int hoc_return_type_code;
 
-extern "C" {
+//extern "C" {
 	extern Object** (*nrnpy_gui_helper_)(const char* name, Object* obj);
 	extern double (*nrnpy_object_to_double_)(Object*);
-};
+//} // extern "C";
 
 #if HAVE_IV
 
@@ -129,7 +129,7 @@ static void* vcons(Object*) {
 	b->ref();
 	return (void*)b;
 #else 
-	return (void*)0;
+	return nullptr;
 #endif /* HAVE_IV  */
 }
 	
@@ -143,7 +143,7 @@ static void* hcons(Object*) {
 	b->ref();
 	return (void*)b;
 #else 
-	return (void*)0;
+	return nullptr;
 #endif /* HAVE_IV  */
 }
 	
@@ -337,7 +337,9 @@ ENDGUI
 	return 0.;
 }
 
-extern "C" {const char* pwm_session_filename();}
+//extern "C" {
+    const char* pwm_session_filename();
+//} // extern "C"
 
 static double save(void* v) {
 	TRY_GUI_REDIRECT_ACTUAL_DOUBLE("Box.save", v);

@@ -13,7 +13,7 @@
 #include "ivocvect.h"
 
 #if !defined(CABLE)
-// really belongs in vector.c but this is convenient since it will be
+// really belongs in vector.cpp but this is convenient since it will be
 // present in ivoc but not in nrniv
 void nrn_vecsim_add(void*, bool) {printf("nrn_vecsym_add implemented in nrniv\n");}
 void nrn_vecsim_remove(void*) {printf("nrn_vecsym_remove implemented in nrniv\n");}
@@ -24,22 +24,22 @@ void GraphVector::record_install(){}
 void GraphVector::record_uninstall(){}
 #endif
 // another hack so ivoc will have these names which nrniv gets elsewhere
-extern "C" {
+//extern "C" {
 int bbs_poll_;
 void bbs_done(){}
 void bbs_handle(){}
 void nrnbbs_context_wait(){}
-}
+//} // extern "C"
 
 #ifdef WIN32
-extern "C" {
+//extern "C" {
 void* dll_lookup(struct DLL*, const char*){return NULL;}
 struct DLL* dll_load(const char*){return NULL;}
-}
+//} // extern "C"
 #endif
 #endif
 
-extern "C" {
+//extern "C" {
 #if CABLE
 #include "nrnoc2iv.h"
 #include "membfunc.h"
@@ -51,7 +51,7 @@ extern "C" {
 extern Symlist* hoc_built_in_symlist;
 extern Symlist* hoc_top_level_symlist;
 extern Objectdata* hoc_top_level_data;
-}
+//} // extern "C"
 
 /*static*/ class PathValue {
 public:

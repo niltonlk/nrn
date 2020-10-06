@@ -1,4 +1,4 @@
-/* fft/real_radix2.c
+/* fft/real_radix2.cpp
  * 
  * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Brian Gough
  * 
@@ -19,7 +19,7 @@
 
 /* Hines: for greater self-containment */
 #include "nrngsl.h"
-/* from gsl/fft/factorize.c */
+/* from gsl/fft/factorize.cpp */
 static int
 fft_binary_logn (const size_t n)
 {
@@ -43,7 +43,7 @@ fft_binary_logn (const size_t n)
   return binary_logn;
 }
 
-/* from gsl/fft/bitreverse.c */
+/* from gsl/fft/bitreverse.cpp */
 static int
 FUNCTION(fft_real,bitreverse_order) (BASE data[],
                                 const size_t stride,

@@ -25,21 +25,22 @@
 
 #include "gui-redirect.h"
 
-extern "C" {
+//extern "C" {
 #include "parse.h"
 extern Object** hoc_temp_objptr(Object*);
 extern Symlist* hoc_top_level_symlist;
 int ivoc_list_count(Object*);
 Object* ivoc_list_item(Object*, int);
-}
+//} // extern "C"
 
 
-extern "C" {
+//extern "C" {
 	extern Object** (*nrnpy_gui_helper_)(const char* name, Object* obj);
 	extern double (*nrnpy_object_to_double_)(Object*);
-};
+//} // extern "C"
 
-extern "C" int hoc_return_type_code;
+extern /*"C"*/ int hoc_return_type_code;
+
 void handle_old_focus();
 
 #if HAVE_IV
@@ -509,7 +510,7 @@ void OcList_reg() {
 	list_class_sym_ = hoc_lookup("List");
 }
 
-extern "C" {
+//extern "C" {
 extern bool hoc_objectpath_impl(Object* ob, Object* oblook, char* path, int depth);
 extern void hoc_path_prepend(char*, const char*, const char*);
 int ivoc_list_look(Object* ob, Object* oblook, char* path, int) {
@@ -534,7 +535,7 @@ int ivoc_list_look(Object* ob, Object* oblook, char* path, int) {
 	}
 	return 0;
 }	
-}
+//} // extern "C"
 
 void OcList::create_browser(const char* name, const char* items, Object* pystract) {
 #if HAVE_IV
@@ -547,7 +548,7 @@ void OcList::create_browser(const char* name, const char* items, Object* pystrac
 	PrintableWindow* w = new StandardWindow(b_->standard_glyph());
 	b_->ocglyph(w);
 	if (name) {
-		w->name((char*)name);
+		w->name(name);
 	}
 	w->map();	
 #endif
@@ -564,7 +565,7 @@ void OcList::create_browser(const char* name, char** pstr, const char* action) {
 	PrintableWindow* w = new StandardWindow(b_->standard_glyph());
 	b_->ocglyph(w);
 	if (name) {
-		w->name((char*)name);
+		w->name(name);
 	}
 	w->map();	
 #endif
