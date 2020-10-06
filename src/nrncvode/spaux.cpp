@@ -1,5 +1,5 @@
 /*
-  spaux.c:  This code implements the following operations on an event-set
+  spaux.cpp:  This code implements the following operations on an event-set
   or priority-queue implemented using splay trees:
   
   n = sphead( q )		n is the head item in q (not removed).
@@ -13,7 +13,7 @@
   SPBLK *); q is an event-set (type SPTREE *),
   The type definitions for these are taken
   from file sptree.h.  All of these operations rest on basic
-  splay tree operations from file sptree.c.
+  splay tree operations from file sptree.cpp.
   
   The basic splay tree algorithms were originally presented in:
   

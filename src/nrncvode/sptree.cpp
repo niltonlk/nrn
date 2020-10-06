@@ -1,6 +1,6 @@
 /*
  *
- *  sptree.c:  The following code implements the basic operations on
+ *  sptree.cpp:  The following code implements the basic operations on
  *  an event-set or priority-queue implemented using splay trees:
  *
 Hines changed to void spinit(SPTREE**) for use with TQueue.

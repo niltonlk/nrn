@@ -12,11 +12,11 @@
 class Cvode;
 #endif
 
-extern "C" {
+//extern "C" {
 void cvode_fadvance(double);
 void cvode_finitialize(double t0);
 void nrncvode_set_t(double);
-bool at_time(NrnThread*, double);
+extern "C" bool at_time(NrnThread*, double);
 
 extern double dt, t;
 #define nt_t nrn_threads->_t
@@ -36,7 +36,7 @@ void fixed_record_continuous(NrnThread* nt);
 void fixed_play_continuous(NrnThread* nt);
 void nrn_solver_prepare();
 static void check_thresh(NrnThread*);
-}
+//} // extern "C"
 
 // for fixed step thread
 void deliver_net_events(NrnThread* nt) {
@@ -98,11 +98,12 @@ void nrn_solver_prepare() {
 	}
 }
 
+extern "C" int v_structure_change;
+
 void cvode_fadvance(double tstop) { // tstop = -1 means single step
 #if USECVODE
 	int err;
     extern int tree_changed;
-    extern int v_structure_change;
     extern int diam_changed;
 	if (net_cvode_instance) {
         if (tree_changed || v_structure_change || diam_changed) {
@@ -128,7 +129,7 @@ void cvode_finitialize(double t0){
 #endif
 }
 
-bool at_time(NrnThread* nt, double te) {
+extern "C" bool at_time(NrnThread* nt, double te) {
 #if USECVODE
 	if (cvode_active_ && nt->_vcv) {
 		return ((Cvode*)nt->_vcv)->at_time(te, nt);

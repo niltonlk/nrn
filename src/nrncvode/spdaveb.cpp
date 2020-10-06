@@ -1,5 +1,5 @@
 /*
- * spdaveb.c -- daveb's new splay tree functions.
+ * spdaveb.cpp -- daveb's new splay tree functions.
  *
  * The functions in this file provide an interface that is nearly
  * the same as the hash library I swiped from mkmf, allowing
