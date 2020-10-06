@@ -2,7 +2,7 @@
 
 /***************************************************************************
 
-      Program Name      DDESrvr.c
+      Program Name      DDESrvr.cpp
 
       Purpose           A simple DDE client application, which communicates
                         to a DDE server using the new 3.1 api DDEML calls.

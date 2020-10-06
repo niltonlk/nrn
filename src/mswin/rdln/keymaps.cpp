@@ -1,4 +1,4 @@
-/* keymaps.c -- Functions and keymaps for the GNU Readline library. */
+/* keymaps.cpp -- Functions and keymaps for the GNU Readline library. */
 
 /* Copyright (C) 1988, 1989, 1991 Free Software Foundation, Inc.
 
@@ -27,10 +27,10 @@
 #include <stdio.h>
 #include "readline.h"
 #include "keymaps.h"
-#include "emacs_ke.c"
+#include "emacs_ke.cpp"
 
 #ifdef VI_MODE
-#include "vi_keymap.c"
+#include "vi_keymap.cpp"
 #endif
 
 /* Remove these declarations when we have a complete libgnu.a. */

@@ -1,4 +1,4 @@
-/* funmap.c -- attach names to functions. */
+/* funmap.cpp -- attach names to functions. */
 
 /* Copyright (C) 1988, 1989, 1991 Free Software Foundation, Inc.
 

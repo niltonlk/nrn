@@ -1,4 +1,4 @@
-/* readline.c -- a general facility for reading lines of input
+/* readline.cpp -- a general facility for reading lines of input
    with emacs style editing and completion.  */
 
 /* Copyright 1987, 1989, 1991, 1992 Free Software Foundation, Inc.
@@ -3289,7 +3289,7 @@ rl_insert (count, c)
   else
 	 {
 		/* Inserting a single character. */
-		string = (char*)alloca (2);
+		string = alloca (2);
 		string[1] = '\0';
 		string[0] = c;
 		rl_insert_text (string);
@@ -6762,7 +6762,7 @@ main ()
 
 /*
  * Local variables:
- * compile-command: "gcc -g -traditional -I. -I.. -DTEST -o readline readline.c keymaps.o funmap.o history.o -ltermcap"
+ * compile-command: "gcc -g -traditional -I. -I.. -DTEST -o readline readline.cpp keymaps.o funmap.o history.o -ltermcap"
  * end:
  */
  #if defined(__MWERKS__)

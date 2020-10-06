@@ -1,4 +1,4 @@
-/* emacs_keymap.c -- the keymap for emacs_mode in readline (). */
+/* emacs_keymap.cpp -- the keymap for emacs_mode in readline (). */
 
 /* Copyright (C) 1988, 1989, 1991 Free Software Foundation, Inc.
 

@@ -1,4 +1,4 @@
-/* History.c -- standalone history library */
+/* History.cpp -- standalone history library */
 
 /* Copyright (C) 1989, 1991 Free Software Foundation, Inc.
 
@@ -1712,6 +1712,6 @@ main ()
 
 /*
 * Local variables:
-* compile-command: "gcc -g -DTEST -o history history.c"
+* compile-command: "gcc -g -DTEST -o history history.cpp"
 * end:
 */
