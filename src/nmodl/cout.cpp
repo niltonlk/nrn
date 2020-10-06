@@ -223,8 +223,8 @@ List           *procfunc, *initfunc, *modelfunc, *termfunc, *initlist, *firstlis
 
 #if NMODL
 List		*nrnstate;
-extern List	*currents, *set_ion_variables(), *get_ion_variables();
-extern List	*begin_dion_stmt(), *end_dion_stmt();
+extern List	*currents, *set_ion_variables(int), *get_ion_variables(int);
+extern List	*begin_dion_stmt(), *end_dion_stmt(char*);
 #endif
 
 extern Symbol  *indepsym;
@@ -518,8 +518,7 @@ static void initstates()
  * type of a list element 
  */
 
-void printlist(s)
-	List           *s;
+void printlist(List* s)
 {
 	Item           *q;
 	int             newline = 0, indent = 0, i;
@@ -787,9 +786,7 @@ void c_out_vectorize()
 	P("_first = 0;\n}\n");
 }
 
-void vectorize_substitute(q, str)
-	Item* q;
-	char* str;
+void vectorize_substitute(Item* q, char* str)
 {
 	if (!vectorize_replacements) {
 		vectorize_replacements = newlist();

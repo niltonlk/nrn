@@ -10,7 +10,7 @@
 #undef METHOD
 #include "parse1.h"
 
-static int isend();
+int isend(char*, char*);
 static void pop_file_stack();
 static int file_stack_empty();
 int in_comment_;
@@ -45,8 +45,7 @@ char *inputline()
 
 static int      linenum = 0;
 
-void inblock(s)
-	char           *s;
+void inblock(char* s)
 {				/* copy input verbatim to intoken up to END*s
 				 * error if we get the whole input */
 	char            *cp;
@@ -58,7 +57,7 @@ void inblock(s)
 		cp = Gets(buf);
 		if (cp == (char *) 0) {
 			linenum = l;
-			diag(s, " block goes to end of file");
+			diag(s, "block goes to end of file");
 		}
 		if (isend(s, buf)) {
 			break;
@@ -68,8 +67,7 @@ void inblock(s)
 	}
 }
 
-static int isend(s, buf)
-	char           *s, *buf;
+int isend(char* s, char* buf)
 {
 	/* if first chars in buf form a keyword return 1 */
 	char           *cp, word[256], *wp, test[256];
@@ -100,7 +98,7 @@ static int isend(s, buf)
 static char     inlinebuf[2][NRN_BUFSIZE], *inlinep = inlinebuf[0] + 30, *ctp = inlinebuf[0] + 30;
 static int whichbuf;
 
-char* Fgets(buf, size, f) char* buf; int size; FILE* f; {
+char* Fgets(char* buf, int size, FILE* f) {
 	char* p = buf;
 	int c, i;
 	for(i=0; i < size; ++ i) {
@@ -168,8 +166,7 @@ int Getc()
 	return c;
 }
 
-int unGetc(c)
-	int             c;
+int unGetc(int c)
 {
 	if (c == EOF)
 		return c;
@@ -182,8 +179,7 @@ int unGetc(c)
 	return c;
 }
 
-char *Gets(buf)
-	char           *buf;
+char *Gets(char* buf)
 {
 	char           *cp;
 	int             c;
@@ -205,9 +201,8 @@ char *Gets(buf)
 }
 
 #if 0				/* not currently used */
-void unGets(buf)		/* all this because we don't have an ENDBLOCK
+void unGets(char* buf)		/* all this because we don't have an ENDBLOCK
 				 * keyword */
-	char           *buf;
 {
 	if (ctp != '\0') {	/* can only be called after successful Gets */
 		Strcpy(inlinep, buf);
@@ -235,8 +230,7 @@ char* current_line() { /* assumes we actually want the previous line */
 }
 
 /* two arguments so we can pass a name to construct an error message. */
-void diag(s1, s2)
-	char           *s1, *s2;
+void diag(char* s1, char* s2)
 {
 	char           *cp;
 	Fprintf(stderr, "%s", s1);
@@ -274,8 +268,7 @@ static Symbol  *symq[20], **symhead = symq, **symtail = symq;
  * meaningful models.  It was this insanity which prompted us to allow use of
  * variables before declaration 
  */
-void enquextern(sym)
-	Symbol         *sym;
+void enquextern(Symbol* sym)
 {
 	*symtail++ = sym;
 }
@@ -311,8 +304,7 @@ typedef struct FileStackItem {
 
 static List* filestack;
 
-static int getprefix(prefix, s)
-	char* prefix, *s;
+static int getprefix(char* prefix, char* s)
 {
 	char* cp;
 	strcpy(prefix, s);
@@ -325,9 +317,7 @@ static int getprefix(prefix, s)
 	return (prefix[0] != '\0');
 }
 
-static FILE* include_open(fname, err)
-	char* fname;
-	int err;
+static FILE* include_open(char* fname, int err)
 {
 	FILE* f = (FILE*)0;
 	FileStackItem* fsi;
@@ -341,7 +331,7 @@ static FILE* include_open(fname, err)
 	}
 	
 	fsi = (FileStackItem*)(SYM(filestack->prev));
-	buf = emalloc(NRN_BUFSIZE);
+	buf = static_cast<char *>(emalloc(NRN_BUFSIZE));
 	if (getprefix(buf, fsi->finname)) {
 		strcat(buf, fname);
 		f = fopen(buf, "r"); /* first try in directory of last file */
@@ -381,7 +371,7 @@ static FILE* include_open(fname, err)
 					break;
 				}
 			}
-			buf2 = emalloc(strlen(dirs) + 2 + strlen(fname));
+			buf2 = static_cast<char *>(emalloc(strlen(dirs) + 2 + strlen(fname)));
 			strcpy(buf2, dirs);
 			strcat(buf2, "/");
 			strcat(buf2, fname);
@@ -400,8 +390,7 @@ static FILE* include_open(fname, err)
 	return f;
 }
 
-void include_file(q)
-	Item* q;
+void include_file(Item* q)
 {
 	char* pf = NULL;
 	char fname[NRN_BUFSIZE];
@@ -448,13 +437,13 @@ static void pop_file_stack() {
 	lappendstr(filetxtlist, buf);
 	FileStackItem* fsi;
 	fsi = (FileStackItem*)(SYM(filestack->prev));
-	delete(filestack->prev);	
+	dlete(filestack->prev);
 	linenum = fsi->linenum;
 	inlinep = fsi->inlinep;
 	fclose(fin);
 	fin = fsi->fp;
 	strcpy(finname, fsi->finname);
-	free((char*)fsi);
+	free(fsi);
 }
 
 static int  file_stack_empty() {

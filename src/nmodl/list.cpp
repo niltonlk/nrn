@@ -105,8 +105,7 @@ List *newlist()
 	return (List *)i;
 }
 
-void freelist(plist)	/*free the list but not the elements*/
-	List **plist;
+void freelist(List** plist)	/*free the list but not the elements*/
 {
 	Item *i1, *i2;
 	if (!(*plist)) {
@@ -120,8 +119,7 @@ void freelist(plist)	/*free the list but not the elements*/
 	*plist = (List *)0;
 }
 
-static Item *linkitem(item)
-	Item *item;
+static Item *linkitem(Item *item)
 {
 	Item *i;
 
@@ -134,25 +132,21 @@ static Item *linkitem(item)
 }
 
 #if 0	 /*currently unused*/
-Item *next(item)
-	Item *item;
+Item *next(	Item *item)
 {
 	assert(item->next->element.lst); /* never return the list item */
 	return item->next;
 }
 
-Item *prev(item)
-	Item *item;
+Item *prev(Item *item)
 {
 	assert(item->prev->element.lst); /* never return the list item */
 	return item->prev;
 }
 #endif
 
-Item *insertstr(item, str) /* insert a copy of the string before item */
+Item *insertstr(Item* item, char* str) /* insert a copy of the string before item */
 /* a copy is made because strings are often assembled into a reusable buffer*/
-	Item *item;
-	char *str;
 {
 	Item *i;
 
@@ -162,8 +156,7 @@ Item *insertstr(item, str) /* insert a copy of the string before item */
 	return i;
 }
 
-Item *insertitem(item, itm) /* insert a item pointer before item */
-	Item *item, *itm;
+Item *insertitem(Item* item, Item* itm) /* insert a item pointer before item */
 {
 	Item *i;
 
@@ -173,9 +166,7 @@ Item *insertitem(item, itm) /* insert a item pointer before item */
 	return i;
 }
 
-Item *insertlist(item, lst) /* insert a item pointer before item */
-	Item *item;
-	List *lst;
+Item *insertlist(Item* item, List* lst) /* insert a item pointer before item */
 {
 	Item *i;
 
@@ -185,10 +176,8 @@ Item *insertlist(item, lst) /* insert a item pointer before item */
 	return i;
 }
 	
-Item *insertsym(item, sym) /* insert a symbol before item */
+Item *insertsym(Item* item, Symbol* sym) /* insert a symbol before item */
 /* a copy is not made because we need the same symbol in different lists */
-	Item *item;
-	Symbol *sym;
 {
 	Item *i;
 
@@ -198,49 +187,37 @@ Item *insertsym(item, sym) /* insert a symbol before item */
 	return i;
 }
 	
-Item *linsertstr(list, str)
-	List *list;
-	char *str;
+Item *linsertstr(List* list, char* str)
 {
 	return insertstr(list->next, str);
 }
 
-Item *lappendstr(list, str)
-	List *list;
-	char *str;
+Item *lappendstr(List* list, char* str)
 {
 	return insertstr(list, str);
 }
 
-Item *linsertsym(list, sym)
-	List *list;
-	Symbol *sym;
+Item *linsertsym(List* list, Symbol* sym)
 {
 	return insertsym(list->next, sym);
 }
 
-Item *lappendsym(list, sym)
-	List *list;
-	Symbol *sym;
+Item *lappendsym(List* list, Symbol* sym)
 {
 	return insertsym(list, sym);
 }
 
-Item *lappenditem(list, item)
-	List *list;
-	Item *item;
+Item *lappenditem(List* list, Item* item)
 {
 	return insertitem(list, item);
 }
 
-Item *lappendlst(list, lst)
-	List *list, *lst;
+Item *lappendlst(List* list, List* lst)
 {
 	return insertlist(list, lst);
 }
 
-void delete(item)
-	Item *item;
+void dlete(Item *item)
 {
 	assert(item->itemtype); /* can't delete list */
 	item->next->prev = item->prev;
@@ -248,23 +225,23 @@ void delete(item)
 	Free(item);
 }
 
-char *emalloc(n) unsigned n; { /* check return from malloc */
+char *emalloc(unsigned n) { /* check return from malloc */
 	char *p;
-	p = malloc(n);
+	p = static_cast<char*>(malloc(n));
 	if (p == (char *)0) {
 		diag("out of memory", (char *)0);
 	}
 	return p;
 }
 
-char *stralloc(buf, rel) char *buf,*rel; {
+char *stralloc(char* buf,  char* rel) {
 	/* allocate space, copy buf, and free rel */
 	char *s;
 	if (buf) {
-		s = emalloc((unsigned)(strlen(buf) + 1));
+		s = static_cast<char *>(emalloc((unsigned)(strlen(buf) + 1)));
 		Strcpy(s, buf);
 	}else{
-		s = emalloc(1);
+		s = static_cast<char *>(emalloc(1));
 		s[0] = '\0';
 	}
 	if (rel) {
@@ -273,21 +250,19 @@ char *stralloc(buf, rel) char *buf,*rel; {
 	return s;
 }
 
-void deltokens(q1, q2) /* delete tokens from q1 to q2 */
-	Item *q1, *q2;
+void deltokens(Item* q1, Item* q2) /* delete tokens from q1 to q2 */
 {
 	/* It is a serious error if q2 precedes q1 */
 	Item *q;
 	for (q = q1; q != q2;) {
 		q = q->next;
-		delete(q->prev);
+		dlete(q->prev);
 	}
-	delete(q2);
+	dlete(q2);
 		
 }
 
-void move(q1, q2, q3)	/* move q1 to q2 and insert before q3*/
-	Item *q1, *q2, *q3;
+void move(Item* q1, Item* q2, Item* q3)	/* move q1 to q2 and insert before q3*/
 {
 	/* it is a serious error if q2 precedes q1 */
 	assert(q1 && q2);
@@ -301,31 +276,25 @@ void move(q1, q2, q3)	/* move q1 to q2 and insert before q3*/
 	q2->next = q3;
 }
 
-void movelist(q1, q2, s)	/* move q1 to q2 from old list to end of list s*/
-	Item *q1, *q2;
-	List *s;
+void movelist(Item* q1, Item* q2, List* s)	/* move q1 to q2 from old list to end of list s*/
 {
 	move(q1, q2, s);
 }
 
-void replacstr(q, s)
-	Item *q;
-	char *s;
+void replacstr(Item* q, char* s)
 {
 	q->itemtype = STRING;
 	q->element.str = stralloc(s, (char *)0);
 
 }
 
-Item *putintoken(s, type)
-	char *s;
-	short type;
+Item *putintoken(char *s, short type)
 {	/* make sure a symbol exists for s and
 	append to intoken list */
 	Symbol *sym;
 
 	if (s == (char *)0)
-		diag("internal error"," in putintoken");
+		diag("internal error", " in putintoken");
 	switch (type) {
 		
 	case STRING:

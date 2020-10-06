@@ -59,9 +59,7 @@ discrete.c,v
 #include "parse1.h"
 #include "symbol.h"
 
-void disc_var_seen(q1, q2, q3, array)	/*NAME '@' NUMBER --- array flag*/
-	Item *q1, *q2, *q3;
-	int array;
+void disc_var_seen(Item* q1, Item* q2, Item* q3, int array)	/*NAME '@' NUMBER --- array flag*/
 {
 	Symbol *s;
 	int num;
@@ -73,26 +71,25 @@ void disc_var_seen(q1, q2, q3, array)	/*NAME '@' NUMBER --- array flag*/
 	}  
 	num--;
 	if (!(s->subtype & STAT)) {
-	diag(s->name, " must be a STATE for use as discrete variable");
+	diag(s->name, "must be a STATE for use as discrete variable");
 	}
 	if (array && !(s->subtype & ARRAY)) {
-		diag(s->name, " must be a scalar discrete variable");
+		diag(s->name, "must be a scalar discrete variable");
 	}
 	if (!array && (s->subtype & ARRAY)) {
-		diag(s->name, " must be an array discrete variable");
+		diag(s->name, "must be an array discrete variable");
 	}
 	if (s->discdim <= num) {
 		s->discdim = num+1;
 	}
 	Sprintf(buf, "__%s", s->name);
 	replacstr(q1, buf);
-	delete(q2);
+	dlete(q2);
 	Sprintf(buf, "[%d]", num);
 	replacstr(q3, buf);
 }
 
-void massagediscblk(q1, q2, q3, q4) /*DISCRETE NAME stmtlist '}'*/
-	Item *q1, *q2, *q3, *q4;
+void massagediscblk(Item* q1, Item* q2, Item* q3, Item* q4) /*DISCRETE NAME stmtlist '}'*/
 {
 	int i;
 	Symbol *s;

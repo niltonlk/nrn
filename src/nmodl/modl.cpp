@@ -31,7 +31,9 @@
  * allowed which gives the complete input filename.  The first argument
  * still gives the prefix of the .c and .var files.
  */
- 
+
+#include <regex>
+
 /* the first arg may also be a file.mod (containing the .mod suffix)*/
 #if MAC
 #include <sioux.h>
@@ -77,11 +79,10 @@ extern int usederivstatearray;
 static char pgm_name[] =	"nmodl";
 extern char *RCS_version;
 extern char *RCS_date;
-static void openfiles();
+void openfiles(int argc, char* argv[]);
 
-int main(argc, argv)
-	int             argc;
-	char           *argv[]; {
+int main(int argc, char* argv[])
+{
 	/*
 	 * arg 1 is the prefix to the input file and output .c and .par
 	 * files 
@@ -254,9 +255,7 @@ fprintf(stderr, "The %s.c file may be manually edited to fix these errors.\n", m
 	return 0;
 }
 
-static void openfiles(argc, argv)
-	int             argc;
-	char           *argv[];
+void openfiles(int argc, char* argv[])
 {
 	char            s[NRN_BUFSIZE];
 	char *cp;
@@ -302,4 +301,10 @@ static void openfiles(argc, argv)
 		diag("Can't create C file: ", s);
 	}
 #endif
+}
+
+
+void verbatim_adjust(char* q) {
+    const std::string repl = std::regex_replace(q, std::regex("u\\.template"), "u.ctemplate");
+    Fprintf(fcout, "%s", repl.c_str());
 }

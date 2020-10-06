@@ -7,12 +7,9 @@ extern int sens_parm;
 extern int numlist;
 static List *eqnq;
 
-static int nonlin_common();
+int nonlin_common(Item*, int);
 
-void solv_nonlin(qsol, fun, method, numeqn, listnum)
-	Item *qsol;
-	Symbol *fun, *method;
-	int numeqn, listnum;
+void solv_nonlin(Item* qsol, Symbol* fun, Symbol* method, int numeqn, int listnum)
 {
 	Sprintf(buf, "%s(%d,_slist%d, _p, %s, _dlist%d);\n",
 		method->name, numeqn, listnum, fun->name, listnum);
@@ -23,10 +20,7 @@ void solv_nonlin(qsol, fun, method, numeqn, listnum)
 	sens_nonlin_out(qsol->next, fun);
 }
 
-void solv_lineq(qsol, fun, method, numeqn, listnum)
-	Item *qsol;
-	Symbol *fun, *method;
-	int numeqn, listnum;
+void solv_lineq(Item* qsol, Symbol* fun, Symbol* method, int numeqn, int listnum)
 {
 	Sprintf(buf, " 0; %s();\n error = %s(%d, _coef%d, _p, _slist%d);\n",
 		fun->name, method->name, numeqn, listnum, listnum);
@@ -34,8 +28,7 @@ void solv_lineq(qsol, fun, method, numeqn, listnum)
 	sens_nonlin_out(qsol->next, fun);
 }
 
-void eqnqueue(q1)
-	Item *q1;
+void eqnqueue(Item* q1)
 {
 	Item *lq;
 
@@ -53,9 +46,7 @@ static void freeqnqueue()
 }
 
 /* args are --- nonlinblk: NONLINEAR NAME stmtlist '}' */
-void massagenonlin(q1, q2, q3, q4, sensused)
-	Item *q1, *q2, *q3, *q4;
-	int sensused;
+void massagenonlin(Item* q1, Item* q2, Item* q3, Item* q4, int sensused)
 {
 /* declare a special _counte variable to number the equations.
 before each equation we increment it by 1 during run time.  This
@@ -81,9 +72,7 @@ gives us a current equation number */
 	}
 }
 
-static int nonlin_common(q4, sensused)	/* used by massagenonlin() and mixed_eqns() */
-	Item *q4;
-	int sensused;
+int nonlin_common(Item* q4, int sensused)	/* used by massagenonlin() and mixed_eqns() */
 {
 	Item *lq, *qs, *q;
 	int i, counts = 0, counte = 0, using_array;
@@ -135,7 +124,7 @@ static int nonlin_common(q4, sensused)	/* used by massagenonlin() and mixed_eqns
 	if (!using_array) {
 		if(counte != counts) {
 Sprintf(buf ,"Number of equations, %d, does not equal number, %d", counte, counts);
-			diag(buf, " of states used");
+			diag(buf, "of states used");
 		}
 	} else {
 #if 1	/* can give message when running */
@@ -158,8 +147,7 @@ numlist, counts*(1 + sens_parm));
 	return counts;
 }
 
-Item *mixed_eqns(q2, q3, q4)	/* name, '{', '}' */
-	Item *q2, *q3, *q4;
+Item *mixed_eqns(Item* q2, Item* q3, Item* q4)	/* name, '{', '}' */
 {
 	int counts;
 	Item *qret;
@@ -205,8 +193,7 @@ static int nstate = 0;
 static Symbol *linblk;
 static Symbol *statsym;
 
-void init_linblk(q) /* NAME */
-	Item *q;
+void init_linblk(Item* q) /* NAME */
 {
 	using_array = 0;
 	nlineq = -1;
@@ -215,8 +202,7 @@ void init_linblk(q) /* NAME */
 	numlist++;
 }
 
-void init_lineq(q1) /* the colon */
-	Item *q1;
+void init_lineq(Item* q1) /* the colon */
 {
 	if (strcmp(SYM(q1)->name, "~+") == 0) {
 		replacstr(q1, "");
@@ -228,10 +214,9 @@ void init_lineq(q1) /* the colon */
 
 static char *indexstr;	/* set in lin_state_term, used in linterm */
 
-void lin_state_term(q1, q2) /* term last*/
-	Item *q1, *q2;
+void lin_state_term(Item* q1, Item* q2) /* term last*/
 {
-	char *qconcat(); /* but puts extra ) at end */
+	char *qconcat(Item*, Item*); /* but puts extra ) at end */
 	
 	statsym = SYM(q1);
 	replacstr(q1, "1.0");
@@ -256,9 +241,7 @@ void lin_state_term(q1, q2) /* term last*/
 	}
 }
 
-void linterm(q1, q2, pstate, sign) /*primary, last ,, */
-	Item *q1, *q2;
-	int pstate, sign;
+void linterm(Item* q1, Item* q2, int pstate, int sign) /*primary, last ,, */
 {
 	char *signstr;
 	
@@ -289,9 +272,7 @@ void linterm(q1, q2, pstate, sign) /*primary, last ,, */
 	Insertstr(q2->next, ";\n");
 }
 	
-void massage_linblk(q1, q2, q3, q4, sensused) /* LINEAR NAME stmtlist '}' */
-	Item *q1, *q2, *q3, *q4;
-	int sensused;
+void massage_linblk(Item* q1, Item* q2, Item* q3, Item* q4, int sensused) /* LINEAR NAME stmtlist '}' */
 {
 	Item *qs;
 	Symbol *s;
@@ -301,7 +282,7 @@ void massage_linblk(q1, q2, q3, q4, sensused) /* LINEAR NAME stmtlist '}' */
 assert(q2);
 #endif
 	if (++nlineq == 0) {
-		diag(linblk->name, " has no equations");
+		diag(linblk->name, "has no equations");
 	}
 	Sprintf(buf, "static void %s();\n", SYM(q2)->name);
 	Linsertstr(procfunc, buf);
@@ -374,8 +355,7 @@ Sprintf(buf, "if(_counte != %d) printf( \"Number of equations, %%d,\
 
 List *solveforlist = (List *)0;
 
-int in_solvefor(s)
-	Symbol *s;
+int in_solvefor(Symbol* s)
 {
 	Item *q;
 	

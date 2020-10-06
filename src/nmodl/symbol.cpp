@@ -17,8 +17,7 @@ void symbol_init() {
 	}
 }
 
-Symbol *lookup(s)	/* find s in symbol table */
-	char *s;
+Symbol *lookup(char* s)	/* find s in symbol table */
 {
 	Item *sp;
 
@@ -30,8 +29,7 @@ Symbol *lookup(s)	/* find s in symbol table */
 	return SYM0;	/* 0 ==> not found */
 }
 
-Symbol *checklocal(sym)
-	Symbol *sym;
+Symbol *checklocal(Symbol* sym)
 {
 	Item *sp;
 	List *sl;
@@ -48,9 +46,7 @@ Symbol *checklocal(sym)
 	return sym;
 }
 	
-Symbol *install(s, t)	/* install s in the list symbol table with type t*/
-	char *s;
-	int t;
+Symbol *install(char* s, int t)	/* install s in the list symbol table with type t*/
 {
 	Symbol *sp;
 	List *sl;
@@ -103,13 +99,12 @@ void poplocal() /* a lot of storage leakage here for symbols we are guaranteed
 	sl = LST(symlistlist->next);
 	for (i = sl->next; i != sl; i = j) {
 		j = i->next;
-		delete(i);
+		dlete(i);
 	}
-	delete(symlistlist->next);
+	dlete(symlistlist->next);
 }
 
-Symbol *copylocal(s)
-	Symbol *s;
+Symbol *copylocal(Symbol* s)
 {
 	if (s->name[0] == '_') {
 		Sprintf(buf, "%s", s->name);

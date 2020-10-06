@@ -129,11 +129,12 @@ List *thread_mem_init_list;
 List* toplocal_;
 extern int protect_;
 extern int protect_include_;
-extern List *set_ion_variables(), *get_ion_variables();
+extern List *set_ion_variables(int), *get_ion_variables(int);
 extern int netrec_need_v;
 
-static int decode_limits();
-static int decode_tolerance();
+ int decode_limits(Symbol* sym, double* pg1, double* pg2);
+ int decode_tolerance(Symbol* sym, double* pg1);
+
 
 /* NEURON block information */
 List *currents;
@@ -154,13 +155,13 @@ static int diamdec = 0;	/*1 if diam is declared*/
 static int areadec = 0;
 static int use_bbcorepointer = 0;
 
-static void defs_h();
-static int iontype();
-static void nrndeclare();
-static void del_range();
-static void declare_p();
-static int iondef();
-static void ion_promote();
+ void defs_h(Symbol*);
+ int iontype(char* s1, char* s2);
+void nrndeclare();
+void del_range(List*);
+void declare_p();
+ int iondef(int*);
+ void ion_promote(Item*);
 static int ppvar_cnt;
 static List* ppvar_semantics_;
 static void ppvar_semantics(int, const char*);
@@ -213,7 +214,7 @@ void nrninit() {
 	useion = newlist();
 	nrnpointers = newlist();
 	using_default_indep = 0;
-	indepinstall(install("t", NAME), "0", "1", "100", (Item*)0, "ms", 0);
+	indepinstall(install( "t", NAME), "0", "1", "100", (Item*)0, "ms", 0);
 	using_default_indep = 1;
 	debugging_ = 1;
 	thread_cleanup_list = newlist();
@@ -339,7 +340,7 @@ fprintf(stderr, "Notice: ARTIFICIAL_CELL models that would require thread specif
 	declare_p();
 	ioncount = iondef(&pointercount); /* first is _nd_area if point process */
 	Lappendstr(defs_list, "\n#if MAC\n#if !defined(v)\n#define v _mlhv\n#endif\n#if !defined(h)\n#define h _mlhh\n#endif\n#endif\n");
-	Lappendstr(defs_list, "\n#if defined(__cplusplus)\nextern \"C\" {\n#endif\n");
+//	Lappendstr(defs_list, "\n#if defined(__cplusplus)\nextern \"C\" {\n#endif\n"); //TODO - can this be removed? otherwise rely on dirty fix: __cminusminus
 	Lappendstr(defs_list, "static int hoc_nrnpointerindex = ");
 	if (pointercount) {
 		q = nrnpointers->next;
@@ -382,9 +383,9 @@ fprintf(stderr, "Notice: ARTIFICIAL_CELL models that would require thread specif
 		s = SYM(q);
 		if (s->subtype & (FUNCT | PROCED) && s->name[0] != '_') {
 			if (point_process) {
-Sprintf(buf, "static double _hoc_%s();\n", s->name);
+                Sprintf(buf, "static double _hoc_%s();\n", s->name);
 			}else{
-Sprintf(buf, "static void _hoc_%s(void);\n", s->name);
+                Sprintf(buf, "static void _hoc_%s(void);\n", s->name);
 			}
 			Lappendstr(defs_list, buf);
 		}
@@ -400,7 +401,7 @@ extern Memb_func* memb_func;\n\
 "	);
 
 	if (nmodl_text) {
-		Lappendstr(defs_list,"\n"
+		Lappendstr(defs_list, "\n"
 "#define NMODL_TEXT 1\n"
 "#if NMODL_TEXT\n"
 "static const char* nmodl_file_text;\n"
@@ -415,15 +416,15 @@ extern Memb_func* memb_func;\n\
 	if (point_process) {
 		Lappendstr(defs_list, "extern Prop* nrn_point_prop_;\n");
 		Lappendstr(defs_list, "static int _pointtype;\n");
-		Lappendstr(defs_list, "static void* _hoc_create_pnt(_ho) Object* _ho; { void* create_point_process();\n");
+		Lappendstr(defs_list, "static void* _hoc_create_pnt(Object* _ho) { void* create_point_process(int, Object*);\n");
 		Lappendstr(defs_list, "return create_point_process(_pointtype, _ho);\n}\n");
-		Lappendstr(defs_list, "static void _hoc_destroy_pnt();\n");
-		Lappendstr(defs_list, "static double _hoc_loc_pnt(_vptr) void* _vptr; {double loc_point_process();\n");
+		Lappendstr(defs_list, "static void _hoc_destroy_pnt(void*);\n");
+		Lappendstr(defs_list, "static double _hoc_loc_pnt(void* _vptr) {double loc_point_process(int, void*);\n");
 		Lappendstr(defs_list, "return loc_point_process(_pointtype, _vptr);\n}\n");
-		Lappendstr(defs_list, "static double _hoc_has_loc(_vptr) void* _vptr; {double has_loc_point();\n");
+		Lappendstr(defs_list, "static double _hoc_has_loc(void* _vptr) {double has_loc_point(void*);\n");
 		Lappendstr(defs_list, "return has_loc_point(_vptr);\n}\n");
-		Lappendstr(defs_list, "static double _hoc_get_loc_pnt(_vptr)void* _vptr; {\n");
-		Lappendstr(defs_list, "double get_loc_point_process(); return (get_loc_point_process(_vptr));\n}\n");
+		Lappendstr(defs_list, "static double _hoc_get_loc_pnt(void* _vptr) {\n");
+		Lappendstr(defs_list, "double get_loc_point_process(void*); return (get_loc_point_process(_vptr));\n}\n");
 	}
 	/* function to set up _p and _ppvar */
 	Lappendstr(defs_list, "extern void _nrn_setdata_reg(int, void(*)(Prop*));\n");
@@ -455,9 +456,9 @@ extern Memb_func* memb_func;\n\
 	
 	/* functions */
 	Lappendstr(defs_list, "/* connect user functions to hoc names */\n");
-	Lappendstr(defs_list,"static VoidFunc hoc_intfunc[] = {\n");
+	Lappendstr(defs_list, "static VoidFunc hoc_intfunc[] = {\n");
    if (point_process) {
-	Lappendstr(defs_list,"0,0\n};\n");
+	Lappendstr(defs_list, "0,0\n};\n");
 	Lappendstr(defs_list, "static Member_func _member_func[] = {\n");
 	Sprintf(buf, "\"loc\", _hoc_loc_pnt,\n");
 	Lappendstr(defs_list, buf);
@@ -657,7 +658,7 @@ diag("No statics allowed for thread safe models:", s->name);
 		}
 	}
 	Lappendstr(defs_list, "/* connect global user variables to hoc */\n");
-	Lappendstr(defs_list,"static DoubScal hoc_scdoub[] = {\n");
+	Lappendstr(defs_list, "static DoubScal hoc_scdoub[] = {\n");
  	ITERATE(q, syminorder) {
 		s = SYM(q);
 		if (s->nrntype & NRNGLOBAL && !(s->subtype & ARRAY)) {
@@ -668,7 +669,7 @@ diag("No statics allowed for thread safe models:", s->name);
 	Lappendstr(defs_list, "0,0\n};\n");
 	
 	/* double vectors */
-	Lappendstr(defs_list,"static DoubVec hoc_vdoub[] = {\n");
+	Lappendstr(defs_list, "static DoubVec hoc_vdoub[] = {\n");
  	ITERATE(q, syminorder) {
 		s = SYM(q);
 		if (s->nrntype & NRNGLOBAL && (s->subtype & ARRAY)) {
@@ -720,7 +721,7 @@ diag("No statics allowed for thread safe models:", s->name);
 		ppvar_cnt += 1;
 	}
 	if (point_process) {
-		Lappendstr(defs_list, "static void _hoc_destroy_pnt(_vptr) void* _vptr; {\n");
+		Lappendstr(defs_list, "static void _hoc_destroy_pnt(void* _vptr) {\n");
 		if (watch_seen_ || for_netcons_) {
 			Lappendstr(defs_list, "  Prop* _prop = ((Point_process*)_vptr)->_prop;\n");
 		}
@@ -859,10 +860,10 @@ Sprintf(buf, "	_p = nrn_prop_data_alloc(_mechtype, %d, _prop);\n", parraycount);
 Sprintf(buf, "	_ppvar = nrn_prop_datum_alloc(_mechtype, %d, _prop);\n", ppvar_cnt);
 		Lappendstr(defs_list, buf);
 		if (point_process) {
-			Lappendstr(defs_list," }\n");
+			Lappendstr(defs_list, " }\n");
 		}
 		Lappendstr(defs_list, "\t_prop->dparam = _ppvar;\n");
-		Lappendstr(defs_list,"\t/*connect ionic variables to this model*/\n");
+		Lappendstr(defs_list, "\t/*connect ionic variables to this model*/\n");
 	}
 	if (diamdec) {
 		Sprintf(buf, "prop_ion = need_memb(_morphology_sym);\n");
@@ -1131,9 +1132,9 @@ extern void _cvode_abstol( Symbol**, double*, int);\n\n\
 
 #if CVODE
 	if (cvode_emit) {
-		Lappendstr(defs_list,"\
+		Lappendstr(defs_list, "\
 	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);\n");
-		Lappendstr(defs_list,"\
+		Lappendstr(defs_list, "\
 	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);\n");
 		if (ion_synonym) {
 Lappendstr(defs_list, "	hoc_register_synonym(_mechtype, _ode_synonym);\n");
@@ -1196,13 +1197,13 @@ if (_nd->_extnode) {\n\
 		lst = get_ion_variables(0);
 		if (lst->next != lst->prev) {
 			move(lst->next, lst->prev, ITM(q));
-			freelist(lst);
+			freelist(&lst); //TODO - check this List**
 		}
 		q = q->next;
 		lst = set_ion_variables(0);
 		if (lst->next != lst->prev) {
 			move(lst->next, lst->prev, ITM(q));
-			freelist(lst);
+			freelist(&lst); //TODO - check this List**
 		}
 		q = q->next;
 		sprintf(buf, "\thoc_reg_ba(_mechtype, _ba%d, %s);\n", i, STR(q));
@@ -1275,7 +1276,7 @@ static void _destructor(Prop* _prop) {\n\
 	}
 }
 
-void warn_ignore(s) Symbol* s; {
+void warn_ignore(Symbol* s) {
 	int b;
 	double d1, d2;
 	b = 0;
@@ -1369,9 +1370,7 @@ sprintf(buf, " (*_f)(_mechtype, _difcoef%d, &_difspace%d, 0, ", n, n);
 	lappendstr(procfunc, "}\n");
 }
 
-static int decode_limits(sym, pg1, pg2)
-	Symbol *sym;
-	double *pg1, *pg2;
+int decode_limits(Symbol* sym, double* pg1, double* pg2)
 {
 	int i;
 	double d1;
@@ -1396,9 +1395,7 @@ static int decode_limits(sym, pg1, pg2)
 	return 0;
 }
 
-static int decode_tolerance(sym, pg1)
-	Symbol *sym;
-	double *pg1;
+int decode_tolerance(Symbol* sym, double* pg1)
 {
 	int i;
 	double d1;
@@ -1422,10 +1419,7 @@ static int decode_tolerance(sym, pg1)
 	return 0;
 }
 
-void decode_ustr(sym, pg1, pg2, s)	/* decode sym->u.str */
-	Symbol *sym;
-	char *s;
-	double *pg1, *pg2;
+void decode_ustr(Symbol* sym, double* pg1, double* pg2, char* s)	/* decode sym->u.str */
 {
 	int i, n;
 	char *cp, *cp1;
@@ -1524,8 +1518,7 @@ void units_reg() {
 	Lappendstr(defs_list, "0,0\n};\n");
 }
 
-static void var_count(s)
-	Symbol *s;
+static void var_count(Symbol* s)
 {
 	defs_h(s);
 		s->used = varcount++;
@@ -1537,8 +1530,7 @@ static void var_count(s)
 		}
 }
 
-static void defs_h(s)
-	Symbol *s;
+void defs_h(Symbol* s)
 {
 	Item *q;
 	
@@ -1553,8 +1545,7 @@ static void defs_h(s)
 }
 
 
-void nrn_list(q1, q2)
-	Item *q1, *q2;
+void nrn_list(Item* q1, Item* q2)
 {
 	List **plist = (List **)0;
 	Item *q;
@@ -1627,9 +1618,7 @@ threadsafe("Use of BBCOREPOINTER is not thread safe.");
 	}
 }
 
-void bablk(ba, type, q1, q2)
-	int ba, type;
-	Item *q1, *q2;
+void bablk(int ba, int type, Item* q1, Item* q2)
 {
 	Item* qb, *qv, *q;
 	qb = insertstr(q1->prev->prev, "/*");
@@ -1667,8 +1656,7 @@ int ion_declared(Symbol* s) {
 	return used;	
 }
 
-void nrn_use(q1, q2, q3, q4)
-	Item *q1, *q2, *q3, *q4;
+void nrn_use(Item* q1, Item* q2, Item* q3, Item* q4)
 {
 	int used, i;
 	Item *q, *qr, *qw;
@@ -1730,8 +1718,7 @@ void nrn_use(q1, q2, q3, q4)
 	}
 }
 
-static int iontype(s1, s2)	/* returns index of variable in ion mechanism */
-	char *s1, *s2;
+int iontype(char* s1, char* s2)	/* returns index of variable in ion mechanism */
 {
 	Sprintf(buf, "i%s", s2);
 	if (strcmp(buf, s1) == 0) {
@@ -1754,8 +1741,7 @@ static int iontype(s1, s2)	/* returns index of variable in ion mechanism */
 	return -1;
 }
 
-static Symbol *ifnew_install(name)
-	char *name;
+static Symbol *ifnew_install(char* name)
 {
 	Symbol *s;
 	
@@ -1766,19 +1752,19 @@ static Symbol *ifnew_install(name)
 	return s;
 }
 
-static void nrndeclare() {
+void nrndeclare() {
 	Symbol *s;
 	Item *q;
 	
-	s=lookup("diam"); if (s) {
+	s=lookup( "diam"); if (s) {
 		if (s->nrntype & (NRNRANGE|NRNGLOBAL)) {
-diag(s->name, " cannot be a RANGE or GLOBAL variable for this mechanism");
+diag(s->name, "cannot be a RANGE or GLOBAL variable for this mechanism");
 		}
 		s->nrntype |= NRNNOTP|NRNPRANGEIN; diamdec=1;
 	}
-	s=lookup("area"); if (s) {
+	s=lookup( "area"); if (s) {
 		if (s->nrntype & (NRNRANGE|NRNGLOBAL)) {
-diag(s->name, " cannot be a RANGE or GLOBAL variable for this mechanism");
+diag(s->name, "cannot be a RANGE or GLOBAL variable for this mechanism");
 		}
 		s->nrntype |= NRNNOTP|NRNPRANGEIN; areadec=1;
 	}
@@ -1798,9 +1784,9 @@ diag(s->name, " cannot be a RANGE or GLOBAL variable for this mechanism");
 	s->nrntype |= NRNEXTRN | NRNNOTP;
 	vectorize_substitute(lappendstr(defs_list, "\n#define t nrn_threads->_t\n#define dt nrn_threads->_dt\n"), "\n#define t _nt->_t\n#define dt _nt->_dt\n");
 
-	s=lookup("usetable"); if (s) { s->nrntype |= NRNGLOBAL | NRNNOTP;}
-	s=lookup("celsius");if(s){s->nrntype |= NRNEXTRN | NRNNOTP;}
-	s=lookup("celcius"); if (s) diag("celcius should be spelled celsius",
+	s=lookup( "usetable"); if (s) { s->nrntype |= NRNGLOBAL | NRNNOTP;}
+	s=lookup( "celsius");if(s){s->nrntype |= NRNEXTRN | NRNNOTP;}
+	s=lookup( "celcius"); if (s) diag("celcius should be spelled celsius",
 					(char *)0);
 	
  	ITERATE(q, syminorder) {
@@ -1833,8 +1819,7 @@ diag(s->name, " cannot be a RANGE or GLOBAL variable for this mechanism");
 	del_range(rangedep);
 }
 
-static void del_range(range)
-	List *range;
+void del_range(List* range)
 {
 	Item *q, *q1;
 	Symbol *s;
@@ -1843,13 +1828,13 @@ static void del_range(range)
 		q1 = q->next;
 		s = SYM(q);
 		if (s->nrntype & (NRNPRANGEIN | NRNPRANGEOUT)) {
-			delete(q);
+			dlete(q);
 		}
 	}
 }
 	
 
-static void declare_p() {
+void declare_p() {
 	Item *q;
 	Symbol* s;
 	
@@ -1886,8 +1871,8 @@ static void declare_p() {
 	}
 }
 
-List *set_ion_variables(block)
-	int block;	/* 0 means equation block , 2 means initial block */
+List *set_ion_variables(int block)
+/* 0 means equation block , 2 means initial block */
 {
 	/*ARGSUSED*/
 	Item *q, *q1, *qconc;
@@ -1952,8 +1937,8 @@ Sprintf(buf, " _ion_%s = %s;\n", SYM(q1)->name, SYM(q1)->name);
 	return l;
 }
 
-List *get_ion_variables(block)
-	int block;	/* 0 means equation block */
+List *get_ion_variables(int block)
+/* 0 means equation block */
 			/* 2 means ode_spec and ode_matsol blocks */
 {
 	/*ARGSUSED*/
@@ -1993,7 +1978,7 @@ Fprintf(stderr, "WARNING: WRITE %s with it a STATE may not be translated correct
 	return l;
 }
 
-static int iondef(p_pointercount) int *p_pointercount; {
+int iondef(int* p_pointercount) {
 	int ioncount, it, need_style;
 	Item *q, *q1, *q2;
 	Symbol *sion;
@@ -2122,7 +2107,7 @@ Sprintf(buf, "#define _ion_di%sdv\t*_ppvar[%d]._pval\n", sion->name, ioncount);
 void ppvar_semantics(int i, const char* name) {
 	Item* q;
 	if (!ppvar_semantics_) { ppvar_semantics_ = newlist(); }
-	q = Lappendstr(ppvar_semantics_, name);
+	q = Lappendstr(ppvar_semantics_, const_cast<char*>(name)); //TODO - ugly but ok for now
 	q->itemtype = (short)i;
 }
 
@@ -2152,8 +2137,7 @@ List *begin_dion_stmt()
 	return l;
 }
 
-List *end_dion_stmt(strdel)
-	char *strdel;
+List *end_dion_stmt(char* strdel)
 {
 	Item *q, *q1;
 	static List *l;
@@ -2182,8 +2166,7 @@ Sprintf(buf, " _ion_di%sdv += (_di%s - %s)/%s",
 	return l;
 }
 
-static void ion_promote(qion)
-	Item* qion;
+void ion_promote(Item* qion)
 {
 	Item* q;
 	char* in;
@@ -2223,7 +2206,7 @@ static void ion_promote(qion)
 
 #define NRNFIX(arg) if (strcmp(n, arg) == 0) e=1;
 
-void nrn_var_assigned(s) Symbol* s; {
+void nrn_var_assigned(Symbol* s){
 	int e;
 	char* n;
 	if (s->assigned_to_ == 0) {
@@ -2240,7 +2223,7 @@ void nrn_var_assigned(s) Symbol* s; {
 	NRNFIX("dt");
 	NRNFIX("celsius");
 	if (e) {
-diag(s->name, " is a special NEURON variable that should not be\n assigned a value\
+diag(s->name, "is a special NEURON variable that should not be\n assigned a value\
  in a model description file\n");
 	}
 }
@@ -2251,7 +2234,7 @@ static int cvode_valid_, using_cvode;
 static int cvode_num_, cvode_neq_;
 static Symbol* cvode_fun_;
 
-void slist_data(s, indx, findx) Symbol* s; int indx, findx; {
+void slist_data(Symbol* s, int indx, int findx) {
 	/* format: number of pairs, followed by findx, indx pairs */
 	int* pi;
 	int i, n;
@@ -2276,11 +2259,11 @@ void slist_data(s, indx, findx) Symbol* s; int indx, findx; {
 	}
 }
 
-int slist_search(n, s) int n; Symbol* s; {
+int slist_search(int n, Symbol* s) {
 	int i, *pi;
 	pi = s->slist_info_;
 if (pi == (int*)0) {
-	diag(s->name, " not really a STATE; Ie. No differential equation for it.\n");
+	diag(s->name, "not really a STATE; Ie. No differential equation for it.\n");
 }
 	assert(pi);
 	for (i=0; i < pi[0]; ++i) {
@@ -2354,7 +2337,7 @@ printf("|%s||%s||%s|\n",STR(q3), s, buf);
 	}
 					}
 					if (b == 0) {
-diag(SYM(q1)->name, " is WRITE but is not a STATE and has no assignment statement");
+diag(SYM(q1)->name, "is WRITE but is not a STATE and has no assignment statement");
 					}
 				}
 			}
@@ -2430,7 +2413,7 @@ static void _ode_map(int _ieq, double** _pv, double** _pvdot, double* _pp, Datum
 /* need to take care of case where a state is an ion concentration. Replace
 the _pp pointer with a pointer to the actual ion model's concentration */
 		cvode_conc_map();
-		Lappendstr(procfunc, "}\n"); 
+		Lappendstr(procfunc, "}\n");
 		if (ion_synonym) {
 			Lappendstr(defs_list, "static void _ode_synonym(int, double**, Datum**);\n");
 			Lappendstr(procfunc, "\
@@ -2501,7 +2484,7 @@ static void _ode_map(int _ieq, double** _pv, doubl** _pvdot, double* _pp){}\n");
 static void _ode_matsol(Node* _nd, double* _pp, Datum* _ppd){}\n");
 }
 
-void cvode_interface(fun, num, neq) Symbol* fun; int num, neq; {
+void cvode_interface(Symbol* fun, int num, int neq) {
 	/* if only one then allowed and emit */
 	cvode_valid_ = 1;
 	cvode_not_allowed = (using_cvode++) ? 1 : 0;
@@ -2529,7 +2512,7 @@ void cvode_valid() {
 	cvode_valid_ = 0;
 }
 
-void cvode_rw_cur(b) char* b; {
+void cvode_rw_cur(char* b) {
 	/* if a current is READ and WRITE then call the correct _ode_spec
 	   since it may compute some aspect of the current */
 	Item* q, *q1;
@@ -2558,8 +2541,7 @@ sprintf(b, "if (_nt->_vcv) { _ode_spec%d(); }\n", cvode_num_);
 }
 #endif
 
-void net_receive(qarg, qp1, qp2, qstmt, qend)
-	Item* qarg, *qp1, *qp2, *qstmt, *qend;
+void net_receive(Item* qarg, Item* qp1, Item* qp2, Item* qstmt, Item* qend)
 {
 	Item* q, *q1;
 	Symbol* s;
@@ -2607,7 +2589,7 @@ void net_receive(qarg, qp1, qp2, qstmt, qend)
 		   called between integrator steps and before a re_init
 		   But no need to do so if it is not used.
 		*/
-		Symbol* vsym = lookup("v");
+		Symbol* vsym = lookup( "v");
 		netrec_need_v = 1;
 		for (q = qstmt; q != qend; q = q->next) {
 			if (q->itemtype == SYMBOL && SYM(q) == vsym) {
@@ -2629,7 +2611,7 @@ void net_receive(qarg, qp1, qp2, qstmt, qend)
 					continue;
 				}
 				if ((s->nrntype & IONCONC) == 0) {
-diag(s->name, " :only concentrations can be mentioned in a NET_RECEIVE block");
+diag(s->name, ":only concentrations can be mentioned in a NET_RECEIVE block");
 				}
 				/* distinct only */
 				for (j=0; j < nion; ++j) {
@@ -2665,8 +2647,7 @@ diag("too many ions mentioned in NET_RECEIVE block (limit 10", (char*)0);
 	}
 }
 
-void net_init(qinit, qp2)
-	Item* qinit, *qp2;
+void net_init(Item* qinit, Item* qp2)
 {
 	/* qinit=INITIAL { stmtlist qp2=} */
 	replacstr(qinit, "\nstatic void _net_init(Point_process* _pnt, double* _args, double _lflag)");
@@ -2684,8 +2665,7 @@ void net_init(qinit, qp2)
 	net_init_q2_ = qp2;
 }
 
-void fornetcon(keyword, par1, args, par2, stmt, qend)
-	Item* keyword, *par1, *args, *par2, *stmt, *qend;
+void fornetcon(Item* keyword, Item* par1, Item* args, Item* par2, Item* stmt, Item* qend)
 {
 	Item* q, *q1;
 	Symbol* s;
@@ -2752,7 +2732,7 @@ void conductance_hint(int blocktype, Item* q1, Item* q2) {
 	if (q2 != q1->next) {
 		Symbol* s = SYM(q2);
 		if (!ion_declared(s)) {
-			diag(s->name, " not declared as USEION in NEURON block");
+			diag(s->name, "not declared as USEION in NEURON block");
 		}
 		lappendsym(conductance_, s);
 	}else{

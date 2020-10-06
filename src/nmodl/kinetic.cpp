@@ -97,11 +97,11 @@ its info.
 */
 extern int sens_parm;
 
-static int genconservterms();
-static int number_states();
-static void kinlist();
-static void genderivterms();
-static void genmatterms();
+int genconservterms(int eqnum, Reaction* r, int fn, Rlist* rlst);
+int number_states(Symbol* fun, Rlist** prlst, Rlist** pclst);
+void kinlist(Symbol* fun, Rlist* rlst);
+void genderivterms(Reaction* r, int type, int n);
+void genmatterms(Reaction* r, int fn);
 
 #define MAXKINBLK 20
 static int nstate_[MAXKINBLK];
@@ -117,13 +117,12 @@ static char* instance_loop() {
 #endif
 
 static int sparse_declared_[10];
-static int sparsedeclared(i) int i; {
+static int sparsedeclared(int i) {
 	assert(i < 10);
 	return sparse_declared_[i]++;
 }
 
-char *qconcat(q1, q2) /* return names as single string */
-	Item *q1, *q2;
+char *qconcat(Item* q1, Item* q2) /* return names as single string */
 {
 	char *cp, *ovrfl, *cs, *n;
 	cp = buf; ovrfl = buf+400;
@@ -151,8 +150,7 @@ char *qconcat(q1, q2) /* return names as single string */
 	return stralloc(buf, (char *)0);
 }
 
-void reactname(q1, lastok, q2) /* NAME [] INTEGER   q2 may be null*/
-	Item *q1, *lastok, *q2;
+void reactname(Item* q1, Item* lastok, Item* q2) /* NAME [] INTEGER   q2 may be null*/
 {	/* put on right hand side */
 	Symbol *s, *s1;
 	Rterm *rnext;
@@ -169,7 +167,7 @@ void reactname(q1, lastok, q2) /* NAME [] INTEGER   q2 may be null*/
 		s->used++;
 		rterm->isstate = 1;
 	} else if (!(s->subtype & (DEP | nmodlCONST | PARM | INDEP | STEP1 | STAT)) ) {
-diag(s->name, " must be a STATE, CONSTANT, ASSIGNED, STEPPED, or INDEPENDENT");
+diag(s->name, "must be a STATE, CONSTANT, ASSIGNED, STEPPED, or INDEPENDENT");
 	}
 	if (q2) {
 		rterm->num = atoi(STR(q2));
@@ -198,8 +196,7 @@ void leftreact() /* current reaction list is for left hand side */
 	rterm = (Rterm *)0;
 }
 
-void massagereaction(qREACTION, qREACT1, qlpar, qcomma, qrpar)
-	Item *qREACTION, *qREACT1, *qlpar, *qcomma, *qrpar;
+void massagereaction(Item* qREACTION, Item* qREACT1, Item* qlpar, Item* qcomma, Item* qrpar)
 {
 	Reaction *r1;
 	
@@ -221,8 +218,7 @@ void massagereaction(qREACTION, qREACT1, qlpar, qcomma, qrpar)
 	rterm = (Rterm *)0;
 }
 
-void flux(qREACTION, qdir, qlast)
-	Item *qREACTION, *qdir, *qlast;
+void flux(Item* qREACTION, Item* qdir, Item* qlast)
 {
 	Reaction *r1;
 	
@@ -297,9 +293,7 @@ ITERATE(q1, ldifuslist) {
    we therefore loop through all the rterms and mark only those
 */
 
-void massagekinetic(q1, q2, q3, q4, sensused) /*KINETIC NAME stmtlist '}'*/
-	Item *q1, *q2, *q3,*q4;
-	int sensused;
+void massagekinetic(Item* q1, Item* q2, Item* q3, Item* q4, int sensused) /*KINETIC NAME stmtlist '}'*/
 {
 	int count = 0, i, order, ncons;
 	Item *q, *qs, *afterbrace;
@@ -494,8 +488,7 @@ rlist->capacity[SYM(q1)->used - 1] = stralloc(buf1, (char *)0);
 }
 
 #if Glass
-void fixrlst(rlst)
-	Rlist *rlst;
+void fixrlst(Rlist* rlst)
 {
 	if(rlst->position->prev->itemtype==STRING &&
 	  !strcmp(rlst->position->prev->element.str,"error =")) {
@@ -506,9 +499,7 @@ void fixrlst(rlst)
 
 static int ncons;	/* the number of conservation equations */
 
-void kinetic_intmethod(fun, meth)
-	Symbol *fun;
-	char* meth;
+void kinetic_intmethod(Symbol* fun, char* meth)
 {
 	/*derivative form*/
 	Reaction *r1;
@@ -547,10 +538,7 @@ Insertstr(rlst->endbrace, buf);
 	kinlist(fun, rlst);
 }
 
-static void genderivterms(r, type, n)
-	Reaction *r;
-	int type;	/* 0 derivative, 1 implicit */
-	int n;		/* function number, needed only for implicit */
+void genderivterms(Reaction* r, int type, int n)
 {
 	Symbol *s;
 	Item *q;
@@ -626,10 +614,7 @@ for (j=0; j<2; j++) {
 	Insertstr(q, "\n"); /* REACTION comment left in */
 }
 
-void genfluxterm(r, type, n)
-	Reaction *r;
-	int type;
-	int n;
+void genfluxterm(Reaction* r, int type, int n)
 {
 	Symbol *s;
 	Rterm *rt;
@@ -638,12 +623,12 @@ void genfluxterm(r, type, n)
 	q = r->position;
 	rt = r->rterm[0];
 	if (!(rt->isstate)) {
-		diag(rt->sym->name, " must be (solved) STATE in flux reaction");
+		diag(rt->sym->name, "must be (solved) STATE in flux reaction");
 	}
 	Sprintf(buf, "D%s", rt->sym->name);
 	s = lookup(buf);
 	if (rt->sym->varnum < ncons)
-		diag(rt->sym->name, " is conserved and has a flux");
+		diag(rt->sym->name, "is conserved and has a flux");
 	/* the right hand side */
 	Insertstr(q, "f_flux = b_flux = 0.;\n");
 	if (type) {
@@ -694,9 +679,7 @@ void genfluxterm(r, type, n)
 }
 
 static int linmat;	/* 1 if linear */
-void kinetic_implicit(fun, dt, mname)
-	Symbol *fun;
-	char *dt, *mname;	/* mname is _advance or sparse */
+void kinetic_implicit(Symbol* fun, char* dt, char* mname)
 {
 	/*implicit equations _slist are state(t+dt) _dlist are Dstate(t)*/
 	Item *q;
@@ -750,7 +733,7 @@ void kinetic_implicit(fun, dt, mname)
     }	
 	if (rlst->sens_parm) {
 		diag(" SENS unimplemented for default kinetic integration",
-			" method");
+			 "method");
 	}
 	/*goes near beginning of block. Before first reaction is not
 	adequate since the first reaction may be within a while loop */
@@ -933,9 +916,7 @@ Insertstr(rlst->position, "}");
     } /* end of NOT_CVODE_FLAG */
 }
 
-static void genmatterms(r, fn)
-	Reaction *r;
-	int fn; /*function number, numlist*/
+void genmatterms(Reaction* r, int fn)
 {
 	Symbol *s, *s1;
 	Item *q;
@@ -1016,8 +997,7 @@ static void genmatterms(r, fn)
 	/* REACTION comment left in */
 }
 
-void massageconserve(q1, q3, q5) /* CONSERVE react '=' expr */
-	Item *q1, *q3, *q5;
+void massageconserve(Item* q1, Item* q3, Item* q5) /* CONSERVE react '=' expr */
 {
 /* the list of states is in rterm at this time with the first at the end */
 	Reaction *r1;
@@ -1047,10 +1027,7 @@ void massageconserve(q1, q3, q5) /* CONSERVE react '=' expr */
 	rterm = (Rterm *)0;
 }
 
-static int genconservterms(eqnum, r, fn, rlst)
-	Reaction *r;
-	int eqnum, fn; /*function number*/
-	Rlist *rlst;
+int genconservterms(int eqnum, Reaction* r, int fn, Rlist* rlst)
 {
 	Item *q;
 	Rterm *rt, *rtdiag;
@@ -1113,9 +1090,7 @@ diag(rt->sym->name, ": only (solved) STATE are allowed in CONSERVE equations.");
 	return eqnum;
 }
 
-static int number_states(fun, prlst, pclst)
-	Symbol *fun;
-	Rlist **prlst, **pclst;
+int number_states(Symbol* fun, Rlist** prlst, Rlist** pclst)
 {
 /* reaction list has the symorder and this info is put back in sym->varnum*/
 /* also index of symorder goes into sym->used */
@@ -1128,7 +1103,7 @@ static int number_states(fun, prlst, pclst)
 	for (rlst = rlist; rlst && (rlst->sym != fun); rlst = rlst->rlistnext)
 		clst = clst->rlistnext;
 	if (rlst == (Rlist *)0) {
-		diag(fun->name, " doesn't exist");
+		diag(fun->name, "doesn't exist");
 	}
 	*prlst = rlst;
 	*pclst = clst;
@@ -1151,9 +1126,7 @@ static int number_states(fun, prlst, pclst)
 	return istate;
 }
 
-static void kinlist(fun, rlst)
-	Symbol *fun;
-	Rlist *rlst;
+void kinlist(Symbol* fun, Rlist* rlst)
 {
 	int i;
 	Symbol *s;
@@ -1217,12 +1190,10 @@ if (vectorize){
 }
 
 /* for now we only check CONSERVE and COMPARTMENT */
-void check_block(standard, actual, mes)
-	int standard, actual;
-	char *mes;
+void check_block(int standard, int actual, char* mes)
 {
 	if (standard != actual) {
-		diag(mes, " not allowed in this kind of block");
+		diag(mes, "not allowed in this kind of block");
 	}
 }
 
@@ -1231,7 +1202,7 @@ compart: COMPARTMENT NAME ',' expr '{' namelist '}'
 		{massagecompart($4, $5, $7, SYM($2));}
 	| COMPARTMENT expr '{' namelist '}'
 		{massagecompart($2, $3, $5, SYM0);}
-	| COMPARTMENT error {myerr("Correct syntax is:	\
+	| COMPARTMENT error {myerr( "Correct syntax is:	\
 COMPARTMENT index, expr { vectorstates }\n\
 			COMPARTMENT expr { scalarstates }");}
 	;
@@ -1248,9 +1219,7 @@ COMPARTMENT index, expr { vectorstates }\n\
  compartlist is a list of triples of item pointers which
  holds the info for massagekinetic.
 */
-void massagecompart(qexp, qb1, qb2, indx)
-	Item *qexp, *qb1, *qb2;
-	Symbol *indx;
+void massagecompart(Item* qexp, Item* qb1, Item* qb2, Symbol* indx)
 {
 	Item *q, *qs;
 	
@@ -1274,7 +1243,7 @@ void massagecompart(qexp, qb1, qb2, indx)
 	for (q = qb1->next; q != qb2; q = qs) {
 		qs = q->next;
 		if (!(SYM(q)->subtype & STAT) && in_solvefor(SYM(q))) {
-			delete(q);
+			dlete(q);
 #if 0
 diag(SYM(q)->name, "must be a (solved) STATE in a COMPARTMENT statement");
 #endif
@@ -1288,9 +1257,7 @@ diag(SYM(q)->name, "must be a (solved) STATE in a COMPARTMENT statement");
 	Lappenditem(compartlist, qb2);
 }
 
-void massageldifus(qexp, qb1, qb2, indx)
-	Item *qexp, *qb1, *qb2;
-	Symbol *indx;
+void massageldifus(Item* qexp, Item* qb1, Item* qb2, Symbol* indx)
 {
 	Item *q, *qs, *q1;
 	Symbol* s, *s2;
@@ -1320,7 +1287,7 @@ void massageldifus(qexp, qb1, qb2, indx)
 		s = SYM(q);
 		s2 = SYM0;
 		if (!(s->subtype & STAT) && in_solvefor(s)) {
-			delete(q);
+			dlete(q);
 diag(SYM(q)->name, "must be a (solved) STATE in a LONGITUDINAL_DIFFUSION statement");
 		}
 		lappendsym(ldifuslist, s);
@@ -1355,8 +1322,7 @@ diag(SYM(q)->name, "must be a (solved) STATE in a LONGITUDINAL_DIFFUSION stateme
 
 static List* kvect;
 
-void kin_vect1(q1, q2, q4)
-	Item *q1, *q2, *q4;
+void kin_vect1(Item* q1, Item* q2, Item* q4)
 {
 	if (!kvect) {
 		kvect = newlist();
@@ -1380,11 +1346,10 @@ void kin_vect2() {
 	
 }
 
-void kin_vect3(q1, q2, q4)
-	Item *q1, *q2, *q4;
+void kin_vect3(Item* q1, Item* q2, Item* q4)
 {
 	Symbol* fun;
-	Item *q, *first, *last, *insertitem();
+	Item *q, *first, *last, *insertitem(Item* item, Item* itm);
 	fun = SYM(q2);
 	last = insertstr(q4->next, "\n");
 	first = insertstr(last, "\n/*copy of previous function */\n");
@@ -1429,8 +1394,7 @@ void see_ostmt() {
 #endif
 }
 
-void see_astmt(q1, q2)
-	Item *q1, *q2;
+void see_astmt(Item* q1, Item* q2)
 {
 #if 0 && VECTORIZE
 	Item* q;
@@ -1445,7 +1409,7 @@ void see_astmt(q1, q2)
 #endif
 }
 
-void vectorize_if_else_stmt(blocktype) int blocktype; {
+void vectorize_if_else_stmt(int blocktype) {
 #if 0 && VECTORIZE
 	if (blocktype == KINETIC && vectorize) {
 		vectorize = 0;
@@ -1467,13 +1431,13 @@ prn(cvode_sbegin, cvode_send);
 		while (ITM(q) != q2) {
 			assert(q2 != cvode_send); /* past the list */
 			q2 = q2->next;
-			delete(q2->prev);
+			dlete(q2->prev);
 		}
 		q2 = q2->next;
 	}
 }
 	
-void prn(q1,q2) Item *q1, *q2; {
+void prn(Item* q1, Item* q2) {
 	Item* qq, *q;
 	for (qq = q1; qq != q2; qq=qq->next) {
 		if (qq->itemtype == ITEM) {
@@ -1499,10 +1463,7 @@ break;
 	}
 }
 
-void cvode_kinetic(qsol, fun, numeqn, listnum)
-	Item* qsol;
-	Symbol* fun;
-	int numeqn, listnum;
+void cvode_kinetic(Item* qsol, Symbol* fun, int numeqn, int listnum)
 {
 #if 1
 	Item* qn;
@@ -1514,7 +1475,7 @@ void cvode_kinetic(qsol, fun, numeqn, listnum)
 	if (done_list) for (q = done_list->next; q != done_list; q = qn) {
 		qn = q->next;
 		if (SYM(q) == fun) {
-			delete(q);
+			dlete(q);
 		}
 	}
 	kinetic_intmethod(fun, "NEURON's CVode");
@@ -1568,11 +1529,11 @@ void cvode_kinetic(qsol, fun, numeqn, listnum)
 			/* delete the statement */
 			while (q->itemtype != SYMBOL || SYM(q)->name[0] != ';') {
 				qnext = q->next;
-				delete(q);
+				dlete(q);
 				q = qnext;
 			}
 			qnext = q->next;
-			delete(q);
+			dlete(q);
 		}
 	}
 #endif
@@ -1581,10 +1542,7 @@ void cvode_kinetic(qsol, fun, numeqn, listnum)
 #endif
 }
 
-void single_channel(qsol, fun, numeqn, listnum)
-	Item* qsol;
-	Symbol* fun;
-	int numeqn, listnum;
+void single_channel(Item* qsol, Symbol*  fun, int numeqn, int listnum)
 {
 	Rlist *rlst, *clst;
 	int nstate, i;
@@ -1683,11 +1641,11 @@ return;
 			/* delete the statement */
 			while (q->itemtype != SYMBOL || SYM(q)->name[0] != ';') {
 				qnext = q->next;
-				delete(q);
+				dlete(q);
 				q = qnext;
 			}
 			qnext = q->next;
-			delete(q);
+			dlete(q);
 		}
 	}
 #endif

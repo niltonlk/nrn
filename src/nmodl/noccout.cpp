@@ -15,8 +15,8 @@ List           *procfunc, *initfunc, *modelfunc, *termfunc, *initlist, *firstlis
 
 #if NMODL
 List		*nrnstate;
-extern List	*currents, *set_ion_variables(), *get_ion_variables();
-extern List	*begin_dion_stmt(), *end_dion_stmt();
+extern List	*currents, *set_ion_variables(int), *get_ion_variables(int);
+extern List	*begin_dion_stmt(), *end_dion_stmt(char*);
 extern List* conductance_;
 static void conductance_cout();
 #endif
@@ -513,7 +513,7 @@ static void initstates()
 
 static int newline, indent;
 
-void printitem(q) Item* q; {
+void printitem(Item* q) {
 		if (q->itemtype == SYMBOL) {
 			if (SYM(q)->type == SPECIAL) {
 				switch (SYM(q)->subtype) {
@@ -533,7 +533,7 @@ void printitem(q) Item* q; {
 			}
 			Fprintf(fcout, " %s", SYM(q)->name);
 		} else if (q->itemtype == VERBATIM) {
-			Fprintf(fcout, "%s", STR(q));
+			verbatim_adjust(STR(q));
 		} else if (q->itemtype == ITEM) {
 			printitem(ITM(q));
 		}else {
@@ -541,7 +541,7 @@ void printitem(q) Item* q; {
 		}
 }
 
-void debugprintitem(q) Item* q; {
+void debugprintitem(Item* q) {
 		if (q->itemtype == SYMBOL) {
 			printf("SYM %s\n", SYM(q)->name);
 		} else if (q->itemtype == VERBATIM) {
@@ -573,8 +573,7 @@ char* items_as_string(Item* q1, Item* q2) {
   return strdup(buf);
 }
 
-void printlist(s)
-	List           *s;
+void printlist(List* s)
 {
 	Item           *q;
 	int	i;
@@ -922,12 +921,10 @@ diag("current can only be LOCAL in a BREAKPOINT if CONDUCTANCE statements are us
 	P("  if (!_first) return;\n");
 	printlist(initlist);
 	P("_first = 0;\n}\n");
-	P("\n#if defined(__cplusplus)\n} /* extern \"C\" */\n#endif\n");
+	//P("\n#if defined(__cplusplus)\n} /* extern \"C\" */\n#endif\n"); // TODO - can this be removed?
 }
 
-void vectorize_substitute(q, str)
-	Item* q;
-	char* str;
+void vectorize_substitute(Item* q, char* str)
 {
 	if (!vectorize_replacements) {
 		vectorize_replacements = newlist();
@@ -994,7 +991,7 @@ static void conductance_cout() {
   ITERATE(q, m) {
     if (q->itemtype == SYMBOL) {
       if (strcmp(SYM(q)->name, "{") == 0) {
-        delete(q);
+        dlete(q);
         break;
       }
     }
@@ -1003,7 +1000,7 @@ static void conductance_cout() {
   for (q = m->prev; q != m; q = q->prev) {
     if (q->itemtype == SYMBOL) {
       if (strcmp(SYM(q)->name, "}") == 0) {
-        delete(q);
+        dlete(q);
         break;
       }
     }

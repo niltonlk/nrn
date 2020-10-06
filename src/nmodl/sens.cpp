@@ -103,8 +103,7 @@ static List *parmlist;
 extern Symbol *indepsym;
 int sens_parm = 0;
 
-void sensparm(qparm)
-	Item *qparm;
+void sensparm(Item* qparm)
 {
 	if (!parmlist)
 		parmlist = newlist();
@@ -112,17 +111,14 @@ void sensparm(qparm)
 	sens_parm++;
 }
 
-void add_sens_statelist(s)
-	Symbol *s;
+void add_sens_statelist(Symbol* s)
 {
 	if (!statelist)
 		statelist = newlist();
 	Lappendsym(statelist, s);
 }
 
-void sensmassage(type, qfun, fn)
-	int type, fn;
-	Item *qfun;
+void sensmassage(int type, Item* qfun, int fn)
 {
 /*qfun is the list symbol for the name of the derivative block. It has
 a count of the number of state variables used.  A copy of this symbol
@@ -157,7 +153,7 @@ there is a linearsens call and we must be sure to keep proper state order */
 	oldfun = SYM(qfun);
 	Sprintf(buf, "S_%s", oldfun->name);
 	if (lookup(buf)) {
-		diag(buf, " is user defined and cant be used for SENS");
+		diag(buf, "is user defined and cant be used for SENS");
 	}
 	/*this is a time bomb*/
 	newfun = install(buf, oldfun->type);
@@ -338,9 +334,7 @@ fn, j + nstate*i, sname, fn, j + nstate*i, dname);
 	sens_parm = 0;
 }
 
-void sens_nonlin_out(q, fun)
-	Item *q;
-	Symbol *fun;
+void sens_nonlin_out(Item* q, Symbol* fun)
 {
 	/* find fun in the sensinfo list and insert its statements before q */
 	

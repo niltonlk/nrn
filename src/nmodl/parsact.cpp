@@ -30,14 +30,12 @@ extern int artificial_cell;
 extern int vectorize;
 extern int assert_threadsafe;
 
-static int type_change();
+int type_change(Symbol* sym, int level);
 
 static long previous_subtype;	/* subtype at the sym->level */
 static char *previous_str;	/* u.str on last install */
 
-void explicit_decl(level, q)
-	int level;
-	Item *q;
+void explicit_decl(int level, Item* q)
 {
 	/* used to be inside parse1.y without the lastvars condition
 	   Without the condition it served two purposes.
@@ -101,7 +99,7 @@ void explicit_decl(level, q)
 	}else if (level > sym->level) { /* old one takes precedence */
 		sym->u.str = previous_str;
 	}else if (strcmp(sym->u.str, previous_str) != 0) { /* not identical */
-		diag(sym->name, " has different values at same level");
+		diag(sym->name, "has different values at same level");
 	}
 }
 
@@ -109,9 +107,7 @@ void explicit_decl(level, q)
 one producing a message. Notice that multiple declarations at level 0 are
 caught as errors in the function above. */
 
-static int type_change(sym, level) /*return 1 if type change, 0 otherwise*/
-	Symbol *sym;
-	int level;
+int type_change(Symbol* sym, int level) /*return 1 if type change, 0 otherwise*/
 {
 	long s, d, c;
 	
@@ -146,10 +142,7 @@ Fprintf(stderr, "Notice: %s is promoted from a PARAMETER to an ASSIGNED\n", sym-
 	return 1;
 }
 	
-void parm_array_install(n, num, units, limits, index)
-	Symbol         *n;
-	char           *num, *units, *limits;
-	int index;
+void parm_array_install(Symbol* n, char* num, char* units, char* limits, int index)
 {
 	char buf[NRN_BUFSIZE];
 
@@ -164,9 +157,7 @@ void parm_array_install(n, num, units, limits, index)
 	n->u.str = stralloc(buf, (char *) 0);
 }
 
-void parminstall(n, num, units, limits)
-	Symbol         *n;
-	char           *num, *units, *limits;
+void parminstall(Symbol* n, char* num, char* units, char* limits)
 {
 	char buf[NRN_BUFSIZE];
 
@@ -182,8 +173,7 @@ void parminstall(n, num, units, limits)
 /* often we want to install a parameter by default but only
 if the user hasn't declared it herself.
 */
-Symbol *ifnew_parminstall(name, num, units, limits)
-	char *name, *num, *units, *limits;
+Symbol *ifnew_parminstall(char* name, char* num, char* units, char* limits)
 {
 	Symbol *s;
 
@@ -198,16 +188,13 @@ Symbol *ifnew_parminstall(name, num, units, limits)
 	if (!(s->subtype & (PARM | STEP1))) {
 		/* special case is scop_indep can be a PARM but not indepsym */
 		if (scop_indep == indepsym || s != scop_indep) {
-			diag(s->name, " can't be declared a parameter by default");
+			diag(s->name, "can't be declared a parameter by default");
 		}
 	}
 	return s;
 }
 
-void steppedinstall(n, q1, q2, units)
-	Symbol         *n;
-	Item           *q1, *q2;
-	char           *units;
+void steppedinstall(Symbol* n, Item* q1, Item* q2, char* units)
 {
 	int             i;
 
@@ -247,11 +234,7 @@ static char    *indepunits = "";
 int using_default_indep;
 #endif
 
-void indepinstall(n, from, to, with, qstart, units, scop)
-	Symbol         *n;
-	char           *from, *to, *with, *units;
-	Item		*qstart;	/* ITEM0 if not present */
-	int scop;	/*1 if declaring the scop independent*/
+void indepinstall(Symbol* n, char* from, char* to, char* with, Item* qstart, char* units, int scop)
 {
 	char buf[NRN_BUFSIZE];
 
@@ -310,18 +293,14 @@ diag("Only one independent variable can be defined", (char *) 0);
  * However Dname will not appear in the .var file unless it is used -- see
  * parout.c. 
  */
-void depinstall(type, n, index, from, to, units, qs, makeconst, abstol)
-	int             type, index, makeconst;
-	Symbol         *n;
-	char           *from, *to, *units, *abstol;
-	Item           *qs;
+void depinstall(int type, Symbol* n, int index, char* from, char* to, char* units, Item* qs, int makeconst, char* abstol)
 {
 	char buf[NRN_BUFSIZE], *pstr;
 	int             c;
 
 	if (!type && strlen(abstol)>0) {
 		printf("abstol = |%s|\n", abstol);
-		diag(n, "tolerance can be specified only for a STATE");
+		diag(n->name, "tolerance can be specified only for a STATE");
 	}
 	pstr = n->u.str;	/* make it work even if recursive */
 	if (n->u.str == (char *) 0)
@@ -349,17 +328,13 @@ void depinstall(type, n, index, from, to, units, qs, makeconst, abstol)
 	previous_str = pstr;
 }
 
-void statdefault(n, index, units, qs, makeconst)
-	Symbol         *n;
-	int             index, makeconst;
-	char           *units;
-	Item           *qs;
+void statdefault(Symbol* n, int index, char* units, Item* qs, int makeconst)
 {
 	char            nam[256], *un;
 	Symbol         *s;
 
 	if (n->type != NAME && n->type != PRIME) {
-		diag(n->name, " can't be a STATE");
+		diag(n->name, "can't be a STATE");
 	}
 	if (makeconst) {
 		Sprintf(nam, "%s0", n->name);
@@ -419,8 +394,7 @@ void vectorize_scan_for_func(Item* q1, Item* q2) {
 	}
 }
 
-void defarg(q1, q2)			/* copy arg list and define as doubles */
-	Item           *q1, *q2;
+void defarg(Item* q1, Item* q2)			/* copy arg list and define as doubles */
 {
 	Item           *q3, *q;
 
@@ -440,35 +414,33 @@ void defarg(q1, q2)			/* copy arg list and define as doubles */
 #endif
 }
 
-void lag_stmt(q1, blocktype)	/* LAG name1 BY name2 */
-	Item *q1;
-	int blocktype;
+void lag_stmt(Item* q1, int blocktype)	/* LAG name1 BY name2 */
 {
 	Symbol *name1, *name2, *lagval;
 
 	/*ARGSUSED*/
 	/* parse */
 	name1 = SYM(q1->next);
-	delete(q1->next);
-	delete(q1->next);
+	dlete(q1->next);
+	dlete(q1->next);
 	name2 = SYM(q1->next);
-	delete(q1->next);
+	dlete(q1->next);
 	name1->usage |= DEP;
 	name2->usage |= DEP;
 	/* check */
 	if (!indepsym) {
 		diag("INDEPENDENT variable must be declared to process",
-			" the LAG statement");
+			 "the LAG statement");
 	}
 	if (!(name1->subtype & (DEP | STAT))) {
-		diag(name1->name, " not a STATE or DEPENDENT variable");
+		diag(name1->name, "not a STATE or DEPENDENT variable");
 	}
 	if (!(name2->subtype & (PARM | nmodlCONST))) {
-		diag(name2->name, " not a CONSTANT or PARAMETER");
+		diag(name2->name, "not a CONSTANT or PARAMETER");
 	}
 	Sprintf(buf, "lag_%s_%s", name1->name, name2->name);
 	if (lookup(buf)) {
-		diag(buf, " already in use");
+		diag(buf, "already in use");
 	}
 	/* create */
 	lagval = install(buf, NAME);
@@ -492,8 +464,7 @@ void lag_stmt(q1, blocktype)	/* LAG name1 BY name2 */
 	replacstr(q1, buf);
 }
 
-void queue_stmt(q1, q2)
-	Item *q1, *q2;
+void queue_stmt(Item* q1, Item* q2)
 {
 	Symbol *s;
 	static int first=1;
@@ -511,7 +482,7 @@ void queue_stmt(q1, q2)
 	s = SYM(q2);
 	s->usage |= DEP;
 	if (!(s->subtype)) {
-		diag(s->name, " not declared");
+		diag(s->name, "not declared");
 	}
 	if (s->subtype & ARRAY) {
 		Sprintf(buf, "%s, %d);\n", s->name, s->araydim);
@@ -521,8 +492,7 @@ void queue_stmt(q1, q2)
 	replacstr(q2, buf);
 }
 
-void add_reset_args(q)
-	Item *q;
+void add_reset_args(Item* q)
 {
 	static int reset_fun_cnt=0;
 	
@@ -533,8 +503,7 @@ void add_reset_args(q)
 	Lappendstr(firstlist, buf);
 }
 
-void add_nrnthread_arg(q)
-	Item *q;
+void add_nrnthread_arg(Item* q)
 {
 	vectorize_substitute(insertstr(q->next, "nrn_threads,"), "_nt,");
 }
@@ -600,9 +569,7 @@ int check_tables_threads(List* p) {
 	return 0;
 }
 
-void table_massage(tablist, qtype, qname, arglist)
-	List *tablist, *arglist;
-	Item *qtype, *qname;
+void table_massage(List* tablist, Item* qtype, Item* qname, List* arglist)
 {
 	Symbol *fsym, *s, *arg=0;
 	char* fname;
@@ -623,7 +590,7 @@ void table_massage(tablist, qtype, qname, arglist)
 	depend = LST(q = q->next);
 	type = SYM(qtype)->type;
 
-	ifnew_parminstall("usetable", "1", "", "0 1");
+	ifnew_parminstall( "usetable", "1", "", "0 1");
 	if (!check_table_statements) {
 		check_table_statements = newlist();
 	}
@@ -813,7 +780,7 @@ Sprintf(buf, "   _t_%s[_i] = %s;\n", s->name, s->name);
 	if (type != FUNCTION1) {
 		Lappendstr(procfunc, "return 0;\n");
 	}
-	Lappendstr(procfunc, "}\n\n"); /* end of new function */		
+	Lappendstr(procfunc, "}\n\n"); /* end of new function */
 
 	/* _n_name function for table lookup with no checking */
 	if (type == FUNCTION1) {
@@ -929,7 +896,7 @@ s->name, s->name, s->name, s->name);
 			Lappendstr(procfunc, buf);
 		}
 	}
-	Lappendstr(procfunc, "}\n\n"); /* end of new function */		
+	Lappendstr(procfunc, "}\n\n"); /* end of new function */
 	
 	/* table declaration */
 	ITERATE(q, table) {
@@ -1024,9 +991,7 @@ void hocfunchack(Symbol* n, Item* qpar1, Item* qpar2, int hack)
 #endif
 }
 
-void hocfunc(n, qpar1, qpar2) /*interface between modl and hoc for proc and func */
-	Item *qpar1, *qpar2;
-	Symbol *n;
+void hocfunc(Symbol* n, Item* qpar1, Item* qpar2) /*interface between modl and hoc for proc and func */
 {
 	/* Hack prevents FUNCTION_TABLE bug of 'double table_name()' extra args
 	   replacing the double in 'double name(...) */
@@ -1035,9 +1000,7 @@ void hocfunc(n, qpar1, qpar2) /*interface between modl and hoc for proc and func
 
 #if VECTORIZE
 /* ARGSUSED */
-void vectorize_use_func(qname, qpar1, qexpr, qpar2, blocktype)
-	Item* qname, *qpar1, *qexpr, *qpar2;
-	int blocktype;
+void vectorize_use_func(Item* qname, Item* qpar1, Item* qexpr, Item* qpar2, int blocktype)
 {
 	Item* q;
 	if (SYM(qname)->subtype &  EXTDEF) {
@@ -1091,7 +1054,7 @@ diag("net_send allowed only in INITIAL and NET_RECEIVE blocks", (char*)0);
 			if (blocktype == NETRECEIVE) {
 				Insertstr(qpar1->next, "_pnt,");
 			}else{
-diag("net_event", " only allowed in NET_RECEIVE block");
+diag("net_event", "only allowed in NET_RECEIVE block");
 			}
 		}else if (strcmp(SYM(qname)->name, "net_move") == 0) {
 			if (artificial_cell) {
@@ -1100,7 +1063,7 @@ diag("net_event", " only allowed in NET_RECEIVE block");
 			if (blocktype == NETRECEIVE) {
 				Insertstr(qpar1->next, "_tqitem, _pnt,");
 			}else{
-diag("net_move", " only allowed in NET_RECEIVE block");
+diag("net_move", "only allowed in NET_RECEIVE block");
 			}
 		}
 		return;
@@ -1124,9 +1087,7 @@ diag("net_move", " only allowed in NET_RECEIVE block");
 
 #endif
 		
-void function_table(s, qpar1, qpar2, qb1, qb2) /* s ( ... ) { ... } */
-	Symbol* s;
-	Item *qpar1, *qpar2, *qb1, *qb2;
+void function_table(Symbol* s, Item* qpar1, Item* qpar2, Item* qb1, Item* qb2) /* s ( ... ) { ... } */
 {
 	Symbol* t;
 	int i;
@@ -1171,8 +1132,7 @@ void function_table(s, qpar1, qpar2, qb1, qb2) /* s ( ... ) { ... } */
 	hocfunchack(t, q1, q2, 1);
 }
 
-void watchstmt(par1, dir, par2, flag, blocktype )Item *par1, *dir, *par2, *flag;
-	int blocktype;
+void watchstmt(Item* par1, Item* dir, Item* par2, Item* flag, int blocktype )
 {
 	if (!watch_seen_) {
 		++watch_seen_;
@@ -1183,7 +1143,7 @@ void watchstmt(par1, dir, par2, flag, blocktype )Item *par1, *dir, *par2, *flag;
 	sprintf(buf, "\nstatic double _watch%d_cond(_pnt) Point_process* _pnt; {\n",
 		watch_seen_);
 	lappendstr(procfunc, buf);
-	vectorize_substitute(lappendstr(procfunc, ""),"\tdouble* _p; Datum* _ppvar; Datum* _thread; _NrnThread* _nt;\n\t_thread= (Datum*)0; _nt = (_NrnThread*)_pnt->_vnt;\n");
+	vectorize_substitute(lappendstr(procfunc, ""),(char*)"\tdouble* _p; Datum* _ppvar; Datum* _thread; _NrnThread* _nt;\n\t_thread= (Datum*)0; _nt = (_NrnThread*)_pnt->_vnt;\n");
 	sprintf(buf, "\t_p = _pnt->_prop->param; _ppvar = _pnt->_prop->dparam;\n\tv = NODEV(_pnt->node);\n	return ");
 	lappendstr(procfunc, buf);
 	movelist(par1, par2, procfunc);

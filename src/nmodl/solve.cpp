@@ -27,8 +27,8 @@ Symbol* cvode_nrn_cur_solve_;
 Symbol* cvode_nrn_current_solve_;
 #endif
 
-static void whileloop();
-static void check_ss_consist();
+void whileloop(Item*, long, int);
+void check_ss_consist(Item*);
 
 /* Need list of solve statements. We impress the
 general list structure to handle it.  The element is a pointer to an
@@ -37,12 +37,10 @@ item which is the first item in the statement sequence in another list.
 static List *solvq;	/* list of the solve statement locations */
 int numlist = 0;	/* number of slist's */
 
-void solvequeue(q1, q2, blocktype, qerr) /*solve NAME=q1 [using METHOD=q2]*/
+void solvequeue(Item* q1, Item* q2, int blocktype, Item* qerr) /*solve NAME=q1 [using METHOD=q2]*/
 				/* q2 = 0 means method wasn't there */
 				/* qerr in ITEM0 or else the closing
 				   brace of an IFERROR stmt */
-	Item *q1, *q2, *qerr;
-	int blocktype;
 {
 	/* the solvq list is organized in groups of an item element
 	followed by the method symbol( null if default to be used) */
@@ -103,13 +101,13 @@ diag("The SOLVE statement must be before the DERIVATIVE block for ", SYM(lq)->na
 			cvode_cnexp_solve = lq;
 #endif
 		}
-		delete(q2->prev);
-		delete(q2);
+		dlete(q2->prev);
+		dlete(q2);
 	}else{
 		qtemp = q1->next;
 		Lappendsym(solvq, SYM0);
 	}
-	delete(q1->prev);
+	dlete(q1->prev);
 
 	/* handle the error statement */
 	/* put one in if it isn't already there */
@@ -194,7 +192,7 @@ void solvhandler()
 
 		case DERF:
 			if (method == SYM0) {
-				method = lookup("adrunge");
+				method = lookup( "adrunge");
 			}
 			if (btype == BREAKPOINT && !steadystate) {
 				/* derivatives recalculated after while loop */
@@ -215,7 +213,7 @@ fprintf(stderr, "Notice: %s is not thread safe. Complain to Hines\n", method->na
 			break;
 		case KINF:
 			if (method == SYM0) {
-				method = lookup("_advance");
+				method = lookup( "_advance");
 			}
 			if (btype == BREAKPOINT && (method->subtype & DERF)) {
 #if VECTORIZE
@@ -246,7 +244,7 @@ fprintf(stderr, "Notice: NONLINEAR is not thread safe.\n");
 			vectorize = 0;
 #endif
 			if (method == SYM0) {
-				method = lookup("newton");
+				method = lookup( "newton");
 			}
 			solv_nonlin(qsol, fun, method, numeqn, listnum);
 			break;
@@ -256,7 +254,7 @@ fprintf(stderr, "Notice: LINEAR is not thread safe.\n");
 			vectorize = 0;
 #endif
 			if (method == SYM0) {
-				method = lookup("simeq");
+				method = lookup( "simeq");
 			}
 			solv_lineq(qsol, fun, method, numeqn, listnum);
 			break;
@@ -351,8 +349,7 @@ fprintf(stderr, "Notice: SOLVE with ERROR is not thread safe.\n");
 	}
 }
 
-void save_dt(q)	/* save and restore the value of indepvar */
-	Item *q;
+void save_dt(Item* q)	/* save and restore the value of indepvar */
 {
 	/*ARGSUSED*/
 #if 0	/* integrators no longer increment time */
@@ -371,10 +368,7 @@ void save_dt(q)	/* save and restore the value of indepvar */
 
 char *saveindep = "";
 
-static void whileloop(qsol, type, ss)
-	Item *qsol;
-	long type;
-	int ss;
+void whileloop(Item* qsol, long type, int ss)
 {
 /* no solve statement except this is allowed to
 change the indepvar. Time passed to integrators
@@ -397,9 +391,9 @@ which is trapped in scop */
 	case DISCRETE:
 		if (firstderf) { /* time dependent process so create a deltastep */
 			double d[3];
-#ifndef NeXT			
-			double atof();
-#endif
+//#ifndef NeXT
+//			double atof();
+//#endif
 			int i;
 			Item *q;
 			char sval[256];
@@ -522,8 +516,7 @@ if (type == DERF) {
 invoke same integrator (default is advance) and DERIVATIVE blocks whenever
 solved must invoke the derivimplicit method.
 */
-static void check_ss_consist(qchk)
-	Item *qchk;
+void check_ss_consist(Item* qchk)
 {
 	Item *q;
 	Symbol *fun, *method;

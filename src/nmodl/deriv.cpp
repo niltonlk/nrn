@@ -15,7 +15,7 @@ extern Symbol *indepsym;
 extern List *indeplist;
 extern int sens_parm, numlist;
 int dtsav_for_nrn_state;
-static void copylist();
+void copylist(List*, Item*);
 List* massage_list_;
 List* netrec_cnexp;
 
@@ -34,16 +34,12 @@ extern List* thread_cleanup_list;
 #if CVODE
 extern char* cvode_deriv(), *cvode_eqnrhs();
 extern Item* cvode_cnexp_solve;
-static void cvode_diffeq();
+void cvode_diffeq(Symbol* ds, Item* qbegin, Item* qend);
 static List* cvode_diffeq_list, *cvode_eqn;
 static int cvode_cnexp_possible;
 #endif
 
-void solv_diffeq(qsol, fun, method, numeqn, listnum, steadystate, btype)
-	Item *qsol;
-	Symbol *fun, *method;
-	int numeqn, listnum, steadystate;
-	int btype;
+void solv_diffeq(Item* qsol, Symbol* fun, Symbol* method, int numeqn, int listnum, int steadystate, int btype)
 {
 	char *maxerr_str, dindepname[256];
 	char deriv1_advance[256], deriv2_advance[256];
@@ -89,9 +85,8 @@ if (deriv_imp_list) {	/* make sure deriv block translation matches method */
 		}
 	}
 	if ((strcmp(method->name, Derivimplicit) == 0) ^ (found == 1)) {
-	diag("To use the derivimplicit method the SOLVE statement must\
- precede the DERIVATIVE block\n",
-" and all SOLVEs using that block must use the derivimplicit method\n");
+	diag("To use the derivimplicit method the SOLVE statement must precede the DERIVATIVE block\n",
+	        " and all SOLVEs using that block must use the derivimplicit method\n");
 	}
 	Sprintf(deriv1_advance, "_deriv%d_advance = 1;\n", listnum);
 	Sprintf(deriv2_advance, "_deriv%d_advance = 0;\n", listnum);
@@ -241,8 +236,7 @@ static Symbol	*forderiv;	/* base state */
 static char	base_units[256];	/*base state units */
 static int	indx, maxindx;	/* current indx, and indx of dstate */
 
-static Symbol * init_forderiv(prime)
-	Symbol *prime;
+static Symbol * init_forderiv(Symbol* prime)
 {
 	char name[256];
 	double d1, d2;
@@ -259,7 +253,7 @@ static Symbol * init_forderiv(prime)
 	}
 	forderiv = lookup(name);
 	if (!forderiv || !(forderiv->subtype & STAT)) {
-		diag(name, " must be declared as a state variable");
+		diag(name, "must be declared as a state variable");
 	}
 	if (forderiv->araydim != prime->araydim) {
 		Sprintf(buf, "%s and %s have different dimensions",
@@ -271,8 +265,7 @@ static Symbol * init_forderiv(prime)
 	return forderiv;
 }
 
-static char *name_forderiv(i)
-	int i;
+static char *name_forderiv(int i)
 {
 	static char name[256];
 	
@@ -288,8 +281,7 @@ static char *name_forderiv(i)
 /* Scop can handle 's so we put the prime style names into the .var file.
 We make use of the tools here to reconstruct the original prime name.
 */
-char *reprime(sym)
-	Symbol *sym;
+char *reprime(Symbol* sym)
 {
 	static char name[256];
 	int i;
@@ -328,7 +320,7 @@ nrn_assert(snprintf(units, SB, "%s/%s^%d", base_units, STR(indeplist->prev), ind
 		s->usage |= DEP;
 	}
 	if (s->araydim != forderiv->araydim) {
-		diag(s->name, " must have same dimension as associated state");
+		diag(s->name, "must have same dimension as associated state");
 	}
 	if (!(s->subtype & STAT)) {/* Dstate changes to state */
 nrn_assert(snprintf(units, SB, "%s/%s^%d", base_units, STR(indeplist->prev), indx) < SB);
@@ -393,8 +385,7 @@ nrn_assert(snprintf(units, SB, "%s/%s^%d", base_units, STR(indeplist->prev), ind
    message.
 */
 
-void add_deriv_imp_list(name)
-	char *name;
+void add_deriv_imp_list(char* name)
 {
 	if (!deriv_imp_list) {
 		deriv_imp_list = newlist();
@@ -405,9 +396,7 @@ void add_deriv_imp_list(name)
 static List *deriv_used_list; /* left hand side derivatives of diffeqs */
 static List *deriv_state_list;	/* states of the derivative equations */
 
-void deriv_used(s, q1, q2)	/* q1, q2 are begin and end tokens for expression */
-	Symbol *s;
-	Item* q1, *q2;
+void deriv_used(Symbol* s, Item* q1, Item* q2)	/* q1, q2 are begin and end tokens for expression */
 {
 	if (!deriv_used_list) {
 		deriv_used_list = newlist();
@@ -426,12 +415,11 @@ void deriv_used(s, q1, q2)	/* q1, q2 are begin and end tokens for expression */
    
 static int matchused = 0;	/* set when MATCH seen */
 /* args are --- derivblk: DERIVATIVE NAME stmtlist '}' */
-void massagederiv(q1, q2, q3, q4, sensused)
-	Item *q1, *q2, *q3, *q4; int sensused;
+void massagederiv(Item* q1, Item* q2, Item* q3, Item* q4, int sensused)
 {
 	int count = 0, deriv_implicit, solve_seen;
 	char units[SB];
-	Item *qs, *q, *mixed_eqns();
+	Item *qs, *q, *mixed_eqns(Item* q2, Item* q3, Item* q4);
 	Symbol *s, *derfun, *state;
 
 	/* to allow verification that definition after SOLVE */
@@ -527,7 +515,7 @@ Sprintf(buf, "static int _slist%d[%d], _dlist%d[%d];\n",
 	lappendstr(procfunc, "return _reset;\n}\n");
 
 /* don't emit _ode_matsol if the user has defined cvodematsol */
-  if (!lookup("cvodematsol")) {
+  if (!lookup( "cvodematsol")) {
 	Item* qq;
 	Item* qextra = q1->next->next->next->next;
 	Sprintf(buf, "static int _ode_matsol%d", numlist);
@@ -609,7 +597,7 @@ Sprintf(buf, "static int _slist%d[%d], _dlist%d[%d];\n",
 Sprintf(buf, "{int _id; for(_id=0; _id < %d; _id++) {\n\
 if (_deriv%d_advance) {\n", count, numlist);
 		Insertstr(q4, buf);
-		sp = install("D", STRING);
+		sp = install( "D", STRING);
 		sp->araydim = count; /*this breaks SENS*/
 		q = insertsym(q4, sp);
 		eqnqueue(q);
@@ -657,8 +645,7 @@ List		*match_bound;	/* list of triples or quadruples.
 in match_bound must be equal to the number of differential equations */
 /* we limit ourselves to one matched boundary problem per model */
 
-void matchinitial(q1)	/* name */
-	Item *q1;
+void matchinitial(Item* q1)	/* name */
 {
 	/* must be of form state0. Later we can check if state' is in fact
 	used. Save the state symbol in the initialvalue matchlist */
@@ -678,13 +665,11 @@ void matchinitial(q1)	/* name */
 			}
 		}
 	}
-	diag(s->name, " must be an initial state parameter");
+	diag(s->name, "must be an initial state parameter");
 	return;
 }	
 			
-void matchbound(q1, q2, q3, q4, q5, sindex) /* q1name q2'(' q3')' '=' q4exprq5 */
-	Item *q1, *q2, *q3, *q4, *q5;
-	Symbol *sindex;
+void matchbound(Item* q1, Item* q2, Item* q3, Item* q4, Item* q5, Symbol* sindex) /* q1name q2'(' q3')' '=' q4exprq5 */
 {
 	/* q1 must be a state */
 	Symbol *state;
@@ -693,13 +678,13 @@ void matchbound(q1, q2, q3, q4, q5, sindex) /* q1name q2'(' q3')' '=' q4exprq5 *
 
 	state = SYM(q1);
 	if (!(state->subtype & STAT) && state->type != PRIME) {
-		diag(state->name, " is not a state");
+		diag(state->name, "is not a state");
 	}
 	if ((state->subtype & ARRAY) && !sindex) {
-		diag(state->name, " must have an index for the implicit loop");
+		diag(state->name, "must have an index for the implicit loop");
 	}
 	if (!(state->subtype & ARRAY) && sindex) {
-		diag(state->name, " is not an array");
+		diag(state->name, "is not an array");
 	}
 
 	Lappendsym(match_bound, state);
@@ -719,7 +704,7 @@ void matchbound(q1, q2, q3, q4, q5, sindex) /* q1name q2'(' q3')' '=' q4exprq5 *
 	}
 }
 
-void checkmatch(blocktype) int blocktype; {
+void checkmatch(int blocktype) {
 	if (blocktype != DERIVATIVE) {
 		diag("MATCH block can only be in DERIVATIVE block", (char *)0);
 	}
@@ -729,14 +714,13 @@ void checkmatch(blocktype) int blocktype; {
 	}
 	if (!indepsym) {
 		diag("INDEPENDENT variable must be declared before MATCH",
-		 " statement");
+		  "statement");
 	}
 	match_bound = newlist();
 	match_init = newlist();
 }
 
-void matchmassage(nderiv)
-	int nderiv;
+void matchmassage(int nderiv)
 {
 	int count, nunknown, j;
 	Item *q, *q1, *setup;
@@ -792,12 +776,12 @@ void matchmassage(nderiv)
 		s = SYM(q);
 		ITERATE(q1, deriv_state_list) {
 			if (SYM(q1) == s) {
-				delete(q1);
+				dlete(q1);
 				break;
 			}
 		}
 		if (!(s->subtype & STAT)) {
-			diag(s->name, " is not a state");
+			diag(s->name, "is not a state");
 		}
 		if (s->subtype & ARRAY) {
 			count += s->araydim;
@@ -823,7 +807,7 @@ Sprintf(buf, "error=shoot(%d, &(%s) - _p, _pmatch_time, _pmatch_value, _state_ma
 		nunknown, indepsym->name, indepsym->name, indepsym->name);
 		/*deltaindep may not be declared yet */
 	Lappendstr(procfunc, buf);
-	Lappendstr(procfunc,"\n initmodel(_p); _match_recurse = 1;\n}\n");
+	Lappendstr(procfunc, "\n initmodel(_p); _match_recurse = 1;\n}\n");
 	Sprintf(buf, "for (_i=0; _i<%d; _i++) _p[_state_get[_i]] = _found_init[_i];",
 		nunknown);
 	Lappendstr(procfunc, buf);
@@ -858,7 +842,7 @@ static double _match_time[%d], _match_value[%d], _found_init[%d];\n",
 	ITERATE(q, match_bound) {
 		s = SYM(q);
 		if (!(s->subtype & STAT)) {
-			diag(s->name, " is not a state");
+			diag(s->name, "is not a state");
 		}
 		tmatch = LST(q = q->next);
 		vmatch = LST(q = q->next);
@@ -906,9 +890,7 @@ Sprintf(buf, ";\n _match_value[%d] = ", j);
 }
 	
 	
-static void copylist(l, i)	/* copy list l before item i */
-	List *l;
-	Item *i;
+void copylist(List* l, Item* i)	/* copy list l before item i */
 {
 	Item *q;
 	
@@ -928,8 +910,7 @@ static void copylist(l, i)	/* copy list l before item i */
 	}
 }
 
-void copyitems(q1, q2, qdest) /* copy items before item */
-	Item* q1, *q2, *qdest;
+void copyitems(Item* q1, Item* q2, Item* qdest) /* copy items before item */
 {
 	Item* q;
 	for (q = q2; q != q1; q = q->prev) {
@@ -950,8 +931,8 @@ void copyitems(q1, q2, qdest) /* copy items before item */
 }
 
 #if CVODE
-static int cvode_linear_diffeq(ds, s, qbegin, qend)
-Symbol*ds, *s; Item* qbegin, *qend; {
+static int cvode_linear_diffeq(Symbol* ds, Symbol* s, Item* qbegin, Item* qend)
+{
 	char* c;
 	List* tlst;
 	Item* q;
@@ -988,7 +969,7 @@ Symbol*ds, *s; Item* qbegin, *qend; {
 }
 
 /* DState symbol, begin, and end of expression */
-static void cvode_diffeq(ds, qbegin, qend) Symbol* ds; Item* qbegin, *qend; {
+void cvode_diffeq(Symbol* ds, Item* qbegin, Item* qend) {
 	/* try first the assumption of linear. If not, then use numerical diff*/
 	Symbol* s;
 	Item* q;
@@ -1047,13 +1028,13 @@ the solvq item (1st of three).
 The 0=f(state) equations have already been solved and the rhs for
 each has been saved. So we know if the translation is possible.
 */
-int cvode_cnexp_success(q1, q2) Item* q1, *q2; {
+int cvode_cnexp_success(Item* q1, Item* q2) {
 	Item* q, *q3, *q4, *qeq;
 	if ( cvode_cnexp_possible) {
 		/* convert Method to nil and the type of the block to
 		   PROCEDURE */
 		SYM(cvode_cnexp_solve->next)->name = stralloc("cnexp", 0);
-		delete(deriv_imp_list->next);
+		dlete(deriv_imp_list->next);
 
 		/* replace the Dstate = f(state) equations */
 		qeq = cvode_eqn->next;
@@ -1085,7 +1066,7 @@ sprintf(buf," %s = %s + (1. - exp(dt*(%s)))*(%s - %s)",
 			q2 = q2->next;
 			for(q3=q1->prev->prev; q3 != q2; q3 = q4) {
 				q4 = q3->next;
-				delete(q3);
+				dlete(q3);
 			}
 		}
 		

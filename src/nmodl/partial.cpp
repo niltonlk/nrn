@@ -81,17 +81,15 @@ static Symbol *pv[4]; /* DV, F, V, G */
 static Item *partialcolon;
 static List *parinfo; /* DV, F, V, G, ~ with ident */
 				
-void solv_partial(qsol, fun)
-	Item *qsol;
-	Symbol *fun;
+void solv_partial(Item* qsol, Symbol* fun)
 {
 	int i, ident;
 	Item *q;
 	Symbol *dspace;
 	
-	if ((dspace = lookup("delta_x")) == SYM0) {
-		dspace = install("delta_x", NAME);
-		parminstall(dspace, "1", "");
+	if ((dspace = lookup( "delta_x")) == SYM0) {
+		dspace = install( "delta_x", NAME);
+		parminstall(dspace, "1", "", "");
 	}
 	Sprintf(buf, "%s();\n", fun->name);
 	replacstr(qsol, buf);
@@ -114,8 +112,7 @@ Sprintf(buf, "if (error=crank(%d, %s, %s, %s, delta_%s, %s, %s, _pbound%d, &_par
    }
 }
 
-void partial_eqn(q2, q4, q8, q11) /*V' F V G*/
-	Item *q2, *q4, *q8, *q11;
+void partial_eqn(Item* q2, Item* q4, Item* q8, Item* q11) /*V' F V G*/
 {
 	int i, dim;
 	Item *q;
@@ -144,14 +141,14 @@ diag("Two partial equations for same state: ", SYM(q8)->name);
 
 	dim = pv[2]->araydim;
 	if (!(pv[2]->subtype & STAT)){
-		diag(pv[2]->name, " is not a STATE");
+		diag(pv[2]->name, "is not a STATE");
 	}
 	if (strcmp(pv[2]->name, pv[0]->name + 1)) {
 		diag(pv[2]->name, "' must be the time derivative");
 	}
 	for (i=0; i<4; i++) {
 		if (!(pv[i]->subtype & ARRAY) || (pv[i]->araydim != dim)) {
-			diag(pv[i]->name, " dimension differs from STATE var");
+			diag(pv[i]->name, "dimension differs from STATE var");
 		}
 	}
 	replacstr(q2->prev, "\n/*where partial call goes*/\n");
@@ -164,8 +161,7 @@ static List *bnd[4];	/* for each condition consisting of
 				symbol, list of tokens for expression
 			in the order DEL y[0]   DEL  y[N]   y[0]   y[N]*/
 
-void massagepartial(q1, q2, q3, q6) /*PARTIAL NAME stmtlist '}'*/
-	Item *q1, *q2, *q3, *q6;
+void massagepartial(Item* q1, Item* q2, Item* q3, Item* q6) /*PARTIAL NAME stmtlist '}'*/
 {
 	
 	int i, ident;
@@ -178,8 +174,8 @@ void massagepartial(q1, q2, q3, q6) /*PARTIAL NAME stmtlist '}'*/
 	}
 	if (!pv[0]) {
 diag(
-"within the PARTIAL block must occur at least one equation with the syntax ---\n",
-"~ V' = F*DEL2(V) + G\n");
+        "within the PARTIAL block must occur at least one equation with the syntax ---\n",
+        "~ V' = F*DEL2(V) + G\n");
 	}
 
 	if (!bndinfo) {
@@ -210,7 +206,7 @@ diag("Duplicate boundary condition for ", s->name);
 		if (bnd[i]) { /* Neumann */
 			if (bnd[i+2]) { /* and also dirichlet */
 				diag("Neumann and Dirichlet conditions",
-				 " specified on same side");
+				  "specified on same side");
 			}
 		} else { /* Neumann not specified */
 			if (!bnd[i+2]) { /* neither is dirichlet */
@@ -260,9 +256,7 @@ diag("Duplicate boundary condition for ", s->name);
 
 /* ~ optionalDEL var[index] = expr */
 /* type 0 Dirichlet (no DEL), type 1 Neumann (with DEL) */
-void partial_bndry(type, qvar, qfirstlast, qexpr, qlast)
-	int type;
-	Item *qvar, *qfirstlast, *qexpr, *qlast;
+void partial_bndry(int type, Item* qvar, Item* qfirstlast, Item* qexpr, Item* qlast)
 {
 	int indx;
 	Item *q;
