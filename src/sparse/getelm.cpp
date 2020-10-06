@@ -8,7 +8,7 @@
 struct elm* getelm(struct elm* el, unsigned row, unsigned col)
    /* return pointer to row col element maintaining order in rows */
 {
-	register struct elm *new;
+	struct elm *new_elem;
 
 	if (el == ELM0)
 		el = rowst[row];
@@ -24,34 +24,34 @@ struct elm* getelm(struct elm* el, unsigned row, unsigned col)
 			return(el);
 	}
 
-	if ( (new = (struct elm *)malloc(sizeof(struct elm))) ==
+	if ( (new_elem = (struct elm *)malloc(sizeof(struct elm))) ==
 		(struct elm *)0)
 		diag("out of space for elements");
-	new->row = row;
-	new->col = col;
-	new->value = 0.;
+    new_elem->row = row;
+    new_elem->col = col;
+    new_elem->value = 0.;
 	{
-	new->r_up = ELM0;	/* place new element first in column list */
-	new->r_down = colst[col];
-	if (colst[col] != ELM0)
-		colst[col]->r_up = new;
-	colst[col] = new;
+        new_elem->r_up = ELM0;	/* place new element first in column list */
+        new_elem->r_down = colst[col];
+        if (colst[col] != ELM0)
+            colst[col]->r_up = new_elem;
+        colst[col] = new_elem;
 	}
 	if (el == ELM0)		/* the new elm belongs at the beginning */
 	{			/* of the row list */
-		new->c_left = ELM0;
-		new->c_right = rowst[row];
+        new_elem->c_left = ELM0;
+        new_elem->c_right = rowst[row];
 		if (rowst[row] != ELM0)
-			rowst[row]->c_left = new;
-		rowst[row] = new;
+			rowst[row]->c_left = new_elem;
+		rowst[row] = new_elem;
 	}
 	else			/* the new elm belongs after el */
 	{
-		new->c_left = el;
-		new->c_right = el->c_right;
-		el->c_right = new;
-		if (new->c_right != ELM0)
-			new->c_right->c_left = new;
+        new_elem->c_left = el;
+        new_elem->c_right = el->c_right;
+		el->c_right = new_elem;
+		if (new_elem->c_right != ELM0)
+            new_elem->c_right->c_left = new_elem;
 	}
-	return(new);
+	return(new_elem);
 }
