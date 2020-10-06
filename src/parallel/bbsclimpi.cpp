@@ -13,9 +13,9 @@
 #include "bbsrcli.h"
 #include "bbssrv.h"
 
-extern "C" {
+//extern "C" {
 extern void nrnmpi_int_broadcast(int*, int, int);
-}
+//} // extern "C"
 
 #define debug 0
 

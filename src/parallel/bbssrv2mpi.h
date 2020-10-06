@@ -12,9 +12,9 @@ class MpiLookingToDoList;
 class MpiResultList;
 struct bbsmpibuf;
 
-extern "C" {
+//extern "C" {
 	void bbs_handle();
-}
+//} // extern "C"
 
 class BBSDirectServer {
 public:

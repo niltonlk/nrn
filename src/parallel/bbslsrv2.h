@@ -3,9 +3,9 @@
 
 #include <InterViews/resource.h>
 
-extern "C" {
+//extern "C" {
 	void bbs_handle();
-}
+//} // extern "C"
 
 class BBSDirectServer {
 public:
