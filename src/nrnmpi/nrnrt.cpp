@@ -90,7 +90,7 @@ static void* rtrun_fun(void* arg) {
 	}
 	rt_task_delete(rtrun_task_);
 	++end_;
-	return (void*)0;
+	return nullptr;
 }
 
 void nrn_maintask_init() {

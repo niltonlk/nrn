@@ -149,7 +149,7 @@ void nrnmpi_upkvec(int n, double* x, bbsmpibuf* r) {
 #if NRNMPI_DYNAMICLOAD
 /* for some unknown reason mpiexec -n 2 python3 test0.py gives
 load_nrnmpi: /home/hines/neuron/nrndynam/x86_64/lib/libnrnmpi.so: undefined symbol: cxx_char_alloc
-So fill this in explicitly in nrnmpi_dynam.c
+So fill this in explicitly in nrnmpi_dynam.cpp
 */
 char* (*p_cxx_char_alloc)(int len);
 #endif
@@ -186,7 +186,7 @@ static void resize(bbsmpibuf* r, int size) {
 	int newsize;
 	if (r->size < size) {
 		newsize = (size/64)*64 + 128;
-		r->buf = hoc_Erealloc(r->buf, newsize); hoc_malchk();
+		r->buf = static_cast<char*>(hoc_Erealloc(r->buf, newsize)); hoc_malchk();
 		r->size = newsize;
 	}
 }
@@ -272,13 +272,13 @@ void nrnmpi_pkstr(const char* s, bbsmpibuf* r) {
 	int len;
 	len = strlen(s);
 	pack(&len, 1, my_MPI_INT, r, "pkstr length");
-	pack((char*)s, len, my_MPI_CHAR, r, "pkstr string");
+	pack(&s, len, my_MPI_CHAR, r, "pkstr string");
 }
 
 void nrnmpi_pkpickle(const char* s, size_t size, bbsmpibuf* r) {
 	int len = size;
 	pack(&len, 1, my_MPI_INT, r, "pkpickle length");
-	pack((char*)s, len, my_MPI_PICKLE, r, "pkpickle data");
+	pack(&s, len, my_MPI_PICKLE, r, "pkpickle data");
 }
 
 void nrnmpi_bbssend(int dest, int tag, bbsmpibuf* r) {
@@ -393,7 +393,7 @@ printf("%d nrnmpi_newbuf %p\n", nrnmpi_myid_bbs, buf);
 #endif
 	buf->buf = (char*)0;
 	if (size > 0) {
-		buf->buf = (char*)hoc_Emalloc(size*sizeof(char)) ; hoc_malchk();
+		buf->buf = static_cast<char*>(hoc_Emalloc(size*sizeof(char))) ; hoc_malchk();
 	}
 	buf->size = size;
 	buf->pkposition = 0;

@@ -278,7 +278,7 @@ static int MPI_Alltoallv_sparse(void *sendbuf, int *sendcnts, int *sdispls,
       
       if(target >= nranks) continue;
       if(recvcnts[target] == 0) continue;
-      status = MPI_Irecv(((char*) recvbuf) + recv_elsize * rdispls[target], 
+      status = MPI_Irecv((static_cast<char*>(recvbuf)) + recv_elsize * rdispls[target],
                          recvcnts[target],
                          recvtype, target, ALLTOALLV_SPARSE_TAG, comm, &requests[n_requests++]);
       assert(status == MPI_SUCCESS);
@@ -292,7 +292,7 @@ static int MPI_Alltoallv_sparse(void *sendbuf, int *sendcnts, int *sdispls,
       int target = myrank ^ ngrp;
       if(target >= nranks) continue;
       if(sendcnts[target] == 0) continue;
-      status = MPI_Isend(((char*) sendbuf) + send_elsize * sdispls[target], 
+      status = MPI_Isend((static_cast<char*>(sendbuf)) + send_elsize * sdispls[target],
                          sendcnts[target],
                          sendtype, target, ALLTOALLV_SPARSE_TAG, comm, &requests[n_requests++]);
       assert(status == MPI_SUCCESS);
@@ -438,7 +438,7 @@ void nrnmpi_char_broadcast_world(char** pstr, int root) {
 	if (nrnmpi_myid_world != root) {
 		if (*pstr) { free(*pstr); *pstr = NULL; }
 		if (sz) {
-			*pstr = (char*)hoc_Emalloc(sz*sizeof(char)); hoc_malchk();
+			*pstr = static_cast<char*>(hoc_Emalloc(sz*sizeof(char))); hoc_malchk();
 		}
 	}
 	if (sz) {
@@ -573,7 +573,7 @@ double nrnmpi_dbl_allreduce(double x, int type) {
 	return result;
 }
 
-void nrnmpi_dbl_allreduce_vec(double* src, double* dest, int cnt, int type) {
+extern "C" void nrnmpi_dbl_allreduce_vec(double* src, double* dest, int cnt, int type) {
 	int i;
 	MPI_Op t;
 	assert(src != dest);
