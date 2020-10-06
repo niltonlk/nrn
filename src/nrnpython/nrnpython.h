@@ -47,9 +47,9 @@
 #define PyInt_FromLong PyLong_FromLong
 #endif
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+//#if defined(__cplusplus)
+//extern "C" {
+//#endif
 
 extern PyObject* nrnpy_hoc_pop();
 extern int nrnpy_numbercheck(PyObject*);
@@ -60,8 +60,8 @@ extern int nrnpy_numbercheck(PyObject*);
 #define castptr2long (long)
 #endif
 
-#if defined(__cplusplus)
-}
-#endif
+//#if defined(__cplusplus)
+//}
+//#endif
 
 #endif

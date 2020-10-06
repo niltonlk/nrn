@@ -38,7 +38,7 @@ typedef struct {
   PyObject* cell_;
 } NPySecObj;
 
-extern "C" {
+//extern "C" {
 
 #include "parse.h"
 extern void (*nrnpy_sectionlist_helper_)(void*, Object*);
@@ -48,7 +48,7 @@ extern char** (*nrnpy_gui_helper3_str_)(const char*, Object*, int);
 extern double (*nrnpy_object_to_double_)(Object*);
 extern void* (*nrnpy_get_pyobj)(Object* obj);
 extern void (*nrnpy_decref)(void* pyobj);
-void lvappendsec_and_ref(void* sl, Section* sec);
+extern void lvappendsec_and_ref(void* sl, Section* sec);
 extern Section* nrn_noerr_access();
 extern void hoc_pushs(Symbol*);
 extern double* hoc_evalpointer();
@@ -91,19 +91,20 @@ extern IvocVect* (*nrnpy_vec_from_python_p_)(void*);
 extern Object** (*nrnpy_vec_to_python_p_)(void*);
 extern Object** (*nrnpy_vec_as_numpy_helper_)(int, double*);
 extern Object* (*nrnpy_rvp_rxd_to_callable)(Object*);
-int nrnpy_set_vec_as_numpy(PyObject* (*p)(int, double*));  // called by ctypes.
-int nrnpy_set_gui_callback(PyObject*);
+extern "C" int nrnpy_set_vec_as_numpy(PyObject* (*p)(int, double*));  // called by ctypes.
+extern "C" int nrnpy_set_gui_callback(PyObject*);
 extern double** nrnpy_setpointer_helper(PyObject*, PyObject*);
 extern Symbol* ivoc_alias_lookup(const char* name, Object* ob);
-extern int nrn_netcon_weight(void*, double**);
+class NetCon;
+extern int nrn_netcon_weight(NetCon*, double**);
 extern int nrn_matrix_dim(void*, int);
 extern NPySecObj* newpysechelp(Section* sec);
 
 extern PyObject* pmech_types;  // Python map for name to Mechanism
 extern PyObject* rangevars_;   // Python map for name to Symbol
 
-extern "C" int hoc_max_builtin_class_id;
-extern "C" int hoc_return_type_code;
+extern /*"C"*/ int hoc_max_builtin_class_id;
+extern /*"C"*/ int hoc_return_type_code;
 
 static cTemplate* hoc_vec_template_;
 static cTemplate* hoc_list_template_;
@@ -131,9 +132,9 @@ static const char* hocobj_docstring =
     "class neuron.hoc.HocObject - Hoc Object wrapper";
 
 #if 1
-}
+//} // extern "C"
 #include <hoccontext.h>
-extern "C" {
+//extern "C" {
 #else
 extern Object* hoc_thisobject;
 #define HocTopContextSet \
@@ -742,7 +743,7 @@ static PyObject* hocobj_call(PyHocObject* self, PyObject* args,
 		for (int i = 0; i < n; ++i) {
 			PyObject* key = PyList_GetItem(keys, i);
 			PyObject* value = PyDict_GetItem(kwrds, key);
-			printf("%s %s\n", PyString_AsString(key), PyString_AsString(PyObject_Str(value)));
+			printf("%s %s\n", PyUnicode_AsUTF8(key), PyUnicode_AsUTF8(PyObject_Str(value)));
 		}
 #endif
     section = PyDict_GetItemString(kwrds, "sec");
@@ -776,7 +777,7 @@ static PyObject* hocobj_call(PyHocObject* self, PyObject* args,
       result = (PyObject*)oj->fpycall(fcall, (void*)self, (void*)args);
       delete oj;
       if (result == NULL) {
-        PyErr_SetString(PyExc_RuntimeError, "hoc error");
+        PyErr_SetString(PyExc_RuntimeError, "hocobj_call error");
       }
     } else {
       result = (PyObject*)fcall((void*)self, (void*)args);
@@ -886,7 +887,7 @@ static void eval_component(PyHocObject* po, int ix) {
   --po->nindex_;
 }
 
-PyObject* nrn_hocobj_ptr(double* pd) {
+extern "C" PyObject* nrn_hocobj_ptr(double* pd) {
   PyObject* result = hocobj_new(hocobject_type, 0, 0);
   PyHocObject* po = (PyHocObject*)result;
   po->type_ = PyHoc::HocScalarPtr;
@@ -1510,7 +1511,7 @@ static int araylen(Arrayinfo* a, PyHocObject* po) {
     n = vector_capacity((IvocVect*)po->ho_->u.this_pointer);
   } else if (po->sym_ == sym_netcon_weight) {
     double* w;
-    n = nrn_netcon_weight(po->ho_->u.this_pointer, &w);
+    n = nrn_netcon_weight(static_cast<NetCon*>(po->ho_->u.this_pointer), &w);
   } else if (po->sym_ == nrn_child_sym) {
     n = nrn_secref_nchild((Section*)po->ho_->u.this_pointer);
   } else if (po->sym_ == sym_mat_x) {
@@ -2253,7 +2254,7 @@ static char* double_array_interface(PyObject* po, long& stride) {
     }
     Py_DECREF(ai);
   }
-  return (char*)data;
+  return static_cast<char*>(data);
 }
 
 static IvocVect* nrnpy_vec_from_python(void* v) {
@@ -2315,12 +2316,12 @@ static IvocVect* nrnpy_vec_from_python(void* v) {
 }
 
 static PyObject* (*vec_as_numpy)(int, double*);
-int nrnpy_set_vec_as_numpy(PyObject* (*p)(int, double*)) {
+extern "C" int nrnpy_set_vec_as_numpy(PyObject* (*p)(int, double*)) {
   vec_as_numpy = p;
   return 0;
 }
 
-int nrnpy_set_toplevel_callbacks(PyObject* rvp_plot0, PyObject* plotshape_plot0, PyObject* get_mech_object_0) {
+extern "C" int nrnpy_set_toplevel_callbacks(PyObject* rvp_plot0, PyObject* plotshape_plot0, PyObject* get_mech_object_0) {
   rvp_plot = rvp_plot0;
   plotshape_plot = plotshape_plot0;
   get_mech_object_ = get_mech_object_0;
@@ -2328,7 +2329,7 @@ int nrnpy_set_toplevel_callbacks(PyObject* rvp_plot0, PyObject* plotshape_plot0,
 }
 
 static PyObject* gui_callback=NULL;
-int nrnpy_set_gui_callback(PyObject* new_gui_callback) {
+extern "C" int nrnpy_set_gui_callback(PyObject* new_gui_callback) {
   gui_callback = new_gui_callback;
   return 0;
 }
@@ -2551,7 +2552,7 @@ static Object* rvp_rxd_to_callable_(Object* obj) {
 }
 
 
-PyObject* get_plotshape_data(PyObject* sp) {
+extern "C" PyObject* get_plotshape_data(PyObject* sp) {
   PyHocObject* pho = (PyHocObject*) sp;
   ShapePlotInterface* spi;
   if (!is_obj_type(pho->ho_, "PlotShape")) {
@@ -2713,7 +2714,7 @@ static PyObject* hocpickle_setstate(PyObject* self, PyObject* args) {
       BYTESWAP(x[i], double)
     }
   }
-  memcpy((char*)vector_vec(vec), datastr, len);
+  memcpy(vector_vec(vec), datastr, len);
   Py_DECREF(rawdata);
   Py_INCREF(Py_None);
   return Py_None;
@@ -2783,12 +2784,12 @@ static void add2topdict(PyObject* dict) {
 
 static PyObject* nrnpy_vec_math = NULL;
 
-int nrnpy_vec_math_register(PyObject* callback) {
+extern "C" int nrnpy_vec_math_register(PyObject* callback) {
   nrnpy_vec_math = callback;
   return 0;
 }
 
-int nrnpy_rvp_pyobj_callback_register(PyObject* callback) {
+extern "C" int nrnpy_rvp_pyobj_callback_register(PyObject* callback) {
   nrnpy_rvp_pyobj_callback = callback;
   return 0;
 }
@@ -3094,4 +3095,4 @@ fail:
   return;
 #endif
 }
-}  // end of extern c
+//} // extern "C"
