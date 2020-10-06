@@ -10,8 +10,8 @@
 
 static int point_process = 0;
 static List *current, *concen, *potential;
-static void unit_chk();
-static int iontype();
+static void unit_chk(char*, char*);
+static int iontype(char*, char*);
 
 int breakpoint_local_seen_;
 int conductance_seen_;
@@ -26,12 +26,12 @@ void nrn_unit_init() {
 void nrn_unit_chk() {
 	Item *q;
 	
-	unit_chk("v", "millivolt");
-	unit_chk("t", "ms");
-	unit_chk("dt", "ms");
+	unit_chk("v",        "millivolt");
+	unit_chk("t",        "ms");
+	unit_chk("dt",       "ms");
 	unit_chk("celsius", "degC");
-	unit_chk("diam", "micron");
-	unit_chk("area", "micron2");
+	unit_chk("diam",     "micron");
+	unit_chk("area",     "micron2");
 
     if (breakpoint_local_seen_ == 0 || conductance_seen_ == 0) {
 	ITERATE(q, current) {
@@ -50,8 +50,7 @@ void nrn_unit_chk() {
 	}
 }
 
-static void unit_chk(name, unit)
-	char *name, *unit;
+static void unit_chk(char* name, char* unit)
 {
 	Symbol *s;
 	
@@ -69,8 +68,7 @@ Sprintf(buf, "%s must have the units, %s, instead of %s.\n",
 	}
 }
 
-void nrn_list(qtype, qlist)
-	Item *qtype, *qlist;
+void nrn_list(Item* qtype, Item* qlist)
 {
 	List **plist;
 	Item *q;
@@ -100,8 +98,7 @@ void nrn_list(qtype, qlist)
 	}
 }
 
-void nrn_use(qion, qreadlist, qwritelist)
-	Item *qion, *qreadlist, *qwritelist;
+void nrn_use(Item* qion, Item* qreadlist, Item* qwritelist)
 {
 	int i;
 	List *l;
@@ -133,8 +130,7 @@ void nrn_use(qion, qreadlist, qwritelist)
 }
 
 static
-int iontype(s1, s2)	/* returns index of variable in ion mechanism */
-	char *s1, *s2;
+int iontype(char* s1, char* s2)	/* returns index of variable in ion mechanism */
 {
 	Sprintf(buf, "i%s", s2);
 	if (strcmp(buf, s1) == 0) {

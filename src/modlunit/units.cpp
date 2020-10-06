@@ -17,8 +17,10 @@
 
 int	unitonflag = 1;
 static int	UnitsOn = 0;
-extern double	fabs();
-extern void diag();
+extern "C" {
+extern double fabs(double);
+} // extern "C"
+extern void diag(char*, char*);
 #define	IFUNITS	{if (!UnitsOn) return;}
 #define OUTTOLERANCE(arg1,arg2) (fabs(arg2/arg1 - 1.) > 1.e-5)
 
@@ -43,17 +45,17 @@ static char	*dfilealt	= "../../share/lib/nrnunits.lib";
 #endif
 #endif
 static char	*unames[NDIM];
-static double	getflt();
-static void fperr();
-static int	lookup();
-static struct	table	*hash();
+double	getflt();
+void fperr(int);
+int	lookup(char* name, unit* up, int den, int c);
+struct	table	*hash_table(char*);
 
-static void chkfperror();
-static void units();
-static int pu();
-static int convr();
-static void init();
-static int get();
+void chkfperror();
+void units(unit*);
+int pu(int, int, int);
+int convr(unit*);
+void units_cpp_init(); //TODO - was this init() used somewhere else? avoiding duplicate symbol: nmold/init.cpp init()
+int get();
 
 extern void Unit_push(char*);
 
@@ -99,8 +101,7 @@ static int	dumpflg;
 
 static char *pc;
 
-static int Getc(inp)
-	FILE *inp;
+static int Getc(FILE* inp)
 {
 	if (inp != stdin) {
 #if MAC
@@ -143,6 +144,33 @@ static char* neuronhome() {
 #endif
 }
 
+
+static char *ucp;
+char *Unit_str(unit* up)
+{
+    register struct unit *p;
+    register int f, i;
+    static char buf[256];
+
+    p = up;
+    sprintf(buf, "%g ", p->factor);
+    {int seee=0; for (ucp=buf; *ucp; ucp++) {
+            if (*ucp == 'e') seee=1;
+            if (seee) *ucp = ucp[1];
+        } if (seee) ucp--;}
+    f = 0;
+    for(i=0; i<NDIM; i++)
+        f |= pu(p->dim[i], i, f);
+    if(f&1) {
+        *ucp++ = '/';
+        f = 0;
+        for(i=0; i<NDIM; i++)
+            f |= pu(-p->dim[i], i, f);
+    }
+    *ucp = '\0';
+    return buf;
+}
+
 void unit_pop() {
 	IFUNITS
 	assert(usp >= unit_stack);
@@ -169,13 +197,11 @@ void unit_swap() { /*exchange top two elements of stack*/
 	}
 }	
 	
-double
-unit_mag() {	/* return unit magnitude that is on stack */
+double unit_mag() {	/* return unit magnitude that is on stack */
 	return usp->factor;
 }
 
-void unit_mag_mul(d)
-	double d;
+void unit_mag_mul(double d)
 {
 	usp->factor *= d;
 }
@@ -187,8 +213,7 @@ void punit() {
 	}
 }
 
-void ucopypop(up)
-	struct unit *up;
+void ucopypop(unit* up)
 {
 	int i;
 	for (i=0; i<NDIM; i++) {
@@ -199,8 +224,7 @@ void ucopypop(up)
 	unit_pop();
 }
 
-void ucopypush(up)
-	struct unit *up;
+void ucopypush(unit* up)
 {
 	int i;
 	Unit_push("");
@@ -211,32 +235,29 @@ void ucopypush(up)
 	usp->isnum = up->isnum;
 }
 
-void Unit_push(string)
-	char *string;
+void Unit_push(char* str)
 {
 	IFUNITS
 	assert(usp < unit_stack + (UNIT_STK_SIZE - 1));
 	++usp;
-	pc = string;
-	if (string) {
+	pc = str;
+	if (str) {
 		usp->isnum = 0;
 	}else{
 		pc = "";
 		usp->isnum = 1;
 	}
 	convr(usp);
-/*printf("unit_push %s\n", string); units(usp);*/
+/*printf("unit_push %s\n", str); units(usp);*/
 }
 
-void unit_push_num(d)
-	double d;
+void unit_push_num(double d)
 {
 	Unit_push("");
 	usp->factor = d;
 }
 
-void unitcheck(s)
-	char *s;
+void unitcheck(char* s)
 {
 	Unit_push(s);
 	unit_pop();
@@ -249,15 +270,14 @@ unit_str() {
 	return Unit_str(usp);
 }
 
-void install_units(s1, s2) /* define s1 as s2 */
-	char *s1, *s2;
+void install_units(char* s1, char* s2) /* define s1 as s2 */
 {
 	struct table *tp;
 	int i;
 	
 	IFUNITS
 	Unit_push(s2);
-	tp = hash(s1);
+	tp = hash_table(s1);
 	if (tp->name) {
 		printf("Redefinition of units (%s) to:", s1);
 		units(usp);
@@ -316,8 +336,7 @@ void unit_div() {
 	unit_pop();
 }
 
-void Unit_exponent(val)
-	int val;
+void Unit_exponent(int val)
 {
 	/* multiply top of stack by val and leave on stack */
 	int i;
@@ -360,7 +379,7 @@ unit_cmp_exact() { /* returns 1 if top two units on stack are same */
 }
 
 /* ARGSUSED */
-static void print_unit_expr(i) int i; {}
+static void print_unit_expr(int i) {}
 
 void Unit_cmp() {
 	/*compares top two units on stack. If not conformable then
@@ -393,7 +412,7 @@ if (unitonflag && up->dim[0] != 9 && usp->dim[0] != 9) {
 			print_unit_expr(1);
 			fprintf(stderr, "\nunits:");
 			units(up);
-diag("The units of the previous two expressions are not conformable","\n");
+diag("The units of the previous two expressions are not conformable",(char*)"\n");
 		}
 	}
 	if (OUTTOLERANCE(up->factor, usp->factor)) {
@@ -446,7 +465,7 @@ int unit_diff() {
 	return 0;
 }
 
-static void chkfperror()
+void chkfperror()
 {
 	if (fperrc) {
 		diag("underflow or overflow in units calculation", (char *)0);
@@ -547,7 +566,7 @@ fprintf(stderr, "Cant open units table in either of:\n%s\n", buf);
 			diag(dfile, dfilealt);
 	}
 	signal(8, fperr);
-	init();
+    units_cpp_init();
 	unit_stk_clean();
 }
 
@@ -573,7 +592,7 @@ char *argv[];
 		exit(1);
 	}
 	signal(8, fperr);
-	init();
+	units_cpp_init();
 
 loop:
 	fperrc = 0;
@@ -610,41 +629,12 @@ fp:
 }
 #endif
 
-static void units(up)
-struct unit *up;
+void units(unit* up)
 {
 	printf("\t%s\n", Unit_str(up));
 }
 
-static char *ucp;
-char *Unit_str(up)
-struct unit *up;
-{
-	register struct unit *p;
-	register int f, i;
-	static char buf[256];
-
-	p = up;
-	sprintf(buf, "%g ", p->factor);
-	{int seee=0; for (ucp=buf; *ucp; ucp++) {
-		if (*ucp == 'e') seee=1;
-		if (seee) *ucp = ucp[1];
-	} if (seee) ucp--;}
-	f = 0;
-	for(i=0; i<NDIM; i++)
-		f |= pu(p->dim[i], i, f);
-	if(f&1) {
-		*ucp++ = '/';
-		f = 0;
-		for(i=0; i<NDIM; i++)
-			f |= pu(-p->dim[i], i, f);
-	}
-	*ucp = '\0';
-	return buf;
-}
-
-static int pu(u, i, f)
-  int u, i, f;
+int pu(int u, int i, int f)
 {
 
 	if(u > 0) {
@@ -666,8 +656,7 @@ static int pu(u, i, f)
 	return(0);
 }
 
-static int convr(up)
-struct unit *up;
+int convr(unit* up)
 {
 	register struct unit *p;
 	register int c;
@@ -718,10 +707,7 @@ loop:
 	goto loop;
 }
 
-static int lookup(name, up, den, c)
-char *name;
-struct unit *up;
-int den, c;
+int lookup(char* name, unit* up, int den, int c)
 {
 	register struct unit *p;
 	register struct table *q;
@@ -732,7 +718,7 @@ int den, c;
 	p = up;
 	e = 1.0;
 loop:
-	q = hash(name);
+	q = hash_table(name);
 	if(q->name) {
 		l1:
 		if(den) {
@@ -776,8 +762,7 @@ loop:
 	return(1);
 }
 
-static int equal(s1, s2)
-char *s1, *s2;
+static int equal(char* s1, char* s2)
 {
 	register char *c1, *c2;
 
@@ -789,7 +774,7 @@ char *s1, *s2;
 	return(0);
 }
 
-static void init()
+void units_cpp_init()
 {
 	register char *cp;
 	register struct table *tp, *lp;
@@ -803,12 +788,12 @@ static void init()
 		*cp++ = i+'a';
 		*cp++ = '*';
 		*cp++ = 0;
-		lp = hash(np);
+		lp = hash_table(np);
 		lp->name = np;
 		lp->factor = 1.0;
 		lp->dim[i] = 1;
 	}
-	lp = hash("");
+	lp = hash_table("");
 	lp->name = cp-1;
 	lp->factor = 1.0;
 
@@ -844,7 +829,7 @@ l0:
 			goto l0;
 		if(c == '\n') {
 			*cp++ = 0;
-			tp = hash(np);
+			tp = hash_table(np);
 			if(tp->name)
 				goto redef;
 			tp->name = np;
@@ -856,7 +841,7 @@ l0:
 		}
 	}
 	*cp++ = 0;
-	lp = hash(np);
+	lp = hash_table(np);
 	if(lp->name)
 		goto redef;
 	convr((struct unit *)lp);
@@ -884,8 +869,7 @@ redef:
 	goto l0;
 }
 
-static double
-getflt()
+double getflt()
 {
 	register int c, i, dp;
 	double d, e;
@@ -941,7 +925,7 @@ l1:
 	return(d);
 }
 
-static int get()
+int get()
 {
 	register int c;
 
@@ -962,9 +946,7 @@ static int get()
 	return(c);
 }
 
-static struct table *
-hash(name)
-char *name;
+struct table * hash_table(char* name)
 {
 	register struct table *tp;
 	register char *np;
@@ -988,7 +970,7 @@ l0:
 	goto l0;
 }
 
-static void fperr(sig) int sig;
+void fperr(int sig)
 {
 
 	signal(8, fperr);

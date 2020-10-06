@@ -14,12 +14,10 @@ char *indepunits = "";
 
 /* subtype of variables using explicit declarations */
 
-static int promote();
-static int nprime();
+static int promote(Symbol*, long);
+static int nprime(char*);
 
-void declare(subtype, q, qa)
-	long subtype;
-	Item *q, *qa;
+void declare(long subtype, Item* q, Item* qa)
 {
 	Symbol *sym;
 	
@@ -53,24 +51,21 @@ void declare(subtype, q, qa)
 /*fprintf(stderr, "declared %s with subtype %ld\n", sym->name, sym->subtype);*/
 }
 
-static int promote(sym, sub)
-	Symbol *sym;
-	long sub;
+static int promote(Symbol* sym, long sub)
 {
 	/*ARGSUSED*/
 	diag("promotion not programmed yet", (char *)0);
 	return 0;
 }
 		
-void declare_indep(sym)
-	Symbol *sym;
+void declare_indep(Symbol* sym)
 {
 	Item **qa;
 	
 	qa = ITMA(sym->info);
 	if (!qa[7]) { /* no explicit SWEEP */
 		if (indepsym) {
-diag("Only one independent variable can be defined", (char *) 0); 
+diag("Only one independent variable can be defined", (char *) 0);
 		}
 		indepsym = sym;
 		if (ITMA(sym->info)[1]) {
@@ -87,8 +82,7 @@ diag("Only one SWEEP declaration is allowed", (char *)0);
 	}
 }
 
-void define_value(q1, q2)
-	Item *q1, *q2;
+void define_value(Item* q1, Item* q2)
 {
 	Symbol *s;
 	s = SYM(q1);
@@ -107,8 +101,7 @@ void define_value(q1, q2)
 }
 
 /* fix up array info */
-void declare_array(s)
-	Symbol *s;
+void declare_array(Symbol* s)
 {
 	Item *q;
 	
@@ -121,9 +114,7 @@ void declare_array(s)
 	}
 }
 
-void decdim(s, q)
-	Symbol *s;
-	Item *q;
+void decdim(Symbol* s, Item* q)
 {
 	s->subtype |= ARRAY;
 	if (q->itemtype == SYMBOL && SYM(q)->type == DEFINEDVAR) {
@@ -135,13 +126,12 @@ void decdim(s, q)
 		assert(0);
 	}
 	if (s->araydim < 1) {
-		diag(s->name, " Array index must be > 0");
+		diag(s->name, "Array index must be > 0");
 	}
 }
 
 Item *
-listtype(q)
-	Item *q;
+listtype(Item* q)
 {
 	static int i=0;
 	
@@ -167,7 +157,7 @@ listtype(q)
 
 void declare_implied()
 {
-	Symbol *sbase, *basestate();
+	Symbol *sbase, *basestate(Symbol*);
 	
 #if NRNUNIT
 	if (!indepsym) {
@@ -175,12 +165,12 @@ void declare_implied()
 		Item* name, *units, *from, *to, *with, *num;
 		save = intoken;
 		intoken = newlist();
-		name = putintoken("t", NAME, 0);
-		units = putintoken("ms", STRING, UNITS);
-		from = putintoken("0", INTEGER, INTEGER);
-		to = putintoken("1", INTEGER, INTEGER);
-		with = putintoken("WITH", NAME, 0);
-		num = putintoken("1", INTEGER, INTEGER);
+		name = putintoken( "t", NAME, 0);
+		units = putintoken( "ms", STRING, UNITS);
+		from = putintoken( "0", INTEGER, INTEGER);
+		to = putintoken( "1", INTEGER, INTEGER);
+		with = putintoken( "WITH", NAME, 0);
+		num = putintoken( "1", INTEGER, INTEGER);
 		qa = itemarray(8, name, units, from, to, with, num, ITEM0, ITEM0);
 		declare(INDEP, ITMA(qa)[0], qa);
 		intoken = save;
@@ -195,7 +185,7 @@ void declare_implied()
 			sbase = basestate(s);
 			if (s->type == PRIME) {
 				if (!sbase) {
-diag(s->name, " is used but its corresponding STATE is not declared");
+diag(s->name, "is used but its corresponding STATE is not declared");
 				}
 				s->subtype = DEP;
 				if (nprime(s->name) == 1) {
@@ -215,8 +205,7 @@ Sprintf(buf, "%s/%s%d", decode_units(sbase), indepunits, nprime(s->name));
 }
 
 Symbol *
-basestate(s)	/* base state symbol for state''' or state0 */
-	Symbol *s;
+basestate(Symbol* s)	/* base state symbol for state''' or state0 */
 {
 	Symbol *base = SYM0;
 
@@ -239,8 +228,7 @@ basestate(s)	/* base state symbol for state''' or state0 */
 #define index strchr
 #endif
 
-static int nprime(s)
-	char *s;
+static int nprime(char* s)
 {
 	char *cp;
 	
@@ -248,8 +236,7 @@ static int nprime(s)
 	return strlen(s) - (cp - s);
 }			
 
-void install_cfactor(qname, q1, q2) /* declare conversion factor */
-	Item *qname, *q1, *q2;
+void install_cfactor(Item* qname, Item* q1, Item* q2) /* declare conversion factor */
 {
 	declare(CNVFAC, qname, ITEM0);
 	Unit_push(STR(q2));

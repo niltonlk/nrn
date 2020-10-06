@@ -6,12 +6,10 @@
 extern char *indepunits;
 static List *reactnames;
 
-static void set_flux_units();
-static void react_unit_err();
+static void set_flux_units(unit*);
+static void react_unit_err(char*, unit*);
 
-void kinunits(type, pass)
-	Item *type;
-	int pass;
+void kinunits(Item* type, int pass)
 {
 	struct unit ux1, ux2, ur1, ur2, uflux;
 	Item *q;
@@ -44,7 +42,7 @@ Fprintf(stderr, "REACTION quantity units for %s is: %s\n", SYM(ITM(q))->name, un
 			unit_pop();
 Fprintf(stderr, "but the quantity units of the first term is: %s\n", unit_str());
 			diag("Inconsistent material quantity units\n",
-			 "Need a correct COMPARTMENT statement");
+			  "Need a correct COMPARTMENT statement");
 		}
 	}
 		
@@ -89,26 +87,23 @@ diag("Inconsistent flux units", (char *)0);
 	freelist(&reactnames);
 }
 
-static void set_flux_units(up)
-	struct unit *up;
+static void set_flux_units(unit* up)
 {
 	Symbol *s;
 
 	Sprintf(buf, "%s", Unit_str(up));
-	if ((s = lookup("f_flux")) == SYM0) {
-		s = install("f_flux", NAME);
+	if ((s = lookup( "f_flux")) == SYM0) {
+		s = install( "f_flux", NAME);
 	}
 	s->u.str = stralloc(buf, (char *)0);
-	if ((s = lookup("b_flux")) == SYM0) {
-		s = install("b_flux", NAME);
+	if ((s = lookup( "b_flux")) == SYM0) {
+		s = install( "b_flux", NAME);
 	}
 	s->u.str = stralloc(buf, (char *)0);
 	
 }
 
-static void react_unit_err(s, up)
-	char *s;
-	struct unit *up;
+static void react_unit_err(char* s, unit* up)
 {
 	
 	Fprintf(stderr, "Flux units for this reaction: %s\n", Unit_str(up));
@@ -125,35 +120,32 @@ void clear_compartlist() {
 	}}
 }
 
-void unit_compartlist(q)
-	Item *q;
+void unit_compartlist(Item* q)
 {
 	char *ustr;
 	
 	ustr = (char *)(ITMA(SYM(q)->info)[6]);
 	if (ustr) {
-		diag(SYM(q)->name, " already in previous COMPARTMENT");
+		diag(SYM(q)->name, "already in previous COMPARTMENT");
 	}
 	ITMA(SYM(q)->info)[6] = (Item *) stralloc(unit_str(), (char *)0);
 }
 
-void unit_ldifuslist(q, flag)
-	Item *q;
-	int flag;
+void unit_ldifuslist(Item* q, int flag)
 {
 	char *ustr;
 	unitonflag = flag;
 	ustr = (char *)(ITMA(SYM(q)->info)[6]);
 	if (!ustr) {
-		diag(SYM(q)->name, " not declared in previous COMPARTMENT");
+		diag(SYM(q)->name, "not declared in previous COMPARTMENT");
 	}
-	Unit_push("micron4/ms");
+	Unit_push( "micron4/ms");
 	if (!unit_cmp_exact()) {
 		unit_pop();
-diag(unit_str(), " : relevant area * diffusion constant must\n   be micron2 micron2/ms (1-21 m4/s)");
+diag(unit_str(), ": relevant area * diffusion constant must\n   be micron2 micron2/ms (1-21 m4/s)");
 	}
 	unit_pop();
-	Unit_push("micron2");
+	Unit_push( "micron2");
 	Unit_push(ustr);
 	if (!unit_cmp_exact()) {
 		diag(ustr, ": With LONGDITUDINAL_DIFFUSION the compartment \
@@ -164,8 +156,7 @@ volume\nmust be measured in micron3/micron (1-12 m2)");
 	unitonflag = 0;
 }
 
-void consreact_push(q)
-	Item* q;
+void consreact_push(Item* q)
 {
 	char* ustr;
 	unit_push(q);
@@ -178,8 +169,7 @@ void consreact_push(q)
 	}
 }
 
-void ureactadd(q)
-	Item *q;
+void ureactadd(Item* q)
 {
 	if (!reactnames) {
 		reactnames = newlist();

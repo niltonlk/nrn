@@ -18,8 +18,7 @@ int parse_pass=0;
 int restart_pass=0;
 extern int yylex();
 
-void parsepass(n)
-	int n;
+void parsepass(int n)
 {
 	unitonflag = 1;
 	parse_pass = n;
@@ -28,9 +27,7 @@ void parsepass(n)
 	}
 }
 
-void parse_restart(q, i)
-	Item *q;
-	int i;
+void parse_restart(Item* q, int i)
 {
 	if (i == restart_pass) {
 		restart_pass = 0;
@@ -43,8 +40,7 @@ void parse_restart(q, i)
 	}
 }
 
-int next_intoken(pitem)
-	Item **pitem;
+int next_intoken(Item** pitem)
 {
 	if (parse_pass == 1) {
 		return yylex();
@@ -61,8 +57,7 @@ int next_intoken(pitem)
 }
 
 Item *
-next_parstok(intok)
-	Item *intok;
+next_parstok(Item* intok)
 {
 	if (!intok) {
 		return ITEM0;
@@ -85,8 +80,7 @@ next_parstok(intok)
 }
 
 Item *
-prev_parstok(intok)
-	Item *intok;
+prev_parstok(Item* intok)
 {
 	if (!intok) {
 		return ITEM0;

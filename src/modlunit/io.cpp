@@ -23,7 +23,7 @@ static int	linenum = 0;
 static char     inlinebuf[600], *inlinep = inlinebuf + 30, *ctp = inlinebuf + 30;
 static int file_stack_empty();
 
-char* Fgets(buf, size, f) char* buf; int size; FILE* f; {
+char* Fgets(char* buf, int size, FILE* f){
 	char* p = buf;
 	int c, i;
 	for(i=0; i < size; ++ i) {
@@ -80,8 +80,7 @@ Getc()
 	return c;
 }
 
-int unGetc(c)
-	int             c;
+int unGetc(int c)
 {
 	if (c == EOF)
 		return c;
@@ -95,8 +94,7 @@ int unGetc(c)
 }
 
 char           *
-Gets(buf)
-	char           *buf;
+Gets(char* buf)
 {
 	char           *cp;
 	int             c;
@@ -118,8 +116,7 @@ Gets(buf)
 }
 
 /* two arguments so we can pass a name to construct an error message. */
-void diag(s1, s2)
-	char           *s1, *s2;
+void diag(char* s1, char* s2)
 {
 	char           *cp;
 	Item *q1, *q2, *q;
@@ -184,45 +181,42 @@ void diag(s1, s2)
 	exit(1);
 }
 
-Symbol *_SYM(q, file, line) Item *q; char *file; int line; {
+Symbol *_SYM(Item* q, char* file, int line){
 	if (!q || q->itemtype != SYMBOL) {
 		internal_error(q, file, line);
 	}
 	return (Symbol *)((q)->element);
 }
 
-char *_STR(q, file, line) Item *q; char *file; int line; {
+char *_STR(Item* q, char* file, int line) {
 	if (!q || q->itemtype != STRING) {
 		internal_error(q, file, line);
 	}
 	return (char *)((q)->element);
 }
 
-Item *_ITM(q, file, line) Item *q; char *file; int line; {
+Item *_ITM(Item* q, char* file, int line) {
 	if (!q || q->itemtype != ITEM) {
 		internal_error(q, file, line);
 	}
 	return (Item *)((q)->element);
 }
 
-Item **_ITMA(q, file, line) Item *q; char *file; int line; {
+Item **_ITMA(Item* q, char* file, int line) {
 	if (!q || q->itemtype != ITEMARRAY) {
 		internal_error(q, file, line);
 	}
 	return (Item **)((q)->element);
 }
 
-List *_LST(q, file, line) Item *q; char *file; int line; {
+List *_LST(Item* q, char* file, int line) {
 	if (!q || q->itemtype != LIST) {
 		internal_error(q, file, line);
 	}
 	return (List *)((q)->element);
 }
 
-void internal_error(q, file, line)
-	Item *q;
-	char *file;
-	int line;
+void internal_error(Item* q, char* file, int line)
 {
 	Fprintf(stderr, "Internal error in file \"%s\", line %d\n", file, line);
 	Fprintf(stderr, "The offending item has the structure:\n");
@@ -241,8 +235,7 @@ typedef struct FileStackItem {
 
 static List* filestack;
 
-static int getprefix(prefix, s)
-	char* prefix, *s;
+static int getprefix(char* prefix, char* s)
 {
 	char* cp;
 	strcpy(prefix, s);
@@ -255,9 +248,7 @@ static int getprefix(prefix, s)
 	return (prefix[0] != '\0');
 }
 
-static FILE* include_open(fname, err)
-	char* fname;
-	int err;
+static FILE* include_open(char* fname, int err)
 {
 	FILE* f = (FILE*)0;
 	FileStackItem* fsi;
@@ -315,8 +306,7 @@ static FILE* include_open(fname, err)
 	return f;
 }
 
-void include_file(q)
-	Item* q;
+void include_file(Item* q)
 {
 	char fname[200];
 	FileStackItem* fsi;
@@ -353,7 +343,7 @@ void pop_file_stack() {
 	fclose(fin);
 	fin = fsi->fp;
 	strcpy(finname, fsi->finname);
-	free((char*)fsi);
+	free(fsi);
 }
 
 static int file_stack_empty() {

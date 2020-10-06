@@ -49,7 +49,7 @@ void consistency()
 		con("STEPPED", STEP1, 0);
 		tu = s->usage;
 		if ((tu & DEP) && (tu & FUNCT))
-			diag(s->name, " used as both variable and function");
+			diag(s->name, "used as both variable and function");
 		if ((t == 0) && tu)
 			Fprintf(stderr,
 				"Warning: %s undefined. (declared within VERBATIM?)\n", s->name);

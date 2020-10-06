@@ -48,16 +48,15 @@ Item           *qlint;
 static char pgm_name[] =	"model";
 extern char *RCS_version;
 extern char *RCS_date;
-static void openfiles();
-static void debug_item();
+static void openfiles(int, char**);
+static void debug_item(Item* q, int indent, FILE* file);
 #if MAC
 #include <sioux.h>
 #endif
 
 int
-main(argc, argv)
-	int             argc;
-	char           *argv[]; {
+main(int argc, char* argv[])
+{
 	/*
 	 * arg 1 is the prefix to the input file and output .c and .par
 	 * files 
@@ -135,9 +134,7 @@ main(argc, argv)
 	return 0;
 }
 
-static void openfiles(argc, argv)
-	int             argc;
-	char           *argv[];
+static void openfiles(int argc, char* argv[])
 {
 	char *cp, modprefix[NRN_BUFSIZE - 5];
 	if (argc > 1) {
@@ -163,8 +160,7 @@ static void openfiles(argc, argv)
 	}
 }
 
-void printlist(list)
-	List *list;
+void printlist(List* list)
 {
 	Item *q;
 
@@ -173,8 +169,7 @@ void printlist(list)
 	}
 }
 
-void printitems(q1, q2)
-	Item *q1, *q2;
+void printitems(Item* q1, Item* q2)
 {
 	Item *q;
 
@@ -183,9 +178,7 @@ void printitems(q1, q2)
 	}
 }
 
-void printitem(q, fp)
-	Item *q;
-	FILE *fp;
+void printitem(Item* q, FILE* fp)
 {
 		switch (q->itemtype) {
 
@@ -207,16 +200,12 @@ void printitem(q, fp)
 	fflush(fp);
 }
 
-void debugitem(q)
-	Item *q;
+void debugitem(Item* q)
 {
 	debug_item(q, 0, stderr);
 }
 
-static void debug_item(q, indent, file)
-	Item *q;
-	int indent;
-	FILE *file;
+static void debug_item(Item* q, int indent, FILE* file)
 {
 	int i;
 	List *list;

@@ -4,15 +4,13 @@
 #include "model.h"
 #include "parse1.h"
 
-void unit_push(q)
-	Item *q;
+void unit_push(Item* q)
 {
 	Unit_push(decode_units(SYM(q)));
 }
 
 char *
-decode_units(sym)
-	Symbol *sym;
+decode_units(Symbol* sym)
 {
 	if (sym->u.str) {
 		return sym->u.str;
@@ -23,8 +21,7 @@ decode_units(sym)
 	return "";
 }
 
-void ifcnvfac(q3) /* '(' expr ')' */
-	Item *q3;
+void ifcnvfac(Item* q3) /* '(' expr ')' */
 {
 	Item *q1, *q2;
 	double d;
@@ -48,8 +45,7 @@ void ifcnvfac(q3) /* '(' expr ')' */
 y can be any expression. If x has dimensions then y must be a positive integer
 and the units can be computed */
 
-void unit_exponent(y, lastok) /*x ^ y*/
-	Item *y, *lastok;
+void unit_exponent(Item* y, Item* lastok) /*x ^ y*/
 {
 	int i;
 	double yval;
@@ -60,19 +56,18 @@ void unit_exponent(y, lastok) /*x ^ y*/
 		assert(i == 1);
 		if (yval - (double)((int)yval)) {
 			unit_less();
-			Unit_push("");
+			Unit_push( "");
 		} else {
 			Unit_exponent((int)yval);
 		}
 	}else{
 		unit_less();
-		Unit_push("");
+		Unit_push( "");
 	}
 }
 
 static Item *qexpr[3];
-void unit_cmp(q1, q2, q3)
-	Item *q1, *q2, *q3;
+void unit_cmp(Item* q1, Item* q2, Item* q3)
 {
 	qexpr[0] = q1;
 	qexpr[1] = q2;
@@ -80,8 +75,7 @@ void unit_cmp(q1, q2, q3)
 	Unit_cmp();
 }
 
-void print_unit_expr(i)
-	int i;
+void print_unit_expr(int i)
 {
 	if (i==1) {
 		if (qexpr[0]) {
@@ -95,9 +89,7 @@ void print_unit_expr(i)
 }
 	
 	
-void unit_logic(type, q1, q2, q3)
-	int type;
-	Item *q1, *q2, *q3;
+void unit_logic(int type, Item* q1, Item* q2, Item* q3)
 {
 	/* if type is 1 then it doesn't matter what the
 	top two elements are: the result is dimensionless.
@@ -111,14 +103,13 @@ void unit_logic(type, q1, q2, q3)
 		unit_pop();
 	}
 	unit_pop();
-	Unit_push("");
+	Unit_push( "");
 }
 
 #define NLEVEL	10 /* 10 levels of call! */
 static int argnumstk[NLEVEL], pargnum = -1;
 
-void unit_push_args(q1)
-	Item *q1;
+void unit_push_args(Item* q1)
 {
 	List *larg;
 	Item *q;
@@ -150,8 +141,7 @@ void unit_done_args()
 	pargnum--;
 }
 
-void unit_chk_arg(q1, q2)
-	Item *q1, *q2;
+void unit_chk_arg(Item* q1, Item* q2)
 {
 	if (argnumstk[pargnum] > 0) {
 		argnumstk[pargnum]--;
@@ -164,10 +154,9 @@ void unit_chk_arg(q1, q2)
 	}
 }
 
-void func_unit(q1, q2)
-	Item *q1, *q2;
+void func_unit(Item* q1, Item* q2)
 {
-	Symbol *s, *checklocal();
+	Symbol *s, *checklocal(Symbol*);
 	
 	s = SYM(q1);
 	s = checklocal(s);	/* hidden with pushlocal */
@@ -179,18 +168,17 @@ void func_unit(q1, q2)
 	}
 }
 
-void unit_del(i)	/* push 1/delta_x ^ i units */
-	int i;
+void unit_del(int i)	/* push 1/delta_x ^ i units */
 {
 	Symbol *s;
 	char *cp;
 	
-	s = lookup("delta_x");
+	s = lookup( "delta_x");
 	if(!s) {
 		diag("delta_x not declared", (char *)0);
 	}
 	cp = decode_units(s);
-	Unit_push("");
+	Unit_push( "");
 	while(i--) {
 		Unit_push(cp);
 		unit_div();

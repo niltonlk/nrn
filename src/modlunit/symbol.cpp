@@ -19,8 +19,7 @@ void symbol_init() {
 }
 
 Symbol *
-lookup(s)	/* find s in symbol table */
-	char *s;
+lookup(char* s)	/* find s in symbol table */
 {
 	Item *sp;
 
@@ -33,8 +32,7 @@ lookup(s)	/* find s in symbol table */
 }
 
 Symbol *
-checklocal(sym)
-	Symbol *sym;
+checklocal(Symbol* sym)
 {
 	Item *sp;
 	List *sl;
@@ -52,9 +50,7 @@ checklocal(sym)
 }
 
 Symbol *
-install(s, t)	/* install s in the list symbol table with type t*/
-	char *s;
-	int t;
+install(char* s, int t)	/* install s in the list symbol table with type t*/
 {
 	Symbol *sp;
 	List *sl;
@@ -83,8 +79,7 @@ install(s, t)	/* install s in the list symbol table with type t*/
 	return sp;
 }
 
-void pushlocal(q1, qdim)
-	Item *q1, *qdim;
+void pushlocal(Item* q1, Item* qdim)
 {
 	Item * q;
 	q = linsertsym(symlistlist, SYM0); /*the type is irrelevant*/
@@ -108,8 +103,7 @@ void poplocal()
 	delete(symlistlist->next);
 }
 
-void install_local(q, qdim)
-	Item *q, *qdim;
+void install_local(Item* q, Item* qdim)
 {
 	Symbol *s;
 	
