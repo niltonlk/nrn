@@ -15,7 +15,7 @@ extern /*"C"*/ int hoc_return_type_code;
 
 //extern "C" {
 	extern double hoc_scan(FILE*);
-	extern FILE* hoc_obj_file_arg(int i);
+	extern "C" FILE* hoc_obj_file_arg(int i);
 	extern Object** hoc_temp_objptr(Object*);
 
 #if 0

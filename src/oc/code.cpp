@@ -762,7 +762,7 @@ int hoc_is_object_arg(int narg) {
     return (type == OBJECTVAR || type == OBJECTTMP);
 }
 
-int hoc_is_tempobj_arg(int narg) {
+extern "C" int hoc_is_tempobj_arg(int narg) {
     return (hoc_argtype(narg) == OBJECTTMP);
 }
 
@@ -1733,7 +1733,7 @@ void bltin(void)        /* evaluate built-in on top of stack */
     pushxm(d);
 }
 
-Symbol *hoc_get_symbol(const char *var) {
+extern "C" Symbol *hoc_get_symbol(const char *var) {
     Symlist *sl = (Symlist *) 0;
     Symbol *prc, *sym;
     Inst *last;

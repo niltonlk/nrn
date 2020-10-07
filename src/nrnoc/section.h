@@ -237,6 +237,9 @@ extern double* nrn_prop_data_alloc(int type, int count, Prop* p);
 extern Datum* nrn_prop_datum_alloc(int type, int count, Prop* p);
 extern void nrn_prop_data_free(int type, double* pd);
 extern void nrn_prop_datum_free(int type, Datum* ppd);
+extern Section* chk_access();
+extern double nrn_ghk(double, double, double, double);
+
 
 #if defined(__cplusplus)
 }
@@ -307,11 +310,9 @@ typedef struct Eqnblock {
 extern int nrn_global_ncell; /* note that for multiple threads all the rootnodes are no longer contiguous */
 extern hoc_List* section_list;	/* Where the Sections live */
 
-extern Section* chk_access();
 extern Section	*sec_alloc();		/* Allocates a single section */
 extern void	node_alloc(Section*, short);		/* Allocates node vectors in a section*/
 extern double section_length(Section*), nrn_diameter(Node*);
-extern double nrn_ghk(double, double, double, double);
 extern Node* nrn_parent_node(Node*);
 extern Section* nrn_section_alloc();
 extern void nrn_section_free(Section*);

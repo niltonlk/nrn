@@ -5,12 +5,12 @@
 //extern "C" {
 //#endif
 
-extern void cvode_fadvance(double);
+extern "C" void cvode_fadvance(double);
 extern void cvode_finitialize(double);
 extern void nrncvode_set_t(double);
 extern void deliver_net_events(NrnThread*);
 extern void nrn_deliver_events(NrnThread*);
-extern void clear_event_queue(void);
+extern "C" void clear_event_queue(void);
 extern void init_net_events(void);
 extern void nrn_record_init(void);
 extern void nrn_play_init(void);

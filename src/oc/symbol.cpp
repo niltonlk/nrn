@@ -267,7 +267,7 @@ void* hoc_Erealloc(void* ptr, size_t size) {/* check return from realloc */
 	return p;
 }
 
-void* erealloc(void* ptr, size_t size) {
+extern "C" void* erealloc(void* ptr, size_t size) {
 	void* p = hoc_Erealloc(ptr, size);
 	if (emalloc_error) { hoc_malchk(); }
 	return p;

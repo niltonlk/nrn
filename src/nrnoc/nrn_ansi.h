@@ -27,6 +27,10 @@ extern void _nrn_watch_activate(Datum *, double(*)(Point_process *), int, Point_
 extern void hoc_reg_ba(int, nrn_bamech_t, int);
 extern int nrn_pointing(double *);
 
+extern void nrn_pushsec(Section*);
+extern void nrn_popsec(void);
+extern Section* chk_access(void);
+
 
 #if defined(__cplusplus)
 }
@@ -115,9 +119,6 @@ extern void section_ref(Section*);
 extern void section_unref(Section*);  
 extern const char* secname(Section*);
 extern const char* nrn_sec2pysecname(Section*);
-extern void nrn_pushsec(Section*);
-extern void nrn_popsec(void); 
-extern Section* chk_access(void);
 extern void nrn_rangeconst(Section*, Symbol*, double* value, int op);
 extern Prop* nrn_mechanism(int type, Node*);
 extern int nrn_exists(Symbol*, Node*);

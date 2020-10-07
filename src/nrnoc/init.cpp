@@ -845,7 +845,7 @@ int nrn_pointing(double* pd) {
 }
 
 int state_discon_flag_ = 0;
-void state_discontinuity(int i, double* pd, double d) {
+extern "C" void state_discontinuity(int i, double* pd, double d) {
 	if (state_discon_allowed_ && state_discon_flag_ == 0) {
 		*pd = d;
 /*printf("state_discontinuity t=%g pd=%lx d=%g\n", t, (long)pd, d);*/

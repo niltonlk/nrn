@@ -41,7 +41,7 @@ static void ion_cur(NrnThread *, Memb_list *, int);
 
 static void ion_init(NrnThread *, Memb_list *, int);
 
-double nrn_nernst(double, double, double), nrn_ghk(double, double, double, double);
+extern "C" double nrn_nernst(double, double, double), nrn_ghk(double, double, double, double);
 
 static int na_ion, k_ion, ca_ion; /* will get type for these special ions */
 
@@ -316,7 +316,7 @@ static double efun(double x) {
     }
 }
 
-double nrn_ghk(double v, double ci, double co, double z) {
+extern "C" double nrn_ghk(double v, double ci, double co, double z) {
     double eco, eci, temp;
     temp = z * v / ktf;
     eco = co * efun(temp);
@@ -366,7 +366,7 @@ ion_style("name_ion", [c_style, e_style, einit, eadvance, cinit])
 #define conci0 global_conci(type)
 #define conco0 global_conco(type)
 
-double nrn_nernst_coef(int type) {
+extern "C" double nrn_nernst_coef(int type) {
     /* for computing jacobian element dconc'/dconc */
     return ktf / charge;
 }

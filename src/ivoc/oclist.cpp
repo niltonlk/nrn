@@ -30,7 +30,7 @@
 extern Object** hoc_temp_objptr(Object*);
 extern Symlist* hoc_top_level_symlist;
 int ivoc_list_count(Object*);
-Object* ivoc_list_item(Object*, int);
+extern "C" Object* ivoc_list_item(Object*, int);
 //} // extern "C"
 
 
@@ -420,7 +420,7 @@ int ivoc_list_count(Object* olist) {
 	OcList* list = (OcList*)olist->u.this_pointer;
 	return list->count();
 }
-Object* ivoc_list_item(Object* olist, int i) {
+extern "C" Object* ivoc_list_item(Object* olist, int i) {
 	chk_list(olist);
 	OcList* list = (OcList*)olist->u.this_pointer;
 	if (i >= 0 && i < list->count()) {

@@ -5,7 +5,7 @@
 #include "nrnmpi.h"
 
 //extern "C" {
-void cvode_fadvance();
+extern "C" void cvode_fadvance();
 void cvode_finitialize();
 extern void (*nrn_multisplit_setup_)();
 //} // extern "C"

@@ -146,11 +146,11 @@ static int narg() {
 extern "C" {
 extern void install_vector_method(const char* name, Pfrd_vp);
 extern int vector_instance_px(void*, double**);
+extern int nrn_mlh_gsort (double* vec, int *base_ptr, int total_elems, doubleComparator cmp);
 } // extern "C"
 
 extern int vector_arg_px(int, double**);
 extern void notify_freed_val_array(double*, size_t);
-extern int nrn_mlh_gsort (double* vec, int *base_ptr, int total_elems, doubleComparator cmp);
 
 extern /*"C"*/ int hoc_return_type_code;
 
@@ -3868,7 +3868,7 @@ static inline void SWAP(int* A, int* B)
       smaller partition.  This *guarantees* no more than log (n)
       stack size is needed! */
       
-int nrn_mlh_gsort (double* vec, int *base_ptr, int total_elems, doubleComparator cmp)
+extern "C" int nrn_mlh_gsort (double* vec, int *base_ptr, int total_elems, doubleComparator cmp)
 {
 /* Stack node declarations used to store unfulfilled partition obligations. */
   struct stack_node {  int *lo;  int *hi; };

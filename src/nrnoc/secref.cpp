@@ -77,12 +77,14 @@ static double s_unname(void* v) {
 	return 1.;
 }
 
+extern "C" Object* ivoc_list_item(Object*, int);
+
 static double s_rename(void* v) {
 //	extern Object* hoc_thisobject, **hoc_objgetarg();
 	extern Objectdata* hoc_top_level_data;
 //	extern Symbol* hoc_table_lookup();
 	extern Symlist* hoc_top_level_symlist;
-    Object* ivoc_list_item(Object*, int);
+
 	char* name;
 	Section* sec;
 	Symbol* sym;

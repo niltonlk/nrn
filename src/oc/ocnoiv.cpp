@@ -100,7 +100,7 @@ double* vector_vec(void* v) {
 	return (double*)0;
 }
 
-Object* ivoc_list_item(Object* list, int item) {
+extern "C" Object* ivoc_list_item(Object* list, int item) {
 	hoc_execerror("implemented in ivoc library", "ivoc_list_item");
 	return nullptr;
 }

@@ -168,7 +168,7 @@ static String* xvalue_format;
 //extern "C" {
 
 extern int units_on_flag_;
-extern Symbol* hoc_get_symbol(const char*);
+extern "C" Symbol* hoc_get_symbol(const char*);
 extern Symbol* hoc_get_last_pointer_symbol();
 extern "C" double* nrn_recalc_ptr(double*);
 void hoc_notify_value() {

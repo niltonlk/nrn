@@ -30,7 +30,7 @@ extern Point_process* ob2pntproc_0(Object*);
 
 
 
-extern void nrn_net_move(void**, Point_process*, double);
+
 
 extern double* _getelm(int, int);
 extern double* _nrn_thread_getelm(void*, int, int);
@@ -106,7 +106,7 @@ extern pnt_receive_init_t* pnt_receive_init;
 extern short* pnt_receive_size;
 extern void nrn_net_send(void**, double*, Point_process*, double, double);
 extern void nrn_net_event(Point_process*, double);
-
+extern void nrn_net_move(void**, Point_process*, double);
 
 #if defined(__cplusplus)
 }

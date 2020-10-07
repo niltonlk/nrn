@@ -86,7 +86,7 @@ extern short* pnt_receive_size;
 extern short* nrn_is_artificial_; // should be bool but not using that type in c
 extern short* nrn_artcell_qindex_;
 extern "C" void net_send(void**, double*, Point_process*, double, double);
-void net_move(void**, Point_process*, double);
+extern "C" void net_move(void**, Point_process*, double);
 //void artcell_net_send(void**, double*, Point_process*, double, double);
 //void artcell_net_move(void**, Point_process*, double);
 int nrn_use_selfqueue_;
@@ -138,7 +138,7 @@ int nrn_netcon_weight(NetCon* nc, double** pw) {
 	*pw = nc->weight_;
 	return nc->cnt_;
 }
-double nrn_event_queue_stats(double* stats) {
+extern "C" double nrn_event_queue_stats(double* stats) {
 #if COLLECT_TQueue_STATISTICS
 	net_cvode_instance_event_queue(nrn_threads)->spike_stat(stats);  
 	return (stats[0]-stats[2]);
@@ -2287,7 +2287,7 @@ int Cvode::handle_step(NetCvode* ns, double te) {
 	return err;
 }
 
-void net_move(void** v, Point_process* pnt, double tt) {
+extern "C" void net_move(void** v, Point_process* pnt, double tt) {
 	if (!(*v)) {
 		hoc_execerror( "No event with flag=1 for net_move in ", hoc_object_name(pnt->ob));
 	}

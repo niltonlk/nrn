@@ -13,7 +13,7 @@ class Cvode;
 #endif
 
 //extern "C" {
-void cvode_fadvance(double);
+extern "C" void cvode_fadvance(double);
 void cvode_finitialize(double t0);
 void nrncvode_set_t(double);
 extern "C" bool at_time(NrnThread*, double);
@@ -28,7 +28,7 @@ extern int nrn_use_daspk_;
 NetCvode* net_cvode_instance;
 void deliver_net_events(NrnThread*);
 void nrn_deliver_events(NrnThread*);
-void clear_event_queue();
+extern "C" void clear_event_queue();
 void init_net_events();
 void nrn_record_init();
 void nrn_play_init();
@@ -56,7 +56,7 @@ void nrn_deliver_events(NrnThread* nt) {
 	nt->_t = tsav;
 }
 
-void clear_event_queue() {
+extern "C" void clear_event_queue() {
 	if (net_cvode_instance) {
 		net_cvode_instance->clear_events();
 	}
@@ -100,7 +100,7 @@ void nrn_solver_prepare() {
 
 extern "C" int v_structure_change;
 
-void cvode_fadvance(double tstop) { // tstop = -1 means single step
+extern "C" void cvode_fadvance(double tstop) { // tstop = -1 means single step
 #if USECVODE
 	int err;
     extern int tree_changed;

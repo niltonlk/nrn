@@ -281,12 +281,11 @@ extern "C" {
 
 extern void* emalloc(size_t n);
 extern void* ecalloc(size_t n, size_t size);
+extern void* erealloc(void* ptr, size_t n);
 
 #if defined(__cplusplus)
 }
 #endif
-
-extern void* erealloc(void* ptr, size_t n);
 
 
 extern	Inst *hoc_progp, *hoc_progbase, *hoc_prog, *hoc_prog_parse_recover;
