@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NEURON: /home/travis/build/neuronsimulator/nrn/src/oc/hoc_init.c File Reference</title>
+<title>NEURON: /home/runner/work/nrn/nrn/src/oc/hoc_init.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -98,6 +98,7 @@ $(document).ready(function(){initNavTree('oc_2hoc__init_8c.html','');});
 <code>#include &quot;<a class="el" href="parse_8h_source.html">parse.h</a>&quot;</code><br />
 <code>#include &lt;<a class="el" href="math_8h_source.html">math.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="equation_8h_source.html">equation.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="nrnunits__modern_8h_source.html">nrnunits_modern.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ocfunc_8h_source.html">ocfunc.h</a>&quot;</code><br />
 </div>
 <p><a href="oc_2hoc__init_8c_source.html">Go to the source code of this file.</a></p>
@@ -129,39 +130,46 @@ Variables</h2></td></tr>
 <tr class="memitem:a60bf5b456a211b0dfb9b905bbe3909f7"><td class="memItemLeft" >struct {</td></tr>
 <tr class="memitem:a8a58a12c56e05db82366e77824f92fa5"><td class="memItemLeft" >&#160;&#160;&#160;char *&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a5ac083a645d964373f022d03df4849c8">name</a></td></tr>
 <tr class="separator:a8a58a12c56e05db82366e77824f92fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6762034042b7b481038c803f6e460061"><td class="memItemLeft" >&#160;&#160;&#160;double&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a7fade3e5e8b405c08cc19a36371fbc98">cval</a></td></tr>
+<tr class="memitem:a6762034042b7b481038c803f6e460061"><td class="memItemLeft" >&#160;&#160;&#160;double&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a3644c9c490ed45f053e36bccaad44f2c">cval</a></td></tr>
 <tr class="separator:a6762034042b7b481038c803f6e460061"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60bf5b456a211b0dfb9b905bbe3909f7"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#a60bf5b456a211b0dfb9b905bbe3909f7">consts</a> []</td></tr>
 <tr class="separator:a60bf5b456a211b0dfb9b905bbe3909f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb03b8add830d4e8db2c7fae8f7821c5"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:ac2d6c2255f5932908bd05b9eec73d2dd"><td class="memItemLeft" >struct {</td></tr>
 <tr class="memitem:afb6ba0d8935a8e18d3e3a398f334f8f0"><td class="memItemLeft" >&#160;&#160;&#160;char *&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a5ac083a645d964373f022d03df4849c8">name</a></td></tr>
 <tr class="separator:afb6ba0d8935a8e18d3e3a398f334f8f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89c273531780f94519a0d6d3292955ca"><td class="memItemLeft" >&#160;&#160;&#160;double(*&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a320e365b08f9c231ab70d7734d0789ee">func</a> )()</td></tr>
-<tr class="separator:a89c273531780f94519a0d6d3292955ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb03b8add830d4e8db2c7fae8f7821c5"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#acb03b8add830d4e8db2c7fae8f7821c5">builtins</a> []</td></tr>
-<tr class="separator:acb03b8add830d4e8db2c7fae8f7821c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11f50ad1afeca7e3831b67fefaa86988"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:adf31c740311ec52987a33fa37cc5c8d5"><td class="memItemLeft" >&#160;&#160;&#160;double&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a3644c9c490ed45f053e36bccaad44f2c">cval</a> [2]</td></tr>
+<tr class="separator:adf31c740311ec52987a33fa37cc5c8d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d6c2255f5932908bd05b9eec73d2dd"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#ac2d6c2255f5932908bd05b9eec73d2dd">uconsts</a> []</td></tr>
+<tr class="separator:ac2d6c2255f5932908bd05b9eec73d2dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6987feb9c4d9eebdb02fdaae4a9e50aa"><td class="memItemLeft" >struct {</td></tr>
 <tr class="memitem:a5c0d95a5eb414316467b0bbd7418cf91"><td class="memItemLeft" >&#160;&#160;&#160;char *&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a5ac083a645d964373f022d03df4849c8">name</a></td></tr>
 <tr class="separator:a5c0d95a5eb414316467b0bbd7418cf91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb6aa623eb28370b268cb68110340923"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>(*&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#abd845f0e5122e1ade9542fec569fce3b">fun_blt</a> )(<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
-<tr class="separator:aeb6aa623eb28370b268cb68110340923"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11f50ad1afeca7e3831b67fefaa86988"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#a11f50ad1afeca7e3831b67fefaa86988">fun_bltin</a> []</td></tr>
-<tr class="separator:a11f50ad1afeca7e3831b67fefaa86988"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af54e62f4a7b55193b024aec0ceff0f97"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:a892faedeba0f222cfd4efb6d1b636c57"><td class="memItemLeft" >&#160;&#160;&#160;double(*&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a320e365b08f9c231ab70d7734d0789ee">func</a> )()</td></tr>
+<tr class="separator:a892faedeba0f222cfd4efb6d1b636c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6987feb9c4d9eebdb02fdaae4a9e50aa"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#a6987feb9c4d9eebdb02fdaae4a9e50aa">builtins</a> []</td></tr>
+<tr class="separator:a6987feb9c4d9eebdb02fdaae4a9e50aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dac620a233835d2c77d7fa345484d48"><td class="memItemLeft" >struct {</td></tr>
 <tr class="memitem:ada89e1cc1d33639b26fce63fdfb7470d"><td class="memItemLeft" >&#160;&#160;&#160;char *&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a5ac083a645d964373f022d03df4849c8">name</a></td></tr>
 <tr class="separator:ada89e1cc1d33639b26fce63fdfb7470d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4086013a90b862423bab4bafaaca9286"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>(*&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a33247191f4f339b26df1921a2877ca99">strfun_blt</a> )(<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
-<tr class="separator:a4086013a90b862423bab4bafaaca9286"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af54e62f4a7b55193b024aec0ceff0f97"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#af54e62f4a7b55193b024aec0ceff0f97">strfun_bltin</a> []</td></tr>
-<tr class="separator:af54e62f4a7b55193b024aec0ceff0f97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3ca7f1b1d585c91e9916531fbe7eb0d"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:a7b2adc91c687ac812d5ccdcbd62d5d73"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>(*&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#abd845f0e5122e1ade9542fec569fce3b">fun_blt</a> )(<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
+<tr class="separator:a7b2adc91c687ac812d5ccdcbd62d5d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dac620a233835d2c77d7fa345484d48"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#a8dac620a233835d2c77d7fa345484d48">fun_bltin</a> []</td></tr>
+<tr class="separator:a8dac620a233835d2c77d7fa345484d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a240c84e20e890cf63c2438b103b12c0e"><td class="memItemLeft" >struct {</td></tr>
 <tr class="memitem:ab46de2ed9369dc45985330965c130152"><td class="memItemLeft" >&#160;&#160;&#160;char *&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a5ac083a645d964373f022d03df4849c8">name</a></td></tr>
 <tr class="separator:ab46de2ed9369dc45985330965c130152"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fc8062e9a177cf2d12999c7ad987e71"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>(*&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a7490b9a33b3e487d8270795f0cbdc814">objfun_blt</a> )(<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
-<tr class="separator:a0fc8062e9a177cf2d12999c7ad987e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3ca7f1b1d585c91e9916531fbe7eb0d"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#aa3ca7f1b1d585c91e9916531fbe7eb0d">objfun_bltin</a> []</td></tr>
-<tr class="separator:aa3ca7f1b1d585c91e9916531fbe7eb0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf8d382ee83b7ba77b8026776a8b42ed8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hoc__functions.html#gaf8d382ee83b7ba77b8026776a8b42ed8">hoc_epsilon</a> = 1.<a class="el" href="vclmp_8c.html#a270b1ecf56619755ce62f6970dfabc91">e</a>-11</td></tr>
+<tr class="memitem:a09bae2d30eb110628eb14a85cdb05f57"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>(*&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a33247191f4f339b26df1921a2877ca99">strfun_blt</a> )(<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
+<tr class="separator:a09bae2d30eb110628eb14a85cdb05f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a240c84e20e890cf63c2438b103b12c0e"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#a240c84e20e890cf63c2438b103b12c0e">strfun_bltin</a> []</td></tr>
+<tr class="separator:a240c84e20e890cf63c2438b103b12c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b087a327be44f2478f084fd67493de6"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:a480a4ff504581267caf3e67f59799fe6"><td class="memItemLeft" >&#160;&#160;&#160;char *&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a5ac083a645d964373f022d03df4849c8">name</a></td></tr>
+<tr class="separator:a480a4ff504581267caf3e67f59799fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e55418ad2fa497f9e4ee79292a80ffd"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>(*&#160;&#160;&#160;<a class="el" href="oc_2hoc__init_8c.html#a7490b9a33b3e487d8270795f0cbdc814">objfun_blt</a> )(<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
+<tr class="separator:a6e55418ad2fa497f9e4ee79292a80ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b087a327be44f2478f084fd67493de6"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#a5b087a327be44f2478f084fd67493de6">objfun_bltin</a> []</td></tr>
+<tr class="separator:a5b087a327be44f2478f084fd67493de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf8d382ee83b7ba77b8026776a8b42ed8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hoc__functions.html#gaf8d382ee83b7ba77b8026776a8b42ed8">hoc_epsilon</a> = 1.<a class="el" href="unitstest_8c.html#a270b1ecf56619755ce62f6970dfabc91">e</a>-11</td></tr>
 <tr class="separator:gaf8d382ee83b7ba77b8026776a8b42ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaad51b4d03f7b962bba2f117df7668de1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hoc__functions.html#gaad51b4d03f7b962bba2f117df7668de1">hoc_ac_</a></td></tr>
 <tr class="separator:gaad51b4d03f7b962bba2f117df7668de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +191,8 @@ Variables</h2></td></tr>
 <tr class="separator:a2f2228e4ea922bc1a37f32452365ed24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2e8bd227a64164f4e27f3478bb95c1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#ab2e8bd227a64164f4e27f3478bb95c1b">nrn_xopen_broadcast_</a></td></tr>
 <tr class="separator:ab2e8bd227a64164f4e27f3478bb95c1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf4a96e2e39b2fd6ed4630bea69c8fcf4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hoc__functions.html#gaf4a96e2e39b2fd6ed4630bea69c8fcf4">_nrnunit_use_legacy_</a></td></tr>
+<tr class="separator:gaf4a96e2e39b2fd6ed4630bea69c8fcf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92bab8a97891d8d70b807faeee41a6a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__init_8c.html#a92bab8a97891d8d70b807faeee41a6a8">nrn_main_launch</a></td></tr>
 <tr class="separator:a92bab8a97891d8d70b807faeee41a6a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -203,7 +213,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00382">382</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00409">409</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -242,7 +252,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00369">369</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00396">396</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -262,7 +272,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00354">354</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00381">381</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -282,13 +292,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00338">338</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00365">365</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="acb03b8add830d4e8db2c7fae8f7821c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb03b8add830d4e8db2c7fae8f7821c5">&#9670;&nbsp;</a></span>builtins</h2>
+<a id="a6987feb9c4d9eebdb02fdaae4a9e50aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6987feb9c4d9eebdb02fdaae4a9e50aa">&#9670;&nbsp;</a></span>builtins</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -323,22 +333,22 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div><div class="line">    <span class="stringliteral">&quot;PI&quot;</span>,   3.14159265358979323846,</div><div class="line">    <span class="stringliteral">&quot;E&quot;</span>,    2.71828182845904523536,</div><div class="line">    <span class="stringliteral">&quot;GAMMA&quot;</span>,0.57721566490153286060, </div><div class="line">    <span class="stringliteral">&quot;DEG&quot;</span>, 57.29577951308232087680, </div><div class="line">    <span class="stringliteral">&quot;PHI&quot;</span>,  1.61803398874989484820, </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="stringliteral">&quot;FARADAY&quot;</span>, 96485.33289, </div><div class="line">    <span class="stringliteral">&quot;R&quot;</span>, 8.3144598,     </div><div class="line"></div><div class="line">    0,  0</div><div class="line">}</div></div><!-- fragment -->
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div><div class="line">    <span class="stringliteral">&quot;PI&quot;</span>,   3.14159265358979323846,</div><div class="line">    <span class="stringliteral">&quot;E&quot;</span>,    2.71828182845904523536,</div><div class="line">    <span class="stringliteral">&quot;GAMMA&quot;</span>,0.57721566490153286060, </div><div class="line">    <span class="stringliteral">&quot;DEG&quot;</span>, 57.29577951308232087680, </div><div class="line">    <span class="stringliteral">&quot;PHI&quot;</span>,  1.61803398874989484820, </div><div class="line">    0,  0</div><div class="line">}</div></div><!-- fragment -->
 </div>
 </div>
-<a id="a7fade3e5e8b405c08cc19a36371fbc98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fade3e5e8b405c08cc19a36371fbc98">&#9670;&nbsp;</a></span>cval</h2>
+<a id="a3644c9c490ed45f053e36bccaad44f2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3644c9c490ed45f053e36bccaad44f2c">&#9670;&nbsp;</a></span>cval</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double cval</td>
+          <td class="memname">double cval[2]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00085">85</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00086">86</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -354,12 +364,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00130">130</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00134">134</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
-<a id="a11f50ad1afeca7e3831b67fefaa86988"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11f50ad1afeca7e3831b67fefaa86988">&#9670;&nbsp;</a></span>fun_bltin</h2>
+<a id="a8dac620a233835d2c77d7fa345484d48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dac620a233835d2c77d7fa345484d48">&#9670;&nbsp;</a></span>fun_bltin</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -384,7 +394,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00106">106</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00110">110</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -400,7 +410,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00260">260</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00264">264</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -416,7 +426,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00260">260</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00264">264</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -432,7 +442,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00261">261</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00265">265</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -448,7 +458,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00257">257</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00261">261</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -478,7 +488,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00033">33</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00034">34</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -494,7 +504,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00032">32</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00033">33</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -510,7 +520,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00263">263</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00267">267</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -526,7 +536,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00367">367</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00394">394</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -542,7 +552,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00264">264</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00268">268</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -558,7 +568,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00265">265</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00269">269</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -574,7 +584,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00267">267</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00271">271</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -590,12 +600,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00249">249</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00253">253</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
-<a id="aa3ca7f1b1d585c91e9916531fbe7eb0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3ca7f1b1d585c91e9916531fbe7eb0d">&#9670;&nbsp;</a></span>objfun_bltin</h2>
+<a id="a5b087a327be44f2478f084fd67493de6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b087a327be44f2478f084fd67493de6">&#9670;&nbsp;</a></span>objfun_bltin</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -621,12 +631,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00237">237</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00241">241</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
-<a id="af54e62f4a7b55193b024aec0ceff0f97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af54e62f4a7b55193b024aec0ceff0f97">&#9670;&nbsp;</a></span>strfun_bltin</h2>
+<a id="a240c84e20e890cf63c2438b103b12c0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a240c84e20e890cf63c2438b103b12c0e">&#9670;&nbsp;</a></span>strfun_bltin</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -636,11 +646,28 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div><div class="line">    <span class="stringliteral">&quot;secname&quot;</span>,  <a class="code" href="cabcode_8c.html#a83bab26c0e5b98a66cee1667ba6d4bfc">hoc_secname</a>,</div><div class="line">    <span class="stringliteral">&quot;units&quot;</span>, <a class="code" href="code2_8c.html#ae905bcb5937fea140a906b9fe919ed01">hoc_Symbol_units</a>,</div><div class="line">    <span class="stringliteral">&quot;neuronhome&quot;</span>, <a class="code" href="code2_8c.html#aa6f0b21cd26df51923a0c1e78e008cd5">hoc_neuronhome</a>,</div><div class="line">    <span class="stringliteral">&quot;getcwd&quot;</span>,   <a class="code" href="oc_2fileio_8c.html#a6eba21c852735a48f581dc38226af78c">hoc_getcwd</a>,</div><div class="line">    <span class="stringliteral">&quot;nrnversion&quot;</span>, <a class="code" href="oc_2hoc__init_8c.html#a9397a2dd1999856dcc17888509fbb239">hoc_nrnversion</a>,</div><div class="line">    0,  0</div><div class="line">}</div><div class="ttc" id="cabcode_8c_html_a83bab26c0e5b98a66cee1667ba6d4bfc"><div class="ttname"><a href="cabcode_8c.html#a83bab26c0e5b98a66cee1667ba6d4bfc">hoc_secname</a></div><div class="ttdeci">void hoc_secname(void)</div><div class="ttdef"><b>Definition:</b> <a href="cabcode_8c_source.html#l02276">cabcode.c:2276</a></div></div>
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div><div class="line">    <span class="stringliteral">&quot;secname&quot;</span>,  <a class="code" href="cabcode_8c.html#a83bab26c0e5b98a66cee1667ba6d4bfc">hoc_secname</a>,</div><div class="line">    <span class="stringliteral">&quot;units&quot;</span>, <a class="code" href="code2_8c.html#ae905bcb5937fea140a906b9fe919ed01">hoc_Symbol_units</a>,</div><div class="line">    <span class="stringliteral">&quot;neuronhome&quot;</span>, <a class="code" href="code2_8c.html#aa6f0b21cd26df51923a0c1e78e008cd5">hoc_neuronhome</a>,</div><div class="line">    <span class="stringliteral">&quot;getcwd&quot;</span>,   <a class="code" href="oc_2fileio_8c.html#a6eba21c852735a48f581dc38226af78c">hoc_getcwd</a>,</div><div class="line">    <span class="stringliteral">&quot;nrnversion&quot;</span>, <a class="code" href="oc_2hoc__init_8c.html#a9397a2dd1999856dcc17888509fbb239">hoc_nrnversion</a>,</div><div class="line">    0,  0</div><div class="line">}</div><div class="ttc" id="cabcode_8c_html_a83bab26c0e5b98a66cee1667ba6d4bfc"><div class="ttname"><a href="cabcode_8c.html#a83bab26c0e5b98a66cee1667ba6d4bfc">hoc_secname</a></div><div class="ttdeci">void hoc_secname(void)</div><div class="ttdef"><b>Definition:</b> <a href="cabcode_8c_source.html#l02280">cabcode.c:2280</a></div></div>
 <div class="ttc" id="code2_8c_html_aa6f0b21cd26df51923a0c1e78e008cd5"><div class="ttname"><a href="code2_8c.html#aa6f0b21cd26df51923a0c1e78e008cd5">hoc_neuronhome</a></div><div class="ttdeci">void hoc_neuronhome(void)</div><div class="ttdef"><b>Definition:</b> <a href="code2_8c_source.html#l00203">code2.c:203</a></div></div>
 <div class="ttc" id="code2_8c_html_ae905bcb5937fea140a906b9fe919ed01"><div class="ttname"><a href="code2_8c.html#ae905bcb5937fea140a906b9fe919ed01">hoc_Symbol_units</a></div><div class="ttdeci">void hoc_Symbol_units(void)</div><div class="ttdef"><b>Definition:</b> <a href="code2_8c_source.html#l00143">code2.c:143</a></div></div>
 <div class="ttc" id="oc_2fileio_8c_html_a6eba21c852735a48f581dc38226af78c"><div class="ttname"><a href="oc_2fileio_8c.html#a6eba21c852735a48f581dc38226af78c">hoc_getcwd</a></div><div class="ttdeci">void hoc_getcwd(void)</div><div class="ttdef"><b>Definition:</b> <a href="oc_2fileio_8c_source.html#l00818">fileio.c:818</a></div></div>
-<div class="ttc" id="oc_2hoc__init_8c_html_a9397a2dd1999856dcc17888509fbb239"><div class="ttname"><a href="oc_2hoc__init_8c.html#a9397a2dd1999856dcc17888509fbb239">hoc_nrnversion</a></div><div class="ttdeci">void hoc_nrnversion(void)</div><div class="ttdef"><b>Definition:</b> <a href="oc_2hoc__init_8c_source.html#l00369">hoc_init.c:369</a></div></div>
+<div class="ttc" id="oc_2hoc__init_8c_html_a9397a2dd1999856dcc17888509fbb239"><div class="ttname"><a href="oc_2hoc__init_8c.html#a9397a2dd1999856dcc17888509fbb239">hoc_nrnversion</a></div><div class="ttdeci">void hoc_nrnversion(void)</div><div class="ttdef"><b>Definition:</b> <a href="oc_2hoc__init_8c_source.html#l00396">hoc_init.c:396</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac2d6c2255f5932908bd05b9eec73d2dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2d6c2255f5932908bd05b9eec73d2dd">&#9670;&nbsp;</a></span>uconsts</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   uconsts[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div><div class="line">    <span class="stringliteral">&quot;FARADAY&quot;</span>, {<a class="code" href="nrnunits__modern_8h.html#a78b6bd20d580e554803663fe6369f17f">_faraday_codata2018</a>, 96485.309}, </div><div class="line">    <span class="stringliteral">&quot;R&quot;</span>, {<a class="code" href="nrnunits__modern_8h.html#a6cf9ec2db40e75e31cd28d6616554bf9">_gasconstant_codata2018</a>, 8.31441}, </div><div class="line">        <span class="stringliteral">&quot;Avogadro_constant&quot;</span>, {<a class="code" href="nrnunits__modern_8h.html#aa3967f896e5129d45da06bb77434f1a9">_avogadro_number_codata2018</a>, 6.02214129e23}, </div><div class="line">    0, {0., 0.}</div><div class="line">}</div><div class="ttc" id="nrnunits__modern_8h_html_a6cf9ec2db40e75e31cd28d6616554bf9"><div class="ttname"><a href="nrnunits__modern_8h.html#a6cf9ec2db40e75e31cd28d6616554bf9">_gasconstant_codata2018</a></div><div class="ttdeci">#define _gasconstant_codata2018</div><div class="ttdef"><b>Definition:</b> <a href="nrnunits__modern_8h_source.html#l00023">nrnunits_modern.h:23</a></div></div>
+<div class="ttc" id="nrnunits__modern_8h_html_a78b6bd20d580e554803663fe6369f17f"><div class="ttname"><a href="nrnunits__modern_8h.html#a78b6bd20d580e554803663fe6369f17f">_faraday_codata2018</a></div><div class="ttdeci">#define _faraday_codata2018</div><div class="ttdef"><b>Definition:</b> <a href="nrnunits__modern_8h_source.html#l00022">nrnunits_modern.h:22</a></div></div>
+<div class="ttc" id="nrnunits__modern_8h_html_aa3967f896e5129d45da06bb77434f1a9"><div class="ttname"><a href="nrnunits__modern_8h.html#aa3967f896e5129d45da06bb77434f1a9">_avogadro_number_codata2018</a></div><div class="ttdeci">#define _avogadro_number_codata2018</div><div class="ttdef"><b>Definition:</b> <a href="nrnunits__modern_8h_source.html#l00020">nrnunits_modern.h:20</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -656,7 +683,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00266">266</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00270">270</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>

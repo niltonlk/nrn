@@ -39,6 +39,7 @@ var nrnoc_2init_8c =
     [ "nrn_threads_create", "nrnoc_2init_8c.html#ac3869b49c0080ce4b450c3167486f1b5", null ],
     [ "nrn_version", "nrnoc_2init_8c.html#abb68ce8f52960dbdd92184c61092edfa", null ],
     [ "nrn_writes_conc", "nrnoc_2init_8c.html#a0ab74a081e89c7c3639ece157b464528", null ],
+    [ "nrnunit_use_legacy", "nrnoc_2init_8c.html#a1dd9ebb9907ad57c48ed8185394d176e", null ],
     [ "point_reg_helper", "nrnoc_2init_8c.html#a8ee21c91bbbea86c166b95db67dab97e", null ],
     [ "point_register_mech", "nrnoc_2init_8c.html#a99a546a9e3ad452a4b3fca14de4b4f1b", null ],
     [ "register_destructor", "nrnoc_2init_8c.html#acb0334aeee5a7512267bca430c77acf9", null ],

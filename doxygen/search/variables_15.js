@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['u',['u',['../union_private_r_n_g_single_type.html#a1f162f4bf8f99c10aed887636bad322d',1,'PrivateRNGSingleType::u()'],['../union_private_r_n_g_double_type.html#ad4cc5afca98c4c3128969d0f38a32980',1,'PrivateRNGDoubleType::u()'],['../struct_symbol.html#a159ed8766e7fd9d8a9bcace6be0d6db4',1,'Symbol::u()'],['../struct_symbol.html#a571860b634d1f9b9522ae18c11f0b21e',1,'Symbol::u()'],['../struct_py_hoc_object.html#ada9729b5e786ea34ff0841804329415b',1,'PyHocObject::u()'],['../struct_py_hoc_object.html#ab816260d74fcea41723ab59936920bce',1,'PyHocObject::u()'],['../struct_symbol.html#a371b7b7d63f56878b84488faf4f5360e',1,'Symbol::u()'],['../struct_object.html#ad714561872e55455259bbedfe99f610b',1,'Object::u()'],['../class_message_item.html#a3145da5baeac8c801ddf1cd0c638b2c1',1,'MessageItem::u()']]],
+  ['u',['u',['../union_private_r_n_g_single_type.html#a1f162f4bf8f99c10aed887636bad322d',1,'PrivateRNGSingleType::u()'],['../union_private_r_n_g_double_type.html#ad4cc5afca98c4c3128969d0f38a32980',1,'PrivateRNGDoubleType::u()'],['../struct_symbol.html#a159ed8766e7fd9d8a9bcace6be0d6db4',1,'Symbol::u()'],['../struct_symbol.html#a571860b634d1f9b9522ae18c11f0b21e',1,'Symbol::u()'],['../struct_py_hoc_object.html#ada9729b5e786ea34ff0841804329415b',1,'PyHocObject::u()'],['../struct_py_hoc_object.html#ab816260d74fcea41723ab59936920bce',1,'PyHocObject::u()'],['../struct_symbol.html#a818071d324f61a345b6c8eabe9dc4e8f',1,'Symbol::u()'],['../struct_object.html#a14751a599642e548a058a8c0c5a1d3b1',1,'Object::u()'],['../class_message_item.html#a1e4b6e1f10545b3803640cc86c348282',1,'MessageItem::u()']]],
   ['u_5fauto',['u_auto',['../struct_symbol.html#a2c43f3fede3e43b7ef20221a13a5e212',1,'Symbol']]],
   ['u_5fdiag',['u_diag',['../struct_i_c_s_adi_grid_data.html#aa6784f24ff94c0a90feb24fe20ef9c5d',1,'ICSAdiGridData']]],
   ['u_5fproc',['u_proc',['../struct_symbol.html#a02ec3ff839534f24331dc9533e9c77b0',1,'Symbol']]],
   ['ub',['ub',['../struct_b_a_n_d.html#a27c64c6997f2f981070f5b630b74f6aa',1,'BAND']]],
   ['ubound_5findex_5f',['ubound_index_',['../class_vec_play_continuous.html#a2cd6b93c31949d0116660b38ed97149e',1,'VecPlayContinuous::ubound_index_()'],['../class_vec_play_continuous_save.html#adc985ff81d76416441e4a9344d60d975',1,'VecPlayContinuousSave::ubound_index_()']]],
+  ['uconsts',['uconsts',['../oc_2hoc__init_8c.html#ac2d6c2255f5932908bd05b9eec73d2dd',1,'hoc_init.c']]],
   ['ucp',['ucp',['../modlunit_2units_8c.html#acb2cc9277fea50c9e7e7ad3c78c22066',1,'units.c']]],
   ['uip',['uip',['../nocpout_8c.html#a7942c8db6cd83eab5a8850f693394cce',1,'nocpout.c']]],
   ['unames',['unames',['../modlunit_2units_8c.html#a35978ac852a01c703e242c7bd4bf288f',1,'units.c']]],

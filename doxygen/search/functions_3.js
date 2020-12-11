@@ -1,7 +1,7 @@
 var searchData=
 [
   ['c',['c',['../class_k_s_chan_function.html#a4776945ca010c7d8f3ceb73995cea565',1,'KSChanFunction']]],
-  ['c_5fout',['c_out',['../cout_8c.html#a6b0230174877545c886b503d451e097d',1,'c_out():&#160;cout.c'],['../nmodlfunc_8h.html#a9fae508a2b90256d0d8af380ab2a5562',1,'c_out(const char *prefix):&#160;noccout.c'],['../nmodlfunc_8h.html#a6b0230174877545c886b503d451e097d',1,'c_out():&#160;cout.c'],['../noccout_8c.html#a9fae508a2b90256d0d8af380ab2a5562',1,'c_out(const char *prefix):&#160;noccout.c']]],
+  ['c_5fout',['c_out',['../cout_8c.html#a6b0230174877545c886b503d451e097d',1,'c_out():&#160;cout.c'],['../nmodlfunc_8h.html#a6b0230174877545c886b503d451e097d',1,'c_out():&#160;cout.c'],['../noccout_8c.html#a6b0230174877545c886b503d451e097d',1,'c_out():&#160;noccout.c']]],
   ['c_5fout_5fvectorize',['c_out_vectorize',['../nmodlfunc_8h.html#a2f38015b4a6ca29def2e02aea08e45a3',1,'nmodlfunc.h']]],
   ['c_5fstr',['c_str',['../class_py2_n_r_n_string.html#a92ce12d2c1d7e5fa267ac0d4d9225fff',1,'Py2NRNString']]],
   ['cab_5falloc',['cab_alloc',['../cabcode_8c.html#a1a198416fedf292389dd8b6e37f86f90',1,'cab_alloc(Prop *p):&#160;cabcode.c'],['../cabvars_8h.html#a027f93a9a63e50a993514d54c982833b',1,'cab_alloc(Prop *):&#160;cabcode.c']]],
@@ -278,5 +278,6 @@ var searchData=
   ['cvode_5frw_5fcur',['cvode_rw_cur',['../nmodlfunc_8h.html#ad9279d2a3e365d357fd3ae6a38cc276a',1,'nmodlfunc.h']]],
   ['cvode_5fvalid',['cvode_valid',['../nmodlfunc_8h.html#a49ef6f46cf3f54748bf00180432205d9',1,'nmodlfunc.h']]],
   ['cvodethreaddata',['CvodeThreadData',['../class_cvode_thread_data.html#a38f9aa5288eeb3bb1c42ee8c0b62087b',1,'CvodeThreadData']]],
-  ['cxx_5fchar_5falloc',['cxx_char_alloc',['../group__hoc__functions.html#gaa261e5527f7c800b24ea40b0f7828517',1,'cxx_char_alloc(size_t sz):&#160;ivoc.cpp'],['../group__hoc__functions.html#gaa261e5527f7c800b24ea40b0f7828517',1,'cxx_char_alloc(size_t size):&#160;ivoc.cpp'],['../group__hoc__functions.html#gaa261e5527f7c800b24ea40b0f7828517',1,'cxx_char_alloc(size_t len):&#160;ocnoiv.c']]]
+  ['cxx_5fchar_5falloc',['cxx_char_alloc',['../group__hoc__functions.html#gaa261e5527f7c800b24ea40b0f7828517',1,'cxx_char_alloc(size_t sz):&#160;ivoc.cpp'],['../group__hoc__functions.html#gaa261e5527f7c800b24ea40b0f7828517',1,'cxx_char_alloc(size_t size):&#160;ivoc.cpp'],['../group__hoc__functions.html#gaa261e5527f7c800b24ea40b0f7828517',1,'cxx_char_alloc(size_t len):&#160;ocnoiv.c']]],
+  ['cxx_5fdemangle',['cxx_demangle',['../backtrace__utils_8cpp.html#ad1d370a08874f13264b83d308fa4d265',1,'cxx_demangle(char *symbol, char **funcname, size_t *funcname_sz):&#160;backtrace_utils.cpp'],['../backtrace__utils_8h.html#ad1d370a08874f13264b83d308fa4d265',1,'cxx_demangle(char *symbol, char **funcname, size_t *funcname_sz):&#160;backtrace_utils.cpp']]]
 ];

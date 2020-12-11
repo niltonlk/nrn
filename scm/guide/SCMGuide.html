@@ -362,13 +362,17 @@ In turn, small changes should be squashed for a clean and linear history.</li>
 <ol class="simple">
 <li>The branch is public: <strong>Merge</strong>!
 Especially critical with long-running, public branches must not have their histories rewritten. Really want a rebase? Then use a new branch for that: checkout the target branch with a new name and merge the source branch.</li>
-<li>Feature branch to be “<em>merge squashed</em>”. Without conflicts consider <strong>merging</strong>. Decisive factors could be keeping reviews valid, or easier conflict resolution:</li>
+<li>Feature branch to be “<em>merge squashed</em>”. Without conflicts consider <strong>merging</strong>. Decisive factors could be keeping reviews valid, or easier conflict resolution:<ol>
 <li><strong>Merge</strong> (GitHub model): With original commits we ensure no behavior changes and GitHub Reviews are kept valid. Extra merge commits squashed anyway at the end.</li>
 <li><strong>Rebase</strong> (Gerrit model). Simplifies the branch. Re-testing the last commit is required.</li>
-<li>Feature branch to be “<em>traditionally merged</em>”: <strong>depends</strong> :</li>
+</ol>
+</li>
+<li>Feature branch to be “<em>traditionally merged</em>”: <strong>depends</strong> :<ol>
 <li>Consider <strong>merging,</strong> mainly if everything is tidy. It’s no-op, keeps reviews valid, etc.
 If you need cleanup/prefer rebase <strong>→</strong>  <strong>do rebase</strong> and <strong>retest all commits</strong></li>
 <li>If fast-forwarded is required, you must <strong>rebase</strong> (and <strong>retest all commits</strong> )</li>
+</ol>
+</li>
 </ol>
 </div>
 <div class="section" id="reviewing">
@@ -377,13 +381,17 @@ If you need cleanup/prefer rebase <strong>→</strong>  <strong>do rebase</stron
 <ol class="simple">
 <li><strong>Make sure the requirements are fulfilled</strong>.
 Patches should do what they advertise. They don’t need to solve a full issue - contributions are even encouraged to be split in several independent patches. However there should be a clear description matching the implementation.</li>
-<li><strong>Ensure the patch works as expected</strong></li>
+<li><strong>Ensure the patch works as expected</strong><ol>
 <li>Quick review on Web UI may be sufficient if the patch is simple (e.g. single line or documentation) and risk of breaking things is reduced</li>
 <li>Otherwise checkout locally the code to have the full picture.</li>
-<li><strong>Ensure high code quality standards</strong></li>
+</ol>
+</li>
+<li><strong>Ensure high code quality standards</strong><ol>
 <li>Minimalistic, self-contained changes</li>
 <li>Simple implementations, avoiding globals, long functions, side-effects</li>
 <li>Compliance with code style conventions, self-explanatory code/comments</li>
+</ol>
+</li>
 <li><strong>Use comments and suggestions.</strong> Give the author the possibility of argumenting for/against a request. In case you, as a reviewer, want to suggest a specific and significant change you may open a sub-Pull-Request.</li>
 <li><strong>Quick changes &amp; fixes</strong>. Such non-functional modifications (e.g. typos, code style, …) may be pushed directly to save review cycles and thus time.</li>
 </ol>

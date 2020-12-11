@@ -154,6 +154,7 @@ var oc_2code_8c =
     [ "tstkchk_actual", "oc_2code_8c.html#a6411d0ffc1399c6ab78252cbc86277a0", null ],
     [ "varpush", "oc_2code_8c.html#a0abd11f58219617c6b496da678f5b8d5", null ],
     [ "varread", "oc_2code_8c.html#ae33c9af9959279c45bcf03b11c0a7154", null ],
+    [ "warn_assign_dynam_unit", "oc_2code_8c.html#a06aef6b1ef21a590827522d8d7a385fe", null ],
     [ "xpop", "oc_2code_8c.html#a3ba001e1bce578899c1956ac17c73f9b", null ],
     [ "fp", "oc_2code_8c.html#a546bb42b7a8e3f5f87bc3edd43969cd6", null ],
     [ "frame", "oc_2code_8c.html#a0510470d6ee5861a1d581f50c16a4ac9", null ],

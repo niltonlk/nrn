@@ -10,6 +10,6 @@ var struct_object =
     [ "secelm_", "struct_object.html#a2def2d856bb89187e86a9294bab0f36b", null ],
     [ "template", "struct_object.html#a83a6c4e193fc676300b06f8ebc670c58", null ],
     [ "this_pointer", "struct_object.html#a1e6a31003c0d2856dec46e1a8f3d400c", null ],
-    [ "u", "struct_object.html#ad714561872e55455259bbedfe99f610b", null ],
+    [ "u", "struct_object.html#a14751a599642e548a058a8c0c5a1d3b1", null ],
     [ "unref_recurse_cnt", "struct_object.html#a3b5a52f1e5e6f097afa6ad1cb6dc60e2", null ]
 ];

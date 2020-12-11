@@ -318,6 +318,7 @@ var hierarchy =
     [ "SaveState::NetConState", "struct_save_state_1_1_net_con_state.html", null ],
     [ "NetCvode", "class_net_cvode.html", null ],
     [ "NetCvodeThreadData", "class_net_cvode_thread_data.html", null ],
+    [ "newobj1_err_t", "structnewobj1__err__t.html", null ],
     [ "Node", "struct_node.html", null ],
     [ "SaveState::NodeState", "struct_save_state_1_1_node_state.html", null ],
     [ "NoIVGraphVector", "class_no_i_v_graph_vector.html", [
@@ -461,8 +462,8 @@ var hierarchy =
     [ "ReactSet", "struct_react_set.html", null ],
     [ "ReadyList", "class_ready_list.html", null ],
     [ "ReducedTree", "class_reduced_tree.html", null ],
-    [ "Regexp", "class_regexp.html", null ],
     [ "regexp", "structregexp.html", null ],
+    [ "Regexp", "class_regexp.html", null ],
     [ "REGION", "struct_r_e_g_i_o_n.html", null ],
     [ "Requirement", "class_requirement.html", null ],
     [ "Requisition", "class_requisition.html", null ],

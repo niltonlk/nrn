@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NEURON: /home/travis/build/neuronsimulator/nrn/src/oc/hoc.c File Reference</title>
+<title>NEURON: /home/runner/work/nrn/nrn/src/oc/hoc.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -112,6 +112,7 @@ $(document).ready(function(){initNavTree('hoc_8c.html','');});
 <code>#include &quot;<a class="el" href="nrnmpi_8h_source.html">nrnmpi.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nrnrt_8h_source.html">nrnrt.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nrnfilewrap_8h_source.html">nrnfilewrap.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="backtrace__utils_8h_source.html">../nrniv/backtrace_utils.h</a>&quot;</code><br />
 <code>#include &lt;ctype.h&gt;</code><br />
 <code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;setjmp.h&gt;</code><br />
@@ -186,6 +187,12 @@ Functions</h2></td></tr>
 <tr class="separator:ae6b4c48cc14bb4a00ac8c473c09b0924"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed91a90dd9238036064d0a6876e3e145"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hoc_8c.html#aed91a90dd9238036064d0a6876e3e145">hoc_show_errmess_always</a> (<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
 <tr class="separator:aed91a90dd9238036064d0a6876e3e145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c515f65deab5f48a2a14c9bef9b395"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hoc_8c.html#a25c515f65deab5f48a2a14c9bef9b395">hoc_newobj1_err</a> ()</td></tr>
+<tr class="memdesc:a25c515f65deab5f48a2a14c9bef9b395"><td class="mdescLeft">&#160;</td><td class="mdescRight">unref partially constructed objects controlled by current longjump handle  <a href="#a25c515f65deab5f48a2a14c9bef9b395">More...</a><br /></td></tr>
+<tr class="separator:a25c515f65deab5f48a2a14c9bef9b395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712276a0abd46a7e3bd70c1907f43d15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hoc_8c.html#a712276a0abd46a7e3bd70c1907f43d15">nrn_get_hoc_jmp</a> ()</td></tr>
+<tr class="memdesc:a712276a0abd46a7e3bd70c1907f43d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">If one of the two jmp_buf is controlling the longjmp hoc_newobj1_err needs handle to know how much to unwrap the newobj1 stack.  <a href="#a712276a0abd46a7e3bd70c1907f43d15">More...</a><br /></td></tr>
+<tr class="separator:a712276a0abd46a7e3bd70c1907f43d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacf5a183dfc9c199d2ebfecbbaafaaf81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hoc__functions.html#gacf5a183dfc9c199d2ebfecbbaafaaf81">hoc_execerror_mes</a> (const char *<a class="el" href="bgpdmasetup_8cpp.html#a3691308f2a4c2f6983f2880d32e29c84">s</a>, const char *<a class="el" href="parallel_2ocbbs_8cpp.html#a87accd1af8e0aff4b818d891374f7cec">t</a>, <a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a> <a class="el" href="sptqueue_8cpp.html#a59506dc25cf97e016d9a623224e2bc27">prnt</a>)</td></tr>
 <tr class="separator:gacf5a183dfc9c199d2ebfecbbaafaaf81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1f1290c5c93eb6c5c39f4352be583cfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hoc__functions.html#ga1f1290c5c93eb6c5c39f4352be583cfa">hoc_execerror</a> (const char *<a class="el" href="bgpdmasetup_8cpp.html#a3691308f2a4c2f6983f2880d32e29c84">s</a>, const char *<a class="el" href="parallel_2ocbbs_8cpp.html#a87accd1af8e0aff4b818d891374f7cec">t</a>)</td></tr>
@@ -194,6 +201,8 @@ Functions</h2></td></tr>
 <tr class="separator:a69eadbebb14fb99bd9f2fb157dfd7631"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8d6375cddd7ca194b0aa81144657ce3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hoc_8c.html#ac8d6375cddd7ca194b0aa81144657ce3">hoc_coredump_on_error</a> (<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
 <tr class="separator:ac8d6375cddd7ca194b0aa81144657ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f872ce28662377d5b0a6c280b6e1fcd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hoc_8c.html#a6f872ce28662377d5b0a6c280b6e1fcd">print_bt</a> ()</td></tr>
+<tr class="separator:a6f872ce28662377d5b0a6c280b6e1fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d06291e22570cae7df387f52bda06da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="nrnconf_8h.html#adbe5dcee9c146b338794974137c55e70">RETSIGTYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hoc_8c.html#a2d06291e22570cae7df387f52bda06da">fpecatch</a> (<a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a> sig)</td></tr>
 <tr class="separator:a2d06291e22570cae7df387f52bda06da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf22279e46b25138a97ae1bda3551d2ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hoc__functions.html#gaf22279e46b25138a97ae1bda3551d2ce">hoc_pid</a> (<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
@@ -353,7 +362,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00161">161</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00162">162</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -369,7 +378,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00151">151</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00152">152</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -385,7 +394,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00174">174</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00175">175</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -401,7 +410,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00253">253</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00257">257</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -417,7 +426,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00135">135</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00136">136</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -433,7 +442,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00160">160</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00161">161</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -449,7 +458,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00278">278</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00282">282</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -466,7 +475,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01285">1285</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01365">1365</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -505,7 +514,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00117">117</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00118">118</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -525,7 +534,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00548">548</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00552">552</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -553,7 +562,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00528">528</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00532">532</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -573,7 +582,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00644">644</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00648">648</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -603,7 +612,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00863">863</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00943">943</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -647,7 +656,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01715">1715</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01795">1795</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -691,7 +700,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00538">538</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00542">542</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -711,7 +720,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00748">748</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00822">822</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -731,7 +740,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00632">632</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00636">636</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -759,7 +768,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01503">1503</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01583">1583</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -779,7 +788,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00263">263</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00267">267</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -799,7 +808,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00742">742</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00760">760</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -829,7 +838,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01711">1711</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01791">1791</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -849,7 +858,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01905">1905</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01985">1985</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -879,7 +888,28 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00794">794</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00874">874</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+
+</div>
+</div>
+<a id="a25c515f65deab5f48a2a14c9bef9b395"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c515f65deab5f48a2a14c9bef9b395">&#9670;&nbsp;</a></span>hoc_newobj1_err()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a> hoc_newobj1_err </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>unref partially constructed objects controlled by current longjump handle </p>
+
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00553">553</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -899,7 +929,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01088">1088</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01168">1168</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -919,7 +949,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01276">1276</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01356">1356</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -947,7 +977,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01311">1311</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01391">1391</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -967,7 +997,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00653">653</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00657">657</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -987,7 +1017,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01534">1534</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01614">1614</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1047,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00880">880</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00960">960</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1037,7 +1067,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00853">853</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00933">933</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1057,7 +1087,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00867">867</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00947">947</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1087,7 +1117,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00872">872</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00952">952</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1107,7 +1137,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01134">1134</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01214">1214</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1127,7 +1157,28 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00078">78</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00079">79</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+
+</div>
+</div>
+<a id="a712276a0abd46a7e3bd70c1907f43d15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a712276a0abd46a7e3bd70c1907f43d15">&#9670;&nbsp;</a></span>nrn_get_hoc_jmp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>* nrn_get_hoc_jmp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If one of the two jmp_buf is controlling the longjmp hoc_newobj1_err needs handle to know how much to unwrap the newobj1 stack. </p>
+
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00682">682</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1155,7 +1206,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01382">1382</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01462">1462</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1197,7 +1248,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01406">1406</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01486">1486</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1239,7 +1290,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01400">1400</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01480">1480</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1259,7 +1310,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00727">727</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00745">745</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1287,7 +1338,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00289">289</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00293">293</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1307,7 +1358,26 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00118">118</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00119">119</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+
+</div>
+</div>
+<a id="a6f872ce28662377d5b0a6c280b6e1fcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f872ce28662377d5b0a6c280b6e1fcd">&#9670;&nbsp;</a></span>print_bt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a> print_bt </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00766">766</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1353,7 +1423,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01300">1300</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01380">1380</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1401,7 +1471,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01289">1289</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01369">1369</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1429,7 +1499,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00257">257</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00261">261</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1449,7 +1519,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00116">116</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00117">117</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1487,7 +1557,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01525">1525</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01605">1605</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1517,7 +1587,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01464">1464</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01544">1544</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1537,7 +1607,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00310">310</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00314">314</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1554,7 +1624,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00188">188</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00192">192</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1578,7 +1648,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00198">198</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00202">202</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1602,7 +1672,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00165">165</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00166">166</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1626,7 +1696,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00187">187</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00191">191</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1650,7 +1720,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00740">740</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00758">758</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1666,7 +1736,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00166">166</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00167">167</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1690,7 +1760,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00652">652</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00656">656</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1714,7 +1784,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00287">287</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00291">291</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1730,7 +1800,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00197">197</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00201">201</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1746,7 +1816,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00196">196</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00200">200</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1762,7 +1832,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00163">163</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00164">164</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1778,7 +1848,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00661">661</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00665">665</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1794,7 +1864,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00167">167</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00168">168</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1810,7 +1880,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01532">1532</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01612">1612</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1826,7 +1896,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01599">1599</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01679">1679</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1842,7 +1912,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00791">791</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00871">871</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1866,7 +1936,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00190">190</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00194">194</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1890,7 +1960,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00189">189</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00193">193</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1922,7 +1992,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00164">164</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00165">165</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1938,7 +2008,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00162">162</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00163">163</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -1954,7 +2024,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00146">146</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00147">147</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2002,7 +2072,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00192">192</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00196">196</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2018,7 +2088,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00193">193</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00197">197</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2034,7 +2104,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00191">191</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00195">195</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2050,7 +2120,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00183">183</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00184">184</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2066,7 +2136,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00263">263</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__init_8c_source.html#l00267">267</a> of file <a class="el" href="oc_2hoc__init_8c_source.html">hoc_init.c</a>.</p>
 
 </div>
 </div>
@@ -2082,7 +2152,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00028">28</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00029">29</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2098,7 +2168,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00029">29</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00030">30</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2122,7 +2192,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01381">1381</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01461">1461</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2138,7 +2208,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00789">789</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00869">869</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2154,7 +2224,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00144">144</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00145">145</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2170,7 +2240,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00667">667</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00671">671</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2186,7 +2256,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00037">37</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00038">38</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2202,7 +2272,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00145">145</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00146">146</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2218,7 +2288,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00182">182</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00183">183</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2274,7 +2344,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01287">1287</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l01367">1367</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2290,7 +2360,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00670">670</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00674">674</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>

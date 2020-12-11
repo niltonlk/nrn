@@ -106,6 +106,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="stdrun.html">Standard Run Tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../compilationoptions.html">Rarely Used Compilation Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../envvariables.html">Environment Variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="interpretermanagement.html">Interpreter Management</a></li>
 </ul>
 </li>
@@ -196,7 +197,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p><a href="#celsius" title="Link to this definition">celsius</a> &middot; <a href="#checkpoint" title="Link to this definition">checkpoint</a> &middot; <a href="#clamp_resist" title="Link to this definition">clamp_resist</a> &middot; <a href="#dt" title="Link to this definition">dt</a> &middot; <a href="#fadvance" title="Link to this definition">fadvance</a> &middot; <a href="#fcurrent" title="Link to this definition">fcurrent</a> &middot; <a href="#finitialize" title="Link to this definition">finitialize</a> &middot; <a href="#fmatrix" title="Link to this definition">fmatrix</a> &middot; <a href="#frecord_init" title="Link to this definition">frecord_init</a> &middot; <a href="#initnrn" title="Link to this definition">initnrn</a> &middot; <a href="#secondorder" title="Link to this definition">secondorder</a> &middot; <a href="#stoprun" title="Link to this definition">stoprun</a> &middot; <a href="#t" title="Link to this definition">t</a></p><p><dl class="docutils"><dt><a href="#FInitializeHandler" title="Link to this definition">FInitializeHandler</a></dt><dd><a href="#FInitializeHandler.allprint" title="Link to this definition">allprint</a></dd></dl></p><div class="section" id="programmatic-simulation-control">
+  <p><a href="#celsius" title="Link to this definition">celsius</a> &middot; <a href="#checkpoint" title="Link to this definition">checkpoint</a> &middot; <a href="#clamp_resist" title="Link to this definition">clamp_resist</a> &middot; <a href="#dt" title="Link to this definition">dt</a> &middot; <a href="#fadvance" title="Link to this definition">fadvance</a> &middot; <a href="#fcurrent" title="Link to this definition">fcurrent</a> &middot; <a href="#finitialize" title="Link to this definition">finitialize</a> &middot; <a href="#fmatrix" title="Link to this definition">fmatrix</a> &middot; <a href="#frecord_init" title="Link to this definition">frecord_init</a> &middot; <a href="#initnrn" title="Link to this definition">initnrn</a> &middot; <a href="#nrnunit_use_legacy" title="Link to this definition">nrnunit_use_legacy</a> &middot; <a href="#secondorder" title="Link to this definition">secondorder</a> &middot; <a href="#stoprun" title="Link to this definition">stoprun</a> &middot; <a href="#t" title="Link to this definition">t</a></p><p><dl class="docutils"><dt><a href="#FInitializeHandler" title="Link to this definition">FInitializeHandler</a></dt><dd><a href="#FInitializeHandler.allprint" title="Link to this definition">allprint</a></dd></dl></p><div class="section" id="programmatic-simulation-control">
 <h1>Programmatic Simulation Control<a class="headerlink" href="#programmatic-simulation-control" title="Permalink to this headline">¶</a></h1>
 <p>See also:</p>
 <div class="toctree-wrapper compound">
@@ -378,6 +379,26 @@ from a call to the <a class="reference internal" href="#fcurrent" title="fcurren
 but leaves NODEA and NODEB unchanged.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py function">
+<dt id="nrnunit_use_legacy">
+<code class="descname">nrnunit_use_legacy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nrnunit_use_legacy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Syntax:</dt><dd><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">=</span> <span class="pre">h.nrnunit_use_legacy(bool)</span></code></dd>
+<dt>Description:</dt><dd><div class="line-block">
+<div class="line">Return current units usage as 0 or 1.</div>
+<div class="line">An argument is not required.</div>
+<div class="line">Arg, False uses modern codata2018 units for FARADAY, R, etc. (default as of version 8.0)</div>
+<div class="line">Arg, True uses legacy units (default prior to October, 2020)</div>
+</div>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../envvariables.html#nrnunit-use-legacy"><span class="std std-ref">NRNUNIT_USE_LEGACY</span></a> <a class="reference internal" href="../programming/math/constants.html#constants"><span class="std std-ref">Constants</span></a></p>
+</div>
 </dd></dl>
 
 <hr class="docutils" />

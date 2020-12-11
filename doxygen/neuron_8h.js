@@ -46,6 +46,7 @@ var neuron_8h =
     [ "nrnpointmenu", "neuron_8h.html#abb0dc6db0554fe9fa88ce3af5fee4ca2", null ],
     [ "nrnpython", "neuron_8h.html#aebddf5f83676792f282eda2b7f23ff42", null ],
     [ "nrnsecmenu", "neuron_8h.html#acbb2d863441fd92168d998d6593d0216", null ],
+    [ "nrnunit_use_legacy", "neuron_8h.html#a1dd9ebb9907ad57c48ed8185394d176e", null ],
     [ "parent_connection", "neuron_8h.html#aeb271de4356ed3010b169d364ed7ab01", null ],
     [ "parent_node", "neuron_8h.html#a25c8fc86c4d349ce26f3b50bc8c77fdd", null ],
     [ "parent_section", "neuron_8h.html#a916028307ca6518c16bcc0962d0331ae", null ],

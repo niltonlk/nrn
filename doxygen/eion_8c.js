@@ -43,6 +43,8 @@ var eion_8c =
     [ "nrn_verify_ion_charge_defined", "eion_8c.html#a2acec9bda28ada89ecaa17b20243a92e", null ],
     [ "nrn_wrote_conc", "eion_8c.html#a7b56a18f5c88a82c897b68dea3f48686", null ],
     [ "second_order_cur", "eion_8c.html#a3613ede55aed848a83fa634cc6dc3857", null ],
+    [ "_faraday_", "eion_8c.html#ad50eb843abcaf77826d7e2fe4bfe0264", null ],
+    [ "_gasconstant_", "eion_8c.html#aa06dd38f085a23c3b38eb51df2fdc306", null ],
     [ "ca_ion", "eion_8c.html#aae0b31dc18496538cc567bed2886bbe8", null ],
     [ "ion_global_map", "eion_8c.html#a0576fa826256c8b1f945c354b9c71f6b", null ],
     [ "ion_global_map_size", "eion_8c.html#a6effb3e773c57422ff0c3af4e3ff31a0", null ],

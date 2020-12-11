@@ -232,5 +232,6 @@ var searchData=
   ['dsolve',['Dsolve',['../matrix2_8h.html#afd1b43611261bf146f93388f039151ff',1,'Dsolve(MAT *A, VEC *b, VEC *x):&#160;matrix2.h'],['../mesch_2solve_8c.html#a33f5ebe63a9b9540c8902a41ed4cbba3',1,'Dsolve(MAT *A, VEC *b, VEC *x):&#160;solve.c']]],
   ['dstates',['dstates',['../class_cvode.html#a449babc26a445ab9c51d26e2e5391f30',1,'Cvode::dstates()'],['../class_net_cvode.html#a09c53b4380203ac1530dd65c95f2be4f',1,'NetCvode::dstates()'],['../nrncvode_2cvodeobj_8cpp.html#aa5e4e108f273d545c20471710234c805',1,'dstates():&#160;cvodeobj.cpp']]],
   ['dt2thread',['dt2thread',['../fadvance_8c.html#ac7662db320c21bf4c6416250598113de',1,'fadvance.c']]],
-  ['dtoa',['dtoa',['../neuron__gnu__builtin_8h.html#a11c8fba76f1e75eafa19d625a8d28664',1,'neuron_gnu_builtin.h']]]
+  ['dtoa',['dtoa',['../neuron__gnu__builtin_8h.html#a11c8fba76f1e75eafa19d625a8d28664',1,'neuron_gnu_builtin.h']]],
+  ['dynam_5funit_5fmag',['dynam_unit_mag',['../modlunit_2units_8c.html#a039000ea8ae08184bc1d53b809014e06',1,'units.c']]]
 ];

@@ -43,6 +43,7 @@ var oc_2ocnoiv_8c =
     [ "notify_freed_val_array", "group__hoc__functions.html#ga621aeacde9bf7f00bfc4ca463e8e96af", null ],
     [ "notify_pointer_freed", "group__hoc__functions.html#ga6fc17763dc6b4b1df4d0c635cb3f9fd3", null ],
     [ "nrn_err_dialog", "oc_2ocnoiv_8c.html#a20945e840b2b1ed5c49d89479664f1cc", null ],
+    [ "nrn_get_oji", "oc_2ocnoiv_8c.html#ad079de1b912a6fe86386889dd1a31fb7", null ],
     [ "nrnbbs_context_wait", "oc_2ocnoiv_8c.html#a12349e69116afc44993f8b7cd9bbeafc", null ],
     [ "nrniv_bind_thread", "oc_2ocnoiv_8c.html#aa51143534b7fa4246b11e6e1521bf92c", null ],
     [ "vector_append", "oc_2ocnoiv_8c.html#a04d66ddbdd0aa50da01327a7d907e7d2", null ],

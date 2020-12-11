@@ -32,7 +32,7 @@ var searchData=
   ['onintr',['onintr',['../oc_2redef_8h.html#a28f6c5031240767800b9eb01153dacd7',1,'redef.h']]],
   ['onlywind',['onlywind',['../memacs_2redef_8h.html#aeacae718b2db323950e0b6a05c73a74e',1,'redef.h']]],
   ['onset',['onset',['../syn_8c.html#a7dd321b7b8092ef30a8c7ac8e62286b8',1,'syn.c']]],
-  ['ontology',['ontology',['../nmodl_2lex_8c.html#a7e8ad8b6ef9edc51542de6905085fe4e',1,'lex.c']]],
+  ['ontology',['ontology',['../modlunit_2lex_8c.html#a7e8ad8b6ef9edc51542de6905085fe4e',1,'ontology():&#160;lex.c'],['../nmodl_2lex_8c.html#a7e8ad8b6ef9edc51542de6905085fe4e',1,'ontology():&#160;lex.c']]],
   ['oop',['OOP',['../mwprefix_8h.html#aeff5f69db8d3a10dee6f43dd3eb26817',1,'OOP():&#160;mwprefix.h'],['../hocdec_8h.html#aeff5f69db8d3a10dee6f43dd3eb26817',1,'OOP():&#160;hocdec.h']]],
   ['op',['OP',['../regexp_8cpp.html#a140367a510ad117b6e871c9042df9350',1,'regexp.cpp']]],
   ['oparinfo',['OPARINFO',['../hocdec_8h.html#a7e337b1ab4c1e7a43aef3cc844712ad2',1,'hocdec.h']]],

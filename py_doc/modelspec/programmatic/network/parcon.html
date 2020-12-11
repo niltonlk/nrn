@@ -497,9 +497,9 @@ Unpacking args must be done in the same order and have the same
 type as the args of the “function_name”. They do not have to be unpacked.
 Saving args is time efficient since it does not imply extra communication
 with the server.</p>
-<p>Arguments may be any pickleable objects (NEURON objects like <a class="reference internal" href="../../../programming/math/vector.html#Vector" title="Vector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code></a> are
-not currently pickleable, but most built-in Python objects and user-defined
-classes are pickleable). The callable is executed on some indeterminate MPI/PVM
+<p>Arguments may be any pickleable objects (The NEURON <a class="reference internal" href="../../../programming/math/vector.html#Vector" title="Vector"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vector</span></code></a> is
+pickleable, and  most built-in Python objects and user-defined
+classes are pickleable). The callable is executed on some indeterminate MPI
 host. The return value is a Python object and may be retrieved with
 <a class="reference internal" href="#ParallelContext.pyret" title="ParallelContext.pyret"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pyret()</span></code></a>.  Python object arguments
 may be retrieved with <a class="reference internal" href="#ParallelContext.upkpyobj" title="ParallelContext.upkpyobj"><code class="xref py py-func docutils literal notranslate"><span class="pre">upkpyobj()</span></code></a>.</p>
@@ -1794,9 +1794,11 @@ network after executing <a class="reference internal" href="#ParallelContext.run
 the <a class="reference internal" href="#ParallelContext.context" title="ParallelContext.context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.context()</span></code></a> method. In particular, without subworlds,
 it is impossible to correctly submit bulletin board tasks, each of which
 simulates a network specfied with the <a class="reference internal" href="#parallelnetwork"><span class="std std-ref">Parallel Network</span></a>
-methods — even if the network is complete on a single process.</p>
+methods — even if the network is complete on a single process. This is
+because network simulations internally call MPI collectives which would
+deadlock due to not every worker participating in the collective.</p>
 <p>The <a class="reference internal" href="#ParallelContext.subworlds" title="ParallelContext.subworlds"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.subworlds()</span></code></a> method divides the world of processors into subworlds,
-each of which can execute a task that independently and assynchronously
+each of which can execute a task (in parallel within the subworld) that independently and assynchronously
 creates and simulates (and destroys if the task networks are different)
 a separate
 network described using the <a class="reference internal" href="#parallelnetwork"><span class="std std-ref">Parallel Network</span></a> and
@@ -1810,14 +1812,18 @@ each subworld utilizes a distinct MPI communicator. In a subworld, the
 number of processors in the subworld. (Note that every subworld has
 a <a class="reference internal" href="#ParallelContext.id" title="ParallelContext.id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.id()</span></code></a> == 0 rank processor.)</p>
 <p>Only the rank <a class="reference internal" href="#ParallelContext.id" title="ParallelContext.id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.id()</span></code></a> == 0 subworld processors communicate
-with the bulletin board. Of these processors, one (<a class="reference internal" href="#ParallelContext.id_world" title="ParallelContext.id_world"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_world()</span></code></a> == 0) is
-the master processor and the others are the workers. The master
-submits tasks to the bulletin board (and executes a task if no results
-are available) and the workers execute tasks and post the results
+with the bulletin board. Of these processors, one
+(<a class="reference internal" href="#ParallelContext.id_world" title="ParallelContext.id_world"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_world()</span></code></a> == 0, i.e. <a class="reference internal" href="#ParallelContext.id_bbs" title="ParallelContext.id_bbs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_bbs()</span></code></a> == 0 and <a class="reference internal" href="#ParallelContext.id" title="ParallelContext.id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id()</span></code></a> == 0)
+is the master processor and the others
+(<a class="reference internal" href="#ParallelContext.id_bbs" title="ParallelContext.id_bbs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_bbs()</span></code></a> &gt; 0 and <a class="reference internal" href="#ParallelContext.id" title="ParallelContext.id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id()</span></code></a> == 0)
+are the workers. The master
+submits tasks to the bulletin board (and executes the task in parallel as a subworld with its total nhost ranks if no results
+are available) and the workers execute tasks and id == 0 processes post the results
 to the bulletin board. Remember, all the workers also have <a class="reference internal" href="#ParallelContext.id" title="ParallelContext.id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.id()</span></code></a>
 == 0 but different <a class="reference internal" href="#ParallelContext.id_world" title="ParallelContext.id_world"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_world()</span></code></a> and <a class="reference internal" href="#ParallelContext.id_bbs" title="ParallelContext.id_bbs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_bbs()</span></code></a> ranks. The subworld
-<a class="reference internal" href="#ParallelContext.id" title="ParallelContext.id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.id()</span></code></a> ranks greater than 0 are not called workers — their
-global rank is <a class="reference internal" href="#ParallelContext.id_world" title="ParallelContext.id_world"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_world()</span></code></a> but their bulletin board rank, <a class="reference internal" href="#ParallelContext.id_bbs" title="ParallelContext.id_bbs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_bbs()</span></code></a> is -1.
+<a class="reference internal" href="#ParallelContext.id" title="ParallelContext.id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.id()</span></code></a> ranks greater than 0 are not workers in the sense of directly interacting with the bulletin board by posting and taking messages — their
+global rank is <a class="reference internal" href="#ParallelContext.id_world" title="ParallelContext.id_world"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_world()</span></code></a> but their bulletin board rank, <a class="reference internal" href="#ParallelContext.id_bbs" title="ParallelContext.id_bbs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_bbs()</span></code></a> is -1. To reduce confusion, it would be nice if the id_bbs value was the same as that of rank 0 of the subworld. But see the following paragraph for why the -1 value has the edge in usefulness. Fortunately the subworld (id_bbs) identifier is for these id()&gt;0 ranks is easy to calculate as <code class="docutils literal notranslate"><span class="pre">pc.id_world()//requested_subworld_size</span></code> where the denominator is the argument used in <a class="reference internal" href="#ParallelContext.subworlds" title="ParallelContext.subworlds"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.subworlds()</span></code></a>.
+(One cannot use <code class="docutils literal notranslate"><span class="pre">pc.nhost()</span></code> in place of the <code class="docutils literal notranslate"><span class="pre">requested_subworld_size</span></code> arg if <code class="docutils literal notranslate"><span class="pre">pc.nhost_world()</span></code> is not an integer multiple of <code class="docutils literal notranslate"><span class="pre">`requested_subworld_size</span></code> since the last subworld will have <code class="docutils literal notranslate"><span class="pre">pc.nhost()</span> <span class="pre">&lt;</span> <span class="pre">requested_subworld_size</span></code>.)
 When a worker (or the master) receives a task to execute, the exact same
 function with arguments that define the task will be executed on all the
 processes of the subworld. A subworld is exactly analogous to the old
@@ -1826,8 +1832,8 @@ by means of <a class="reference internal" href="#ParallelContext.id" title="Para
 the <a class="reference internal" href="#ParallelContext.nhost" title="ParallelContext.nhost"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.nhost()</span></code></a> processes in the subworld.</p>
 <p>A runtime error will result if an <a class="reference internal" href="#ParallelContext.id_bbs" title="ParallelContext.id_bbs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_bbs()</span></code></a> == -1 rank processor tries
 to communicate with the bulletin board, thus the general idiom for
-a task posting or taking information from the bulletin board should be either
-<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(pc.id</span> <span class="pre">==</span> <span class="pre">0)</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code> or <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(pc.id_bbs</span> <span class="pre">!=</span> <span class="pre">-1)</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code>.
+a task posting or taking information from the bulletin board should be
+<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(pc.id</span> <span class="pre">==</span> <span class="pre">0)</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code> or if (pc.id_bbs != -1) { … }.
 The latter is more general since the former would not be correct if
 <a class="reference internal" href="#ParallelContext.subworlds" title="ParallelContext.subworlds"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subworlds()</span></code></a> has NOT been called since in that case
 <code class="docutils literal notranslate"><span class="pre">pc.id</span> <span class="pre">==</span> <span class="pre">pc.id_world</span> <span class="pre">==</span> <span class="pre">pc.id_bbs</span></code> and
@@ -1843,10 +1849,11 @@ The latter is more general since the former would not be correct if
 <dt>Description:</dt><dd><p>Divides the world of all processors
 into <a class="reference internal" href="#ParallelContext.nhost_world" title="ParallelContext.nhost_world"><code class="xref py py-func docutils literal notranslate"><span class="pre">nhost_world()</span></code></a> / subworld_size subworlds.
 Note that the total number of processes, nhost_world, should be
-an integer multiple of subworld_size.
+an integer multiple of subworld_size. If that is not the case, the
+last subworld will have <code class="docutils literal notranslate"><span class="pre">pc.nhost()</span> <span class="pre">&lt;</span> <span class="pre">subworld_size</span></code>.
 The most useful subworld sizes are 1 and <a class="reference internal" href="#ParallelContext.nhost_world" title="ParallelContext.nhost_world"><code class="xref py py-func docutils literal notranslate"><span class="pre">nhost_world()</span></code></a> .
 After return, for the processes
-in each subworld, <a class="reference internal" href="#ParallelContext.nhost" title="ParallelContext.nhost"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.nhost()</span></code></a> is equal to subworld_size
+in each subworld, <a class="reference internal" href="#ParallelContext.nhost" title="ParallelContext.nhost"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.nhost()</span></code></a> is equal to subworld_size (except the last if nhost_world is not in integer multiple of subworld_size).
 and the <a class="reference internal" href="#ParallelContext.id" title="ParallelContext.id"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ParallelContext.id()</span></code></a> is the rank of the process with respect
 to the subworld of which it is a part.</p>
 <p>Each subworld has its own
@@ -1875,7 +1882,7 @@ two subworlds each with 3 processes. To aid in seeing how the computation
 progresses the function “f” prints its rank and number of processors
 for the world, bulletin board, and net (subworld) as well as argument,
 return value, and bulletin board defined userid. Prior to the runworker
-call all processes call f. After the runworker call, only the master
+call, all processes call f. After the runworker call, only the master
 process returns and calls f. The master submits 4 tasks and then enters
 a while loop waiting for results and, when a result is ready, prints
 the userid, argument, and return value of the task.</p>

@@ -9,6 +9,7 @@ var searchData=
   ['netcvodethreaddata',['NetCvodeThreadData',['../class_net_cvode_thread_data.html',1,'']]],
   ['netparevent',['NetParEvent',['../class_net_par_event.html',1,'']]],
   ['netparmusicevent',['NetParMusicEvent',['../class_net_par_music_event.html',1,'']]],
+  ['newobj1_5ferr_5ft',['newobj1_err_t',['../structnewobj1__err__t.html',1,'']]],
   ['node',['Node',['../struct_node.html',1,'']]],
   ['nodestate',['NodeState',['../struct_save_state_1_1_node_state.html',1,'SaveState']]],
   ['noivgraphvector',['NoIVGraphVector',['../class_no_i_v_graph_vector.html',1,'']]],

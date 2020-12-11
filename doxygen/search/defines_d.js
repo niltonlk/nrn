@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['m',['M',['../intfire1_8c.html#a52037c938e3c1b126c6277da5ca689d0',1,'M():&#160;intfire1.c'],['../intfire2_8c.html#a52037c938e3c1b126c6277da5ca689d0',1,'M():&#160;intfire2.c'],['../intfire4_8c.html#a52037c938e3c1b126c6277da5ca689d0',1,'M():&#160;intfire4.c'],['../hh_8c.html#a00626facb4f86efb8618a4c5f5c3c5f8',1,'m():&#160;hh.c'],['../intfire1_8c.html#a00626facb4f86efb8618a4c5f5c3c5f8',1,'m():&#160;intfire1.c'],['../intfire2_8c.html#a00626facb4f86efb8618a4c5f5c3c5f8',1,'m():&#160;intfire2.c'],['../intfire4_8c.html#a00626facb4f86efb8618a4c5f5c3c5f8',1,'m():&#160;intfire4.c']]],
+  ['m',['m',['../hh_8c.html#a00626facb4f86efb8618a4c5f5c3c5f8',1,'m():&#160;hh.c'],['../intfire1_8c.html#a00626facb4f86efb8618a4c5f5c3c5f8',1,'m():&#160;intfire1.c'],['../intfire2_8c.html#a00626facb4f86efb8618a4c5f5c3c5f8',1,'m():&#160;intfire2.c'],['../intfire4_8c.html#a00626facb4f86efb8618a4c5f5c3c5f8',1,'m():&#160;intfire4.c'],['../intfire1_8c.html#a52037c938e3c1b126c6277da5ca689d0',1,'M():&#160;intfire1.c'],['../intfire2_8c.html#a52037c938e3c1b126c6277da5ca689d0',1,'M():&#160;intfire2.c'],['../intfire4_8c.html#a52037c938e3c1b126c6277da5ca689d0',1,'M():&#160;intfire4.c']]],
   ['m_5fadd_5fval',['m_add_val',['../matrix_8h.html#a5eac7276a0969848ed7542adafc4b98a',1,'matrix.h']]],
   ['m_5fcopy',['m_copy',['../matrix_8h.html#a4be5f6bf1b277177b1563f88eeadf018',1,'matrix.h']]],
   ['m_5fe',['M_E',['../_log_norm_8cpp.html#a9bf5d952c5c93c70f9e66c9794d406c9',1,'LogNorm.cpp']]],
@@ -117,6 +117,8 @@ var searchData=
   ['modename',['modename',['../memacs_2redef_8h.html#ace42e65bb335a33d066d08c6f9e0225f',1,'redef.h']]],
   ['modlunitconst',['modlunitCONST',['../model_8h.html#a6ec71ddec3b0c4b30461465a48a71dec',1,'model.h']]],
   ['modulus',['MODULUS',['../mesch_2init_8c.html#a9bc1fe94bf8c1b9aaef3dade106b6304',1,'init.c']]],
+  ['mol',['mol',['../unitstest_8c.html#a4d592611dd21d886df169e05954a0fe5',1,'unitstest.c']]],
+  ['mole',['mole',['../unitstest_8c.html#ae0e49cdf29a491348c3a96511521c9b1',1,'unitstest.c']]],
   ['monoglyph',['MonoGlyph',['../_inter_views_2__defines_8h.html#a8e1be1bba179639222566098b4a351f4',1,'_defines.h']]],
   ['monokit',['MonoKit',['../_inter_views_2__defines_8h.html#a0becd085ab232829e8ec910ceab8aee2',1,'_defines.h']]],
   ['monokitimpl',['MonoKitImpl',['../_inter_views_2__defines_8h.html#af8c44e211734deebbd12f79b09cad39f',1,'_defines.h']]],

@@ -134,7 +134,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#miscellaneous-rarely-used-options-specific-to-neuron">Miscellaneous Rarely used options specific to NEURON:</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#nrn-enable-discrete-event-observer-bool-on">NRN_ENABLE_DISCRETE_EVENT_OBSERVER:BOOL=ON</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#nrn-enable-legacy-fr-bool-on">NRN_ENABLE_LEGACY_FR:BOOL=ON</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nrn-dynamic-units-use-legacy-bool-off">NRN_DYNAMIC_UNITS_USE_LEGACY:BOOL=OFF</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#nrn-enable-mech-dll-style-bool-on">NRN_ENABLE_MECH_DLL_STYLE:BOOL=ON</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#nrn-enable-memacs-bool-off">NRN_ENABLE_MEMACS:BOOL=OFF</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#nrn-enable-shared-bool-on">NRN_ENABLE_SHARED:BOOL=ON</a></li>
@@ -604,11 +604,19 @@ How does one reformat a specific cmake file?</p>
 <div>Enable Observer to be a subclass of DiscreteEvent
 Can save space but a lot of component destruction may not notify other components that are watching it to no longer use that component. Useful only if one builds a model without needing to eliminate pieces of the model.</div></blockquote>
 </div>
-<div class="section" id="nrn-enable-legacy-fr-bool-on">
-<h2>NRN_ENABLE_LEGACY_FR:BOOL=ON<a class="headerlink" href="#nrn-enable-legacy-fr-bool-on" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nrn-dynamic-units-use-legacy-bool-off">
+<h2>NRN_DYNAMIC_UNITS_USE_LEGACY:BOOL=OFF<a class="headerlink" href="#nrn-dynamic-units-use-legacy-bool-off" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><p>Use original faraday, R, etc. instead of 2019 nist constants</p>
-<p>The default for version 8.0 onward is likely to become OFF in order to use the latest physical constants (at the cost of slight changes to legacy results).</p>
+<div><p>Default is to use modern faraday, R, etc. from 2019 nist constants.
+When Off or ON, and in the absence of the <code class="docutils literal notranslate"><span class="pre">NRNUNIT_USE_LEGACY=0or1</span></code>
+environment variable, the default dynamic value of <code class="docutils literal notranslate"><span class="pre">h.nrnunit_use_legacy()</span></code>
+will be 0 or 1 respectively.</p>
+<p>At launch time (or import neuron),
+use of legacy or modern units can be specified with the
+<code class="docutils literal notranslate"><span class="pre">NRNUNIT_USE_LEGACY=0or1</span></code> environment variable. The use of legacy or
+modern units can be dynamically specified after launch with the
+<code class="docutils literal notranslate"><span class="pre">h.nrnunit_use_legacy(0or1)</span></code> function (with no args, returns the
+current use flag).</p>
 </div></blockquote>
 </div>
 <div class="section" id="nrn-enable-mech-dll-style-bool-on">

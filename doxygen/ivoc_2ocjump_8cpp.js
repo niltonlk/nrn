@@ -5,6 +5,7 @@ var ivoc_2ocjump_8cpp =
     [ "hoc_execute", "ivoc_2ocjump_8cpp.html#ae6c6370767152dc921917b415c21edb2", null ],
     [ "hoc_execute1", "ivoc_2ocjump_8cpp.html#ae8ac2096d6958fbb6955ec99943ec4d0", null ],
     [ "hoc_valid_stmt", "ivoc_2ocjump_8cpp.html#a6f23eefd2810283d803e131b6773f504", null ],
+    [ "nrn_get_oji", "ivoc_2ocjump_8cpp.html#a99068e2b4723b1c988a7c9fddbb7acf4", null ],
     [ "oc_restore_code", "ivoc_2ocjump_8cpp.html#a7eba8d48810690dcff5dd39a5a35b540", null ],
     [ "oc_restore_hoc_oop", "ivoc_2ocjump_8cpp.html#a711f7c9782ffa08cde27833097f522b8", null ],
     [ "oc_restore_input_info", "ivoc_2ocjump_8cpp.html#a6d1c0f567936b89636827955718151c3", null ],

@@ -6,13 +6,13 @@ Python RXD tutorials
    :maxdepth: 2
 
    Calcium Waves
+   Extracellular Tutorial
+   Reaction-Diffusion tutorial
    changing intial conditions
    circadian
    degradable_buffer
    extracellular
-   Extracellular Tutorial
    initialization
    ion-channels
    ip3-demo
-   Reaction-Diffusion tutorial
    thresholds

@@ -35,6 +35,7 @@ var nrnpy__p2h_8cpp =
     [ "nrnpy_po2ho", "nrnpy__p2h_8cpp.html#a26b015502cacb56a41b19b34441da380", null ],
     [ "nrnpy_pyCallObject", "nrnpy__p2h_8cpp.html#ada77903e1b583debc242cc57d3de8416", null ],
     [ "nrnpy_pyobject_in_obj", "nrnpy__p2h_8cpp.html#a211769e0a9c600f318bf7fddf5c764ca", null ],
+    [ "nrnpyerr_str", "nrnpy__p2h_8cpp.html#a2323befd88bc2f450b0ab2a334c3742c", null ],
     [ "nrnpython_reg_real", "nrnpy__p2h_8cpp.html#acd7a579ba4aa9702c79b16fe9c2f3d97", null ],
     [ "p_cons", "nrnpy__p2h_8cpp.html#ae5d9e965d0e94822cd369f15f1153582", null ],
     [ "p_destruct", "nrnpy__p2h_8cpp.html#a90d62b79242f5ce03533f86f33b61f2e", null ],

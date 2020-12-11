@@ -13,6 +13,7 @@ var searchData=
   ['backsearch',['backsearch',['../efunc_8h.html#a99f77aeefc99fe4db6b8f285711eea36',1,'backsearch():&#160;efunc.h'],['../search_8c.html#adf21d88d5f7d338f72ad84c28e07853f',1,'backsearch(int f, int n):&#160;search.c']]],
   ['backslash',['backslash',['../hoc_8c.html#a922e111e3baee4c15909141e11d412c5',1,'hoc.c']]],
   ['backspace',['backspace',['../readline_8c.html#a357785bcf94ef5d5b423ec2ee6d274f6',1,'readline.c']]],
+  ['backward_5fwrapper',['backward_wrapper',['../backtrace__utils_8cpp.html#a2bccd6820cf0129cd70d1054da719f72',1,'backward_wrapper():&#160;backtrace_utils.cpp'],['../backtrace__utils_8h.html#a2bccd6820cf0129cd70d1054da719f72',1,'backward_wrapper():&#160;backtrace_utils.cpp']]],
   ['backword',['backword',['../efunc_8h.html#ac90145d7a80431b45210b1af9699c3c4',1,'backword():&#160;efunc.h'],['../word_8c.html#a36504e58f3c6c1dd0c2b40a3c3b3cd72',1,'backword(int f, int n):&#160;word.c']]],
   ['bamechlist',['BAMechList',['../class_b_a_mech_list.html#ad15634947c6a665be75f7453fa99315d',1,'BAMechList']]],
   ['band2mat',['band2mat',['../bdfactor_8c.html#a8eb23c58ad91a383f690ef8751e53302',1,'band2mat(BAND *bA, MAT *A):&#160;bdfactor.c'],['../matrix_8h.html#a8eb23c58ad91a383f690ef8751e53302',1,'band2mat(BAND *bA, MAT *A):&#160;bdfactor.c']]],

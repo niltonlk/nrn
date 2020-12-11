@@ -82,6 +82,7 @@ var nrnpy__nrn_8cpp =
     [ "nrn_hocobj_ptr", "nrnpy__nrn_8cpp.html#ae676aece15ea6cc675262fcb62a97097", null ],
     [ "nrn_is_hocobj_ptr", "nrnpy__nrn_8cpp.html#aba6f7cc036ce28e5c2078a258fb7d356", null ],
     [ "nrn_length_change", "nrnpy__nrn_8cpp.html#ac6d8d5f3eaae554379ee5ddba96445d0", null ],
+    [ "nrn_noerr_access", "nrnpy__nrn_8cpp.html#a434e3be2a0f5bb4a30a3517e2124de7b", null ],
     [ "nrn_pointer_assign", "nrnpy__nrn_8cpp.html#a8e17261e8abafd9de7fd1234033d2ed6", null ],
     [ "nrn_pt3dchange1", "nrnpy__nrn_8cpp.html#a90ecdb19867e3d14ea0fc589d5fd3eb7", null ],
     [ "nrn_pt3dchange2", "nrnpy__nrn_8cpp.html#a74e577ce52a3fc2e78893b354f16b82b", null ],

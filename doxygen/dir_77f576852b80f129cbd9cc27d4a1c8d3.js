@@ -57,6 +57,7 @@ var dir_77f576852b80f129cbd9cc27d4a1c8d3 =
     [ "nrnran123.c", "nrnran123_8c.html", "nrnran123_8c" ],
     [ "nrnran123.h", "nrnran123_8h.html", "nrnran123_8h" ],
     [ "nrnrt.h", "nrnrt_8h.html", null ],
+    [ "nrnunits_modern.h", "nrnunits__modern_8h.html", "nrnunits__modern_8h" ],
     [ "oc_ansi.h", "oc__ansi_8h.html", "oc__ansi_8h" ],
     [ "ocerf.c", "ocerf_8c.html", null ],
     [ "ocfunc.h", "ocfunc_8h.html", "ocfunc_8h" ],

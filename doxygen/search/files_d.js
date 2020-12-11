@@ -112,6 +112,7 @@ var searchData=
   ['nrnsymdiritem_2eh',['nrnsymdiritem.h',['../nrnsymdiritem_8h.html',1,'']]],
   ['nrntimeout_2ec',['nrntimeout.c',['../nrntimeout_8c.html',1,'']]],
   ['nrnunit_2ec',['nrnunit.c',['../nrnunit_8c.html',1,'']]],
+  ['nrnunits_5fmodern_2eh',['nrnunits_modern.h',['../nrnunits__modern_8h.html',1,'']]],
   ['nrnversion_2ec',['nrnversion.c',['../nrnversion_8c.html',1,'']]],
   ['nrnversion_2eh',['nrnversion.h',['../nrnversion_8h.html',1,'']]],
   ['nrnwrap_5fpython_2eh',['nrnwrap_Python.h',['../nrnwrap___python_8h.html',1,'']]],

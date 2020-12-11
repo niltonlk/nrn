@@ -111,6 +111,7 @@ var searchData=
   ['logmean',['logMean',['../class_log_normal.html#ae1b1f5cf34efe304a3b8ea5f5c07927a',1,'LogNormal']]],
   ['logvariance',['logVariance',['../class_log_normal.html#a2fbafbeceddb8e0cd0dfe95be66512dc',1,'LogNormal']]],
   ['long',['long',['../nrncvode_2netcvode_8cpp.html#a0bc651ef7626a7868da4cbfdbe70f96f',1,'netcvode.cpp']]],
+  ['long_5foptions',['long_options',['../modl_8c.html#ab5b68aa8f898c499ca2c3092ecd9e552',1,'modl.c']]],
   ['longdretval',['longdretval',['../nvector__nrnthread__ld_8c.html#aa482d957fa171a21924640a4bec385f6',1,'nvector_nrnthread_ld.c']]],
   ['looking_5ftodo_5f',['looking_todo_',['../class_b_b_s_direct_server.html#a70c1096fcc7a02cfbffd4062f18147d6',1,'BBSDirectServer']]],
   ['lookups',['lookups',['../struct_s_p_t_r_e_e.html#ae22614355a80b36fa06bd60c7ac0efae',1,'SPTREE']]],

@@ -2,6 +2,8 @@ var dir_3839636f4dffaa4aab0a620bf9b8685f =
 [
     [ "nrncore_write", "dir_bc1e699405cc8f7ce82e46d76827724b.html", "dir_bc1e699405cc8f7ce82e46d76827724b" ],
     [ "arraypool.h", "arraypool_8h.html", "arraypool_8h" ],
+    [ "backtrace_utils.cpp", "backtrace__utils_8cpp.html", "backtrace__utils_8cpp" ],
+    [ "backtrace_utils.h", "backtrace__utils_8h.html", "backtrace__utils_8h" ],
     [ "bbs.cpp", "nrniv_2bbs_8cpp.html", null ],
     [ "bbsavestate.cpp", "bbsavestate_8cpp.html", "bbsavestate_8cpp" ],
     [ "bbsavestate.h", "bbsavestate_8h.html", [

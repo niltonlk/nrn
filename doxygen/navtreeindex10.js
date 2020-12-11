@@ -1,5 +1,15 @@
 var NAVTREEINDEX10 =
 {
+"class_dismissable_window.html#a2bc4ea625d7a16c633f6aa373be7050f":[4,0,78,7],
+"class_dismissable_window.html#a2fc6856480830798269acf59b806a793":[4,0,78,2],
+"class_dismissable_window.html#a39b9535a33130d0fa4900d9366bb5ca8":[4,0,78,4],
+"class_dismissable_window.html#a573aaf60bfe3e808cc8baaa88ee2e396":[4,0,78,1],
+"class_dismissable_window.html#a5d37007295e8da8cf8e7adb37ef5914a":[4,0,78,10],
+"class_dismissable_window.html#abd94622317063dad44374e2616427bc7":[4,0,78,3],
+"class_dismissable_window.html#ac3ae52db94cb92ff05f1165f1bdefd93":[4,0,78,12],
+"class_dismissable_window.html#ace8bab8600ee9fc0c52e53783276ad18":[4,0,78,6],
+"class_dismissable_window.html#ad1774ee632c9d8bbd78121a865679324":[4,0,78,15],
+"class_dismissable_window.html#ae122b1d003b2a46a8535a6cbb14a33e1":[4,0,78,9],
 "class_dismissable_window.html#af691bc19c223b0f9b848c16d1561e392":[4,0,78,8],
 "class_dismissable_window.html#af82877838537e05778a6a1c7c4feb519":[4,0,78,14],
 "class_doc_browser.html":[4,0,81],
@@ -239,15 +249,5 @@ var NAVTREEINDEX10 =
 "class_g_poly_line.html#a51e81894e3fe7016ebf6a72192d8a937":[4,0,125,6],
 "class_g_poly_line.html#a6087393e851ec648ac040181c4da54d8":[4,0,125,32],
 "class_g_poly_line.html#a661a1419aeed877a5c1d5ffc928e429b":[4,0,125,4],
-"class_g_poly_line.html#a6a69b4581a00530ece4b03352cb22b63":[4,0,125,27],
-"class_g_poly_line.html#a727c07da267a480244d37d3fc1442915":[4,0,125,8],
-"class_g_poly_line.html#a759069dcf50f57f65a4b6bb76436c27b":[4,0,125,23],
-"class_g_poly_line.html#a7739668abf08de1659818f0ab43f2617":[4,0,125,7],
-"class_g_poly_line.html#a79d248ad36941f0d04e0ca98a7bd9c9f":[4,0,125,22],
-"class_g_poly_line.html#a7ba1187bdc7a5455b7fa460bff3ec55c":[4,0,125,33],
-"class_g_poly_line.html#a8193503fb9ab70ed480f8807fda0db6b":[4,0,125,30],
-"class_g_poly_line.html#a82cec70cf4e97c460a8ce62109c31fda":[4,0,125,20],
-"class_g_poly_line.html#a8b34fd0167a19c7946b94d5bc9486d32":[4,0,125,0],
-"class_g_poly_line.html#a8ca2241732ff31a5329079292fb7679a":[4,0,125,35],
-"class_g_poly_line.html#a8e8519acdffab98e61ca03879259f8c3":[4,0,125,15]
+"class_g_poly_line.html#a6a69b4581a00530ece4b03352cb22b63":[4,0,125,27]
 };

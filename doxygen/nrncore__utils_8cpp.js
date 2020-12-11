@@ -1,5 +1,6 @@
 var nrncore__utils_8cpp =
 [
+    [ "RTLD_NODELETE", "nrncore__utils_8cpp.html#a63b65253a063469ae964534ab38fe635", null ],
     [ "count_distinct", "nrncore__utils_8cpp.html#a7a11a2fb982c5304940d167cf0b64a25", null ],
     [ "file_exist", "nrncore__utils_8cpp.html#aea678a36e4bf1e9ff808c85f1f367d30", null ],
     [ "model_ready", "nrncore__utils_8cpp.html#ab7baca06c6d978e4ec463c7ce42e7fd3", null ],

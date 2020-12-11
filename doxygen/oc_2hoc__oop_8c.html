@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NEURON: /home/travis/build/neuronsimulator/nrn/src/oc/hoc_oop.c File Reference</title>
+<title>NEURON: /home/runner/work/nrn/nrn/src/oc/hoc_oop.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -115,6 +115,8 @@ $(document).ready(function(){initNavTree('oc_2hoc__oop_8c.html','');});
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="union_templatedatum.html">Templatedatum</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnewobj1__err__t.html">newobj1_err_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -140,6 +142,9 @@ Macros</h2></td></tr>
 <tr class="separator:a7169072ad9f7464e4b859224817711c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1110eb7e997a2e03f30b97b5617a2bb6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a1110eb7e997a2e03f30b97b5617a2bb6">OBJ_STACK_SIZE</a>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:a1110eb7e997a2e03f30b97b5617a2bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe3eaeb2a416371dba7a9d1832926df8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#afe3eaeb2a416371dba7a9d1832926df8">NEWOBJ1_ERR_SIZE</a>&#160;&#160;&#160;32 /* starts with this size, and doubles <a class="el" href="svclmp_8c.html#a42cc7dae7a40abcb545fc41730fa1476">on</a> overflow */</td></tr>
+<tr class="memdesc:afe3eaeb2a416371dba7a9d1832926df8"><td class="mdescLeft">&#160;</td><td class="mdescRight">If hoc_newob1 fails after creating a new object, that object needs to be unreffed.  <a href="#afe3eaeb2a416371dba7a9d1832926df8">More...</a><br /></td></tr>
+<tr class="separator:afe3eaeb2a416371dba7a9d1832926df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f45849e4bd3a184715f547960633fc5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a4f45849e4bd3a184715f547960633fc5">objectpath</a>&#160;&#160;&#160;<a class="el" href="oclist_8cpp.html#a2d4014aa84426fdc5515659fb7a97619">hoc_objectpath_impl</a></td></tr>
 <tr class="separator:a4f45849e4bd3a184715f547960633fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc5af0bfeeeceaf32583b299dc04ce3f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#adc5af0bfeeeceaf32583b299dc04ce3f">pathprepend</a>&#160;&#160;&#160;<a class="el" href="oclist_8cpp.html#acc7d265b74ede6f546842f26bd1272c8">hoc_path_prepend</a></td></tr>
@@ -204,6 +209,21 @@ Functions</h2></td></tr>
 <tr class="separator:ga289e5386e828025dd6c4f575a11eaf7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga35baaa58c5cb874ce60475deab46001e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__hoc__functions.html#ga35baaa58c5cb874ce60475deab46001e">hoc_temp_objvar</a> (<a class="el" href="struct_symbol.html">Symbol</a> *symtemp, <a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a> *<a class="el" href="vclmp_8c.html#a3b90d5a73541ab9402511d87bed076ef">v</a>)</td></tr>
 <tr class="separator:ga35baaa58c5cb874ce60475deab46001e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad079de1b912a6fe86386889dd1a31fb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#ad079de1b912a6fe86386889dd1a31fb7">nrn_get_oji</a> ()</td></tr>
+<tr class="memdesc:ad079de1b912a6fe86386889dd1a31fb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return handle for the current longjump buffer info.  <a href="#ad079de1b912a6fe86386889dd1a31fb7">More...</a><br /></td></tr>
+<tr class="separator:ad079de1b912a6fe86386889dd1a31fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712276a0abd46a7e3bd70c1907f43d15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a712276a0abd46a7e3bd70c1907f43d15">nrn_get_hoc_jmp</a> ()</td></tr>
+<tr class="memdesc:a712276a0abd46a7e3bd70c1907f43d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">If one of the two jmp_buf is controlling the longjmp hoc_newobj1_err needs handle to know how much to unwrap the newobj1 stack.  <a href="#a712276a0abd46a7e3bd70c1907f43d15">More...</a><br /></td></tr>
+<tr class="separator:a712276a0abd46a7e3bd70c1907f43d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addaaa7876b95bf0d1fdd4efd932ea621"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#addaaa7876b95bf0d1fdd4efd932ea621">push_newobj1_err</a> (<a class="el" href="struct_object.html">Object</a> *ob)</td></tr>
+<tr class="memdesc:addaaa7876b95bf0d1fdd4efd932ea621"><td class="mdescLeft">&#160;</td><td class="mdescRight">save partially constructed object and controlling longjump handle  <a href="#addaaa7876b95bf0d1fdd4efd932ea621">More...</a><br /></td></tr>
+<tr class="separator:addaaa7876b95bf0d1fdd4efd932ea621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74c2bc03e57a2344913890fef0be0e47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a74c2bc03e57a2344913890fef0be0e47">pop_newobj1_err</a> ()</td></tr>
+<tr class="memdesc:a74c2bc03e57a2344913890fef0be0e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">pop the now fully constructed object  <a href="#a74c2bc03e57a2344913890fef0be0e47">More...</a><br /></td></tr>
+<tr class="separator:a74c2bc03e57a2344913890fef0be0e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c515f65deab5f48a2a14c9bef9b395"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a25c515f65deab5f48a2a14c9bef9b395">hoc_newobj1_err</a> ()</td></tr>
+<tr class="memdesc:a25c515f65deab5f48a2a14c9bef9b395"><td class="mdescLeft">&#160;</td><td class="mdescRight">unref partially constructed objects controlled by current longjump handle  <a href="#a25c515f65deab5f48a2a14c9bef9b395">More...</a><br /></td></tr>
+<tr class="separator:a25c515f65deab5f48a2a14c9bef9b395"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7763e845679270c3531277781cee3c86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a7763e845679270c3531277781cee3c86">hoc_newobj1</a> (<a class="el" href="struct_symbol.html">Symbol</a> *sym, <a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a> <a class="el" href="ocptrvector_8cpp.html#aa5c2ff90fcb408e89beb87cf6c7e7f48">narg</a>)</td></tr>
 <tr class="separator:a7763e845679270c3531277781cee3c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc1b0d1035f95f305a61b714708e413d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#adc1b0d1035f95f305a61b714708e413d">hoc_newobj_arg</a> (<a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>)</td></tr>
@@ -330,6 +350,14 @@ Variables</h2></td></tr>
 <tr class="separator:a115f414c1776e95401cf99b48f1dfaa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5effc7a42923ac78e1a88c08b42d619"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#ab5effc7a42923ac78e1a88c08b42d619">obj_stack_loc</a></td></tr>
 <tr class="separator:ab5effc7a42923ac78e1a88c08b42d619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e0eb5e4055c23b410805e300617ca55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a5e0eb5e4055c23b410805e300617ca55">oc_jump_target_</a> )()</td></tr>
+<tr class="separator:a5e0eb5e4055c23b410805e300617ca55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9ffd034b74b9f6977b000c4f6542c70"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#ae9ffd034b74b9f6977b000c4f6542c70">newobj1_err_index_</a></td></tr>
+<tr class="separator:ae9ffd034b74b9f6977b000c4f6542c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16b27748d9dda966e2abc5cd57efedd9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a16b27748d9dda966e2abc5cd57efedd9">newobj1_err_size_</a></td></tr>
+<tr class="separator:a16b27748d9dda966e2abc5cd57efedd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a141075c0fc3528fa586a91f7e4ca3c82"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structnewobj1__err__t.html">newobj1_err_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a141075c0fc3528fa586a91f7e4ca3c82">newobj1_err_</a></td></tr>
+<tr class="separator:a141075c0fc3528fa586a91f7e4ca3c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af77494fe6168180e9ca91506a7f04703"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#af77494fe6168180e9ca91506a7f04703">gui_redirect_obj_</a></td></tr>
 <tr class="separator:af77494fe6168180e9ca91506a7f04703"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48fd862399be66a59e60cd4cf40d8f1a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="oc_2hoc__oop_8c.html#a48fd862399be66a59e60cd4cf40d8f1a">template_id</a></td></tr>
@@ -365,6 +393,25 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00016">16</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+
+</div>
+</div>
+<a id="afe3eaeb2a416371dba7a9d1832926df8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe3eaeb2a416371dba7a9d1832926df8">&#9670;&nbsp;</a></span>NEWOBJ1_ERR_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEWOBJ1_ERR_SIZE&#160;&#160;&#160;32 /* starts with this size, and doubles <a class="el" href="svclmp_8c.html#a42cc7dae7a40abcb545fc41730fa1476">on</a> overflow */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If hoc_newob1 fails after creating a new object, that object needs to be unreffed. </p>
+<p>To handle the case of constructors themselves creating new objects before the error or intervening recovery of error by a callee recovering from execerror, the incomplete new object is put on a stack along with the current longjump target, and removed from the stack when the object is complete. There could be a problem if the destructor doesn't work with a partially constructed object. In case of a execerror before newobj1 completion, all partially constructed objects with a longjump handle equal to the current longjump handle are unreffed. </p>
+
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00514">514</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -412,7 +459,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01836">1836</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01907">1907</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -428,7 +475,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01837">1837</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01908">1908</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -605,7 +652,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00618">618</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00689">689</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -649,7 +696,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00741">741</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00812">812</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -685,7 +732,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00654">654</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00725">725</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -773,7 +820,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01507">1507</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01578">1578</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -811,7 +858,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01973">1973</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02044">2044</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -831,7 +878,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01728">1728</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01799">1799</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -851,7 +898,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02037">2037</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02108">2108</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -889,7 +936,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02056">2056</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02127">2127</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -927,7 +974,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02077">2077</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02148">2148</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -947,7 +994,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02096">2096</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02167">2167</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -967,7 +1014,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01311">1311</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01382">1382</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -987,7 +1034,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01436">1436</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01507">1507</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1007,7 +1054,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00803">803</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00874">874</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1027,7 +1074,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00861">861</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00932">932</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1047,7 +1094,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01713">1713</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01784">1784</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1067,7 +1114,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01474">1474</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01545">1545</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1107,7 +1154,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01740">1740</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01811">1811</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1147,7 +1194,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00808">808</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00879">879</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1191,7 +1238,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02102">2102</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l02173">2173</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1241,7 +1288,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00590">590</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00661">661</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1271,7 +1318,28 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00503">503</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00572">572</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+
+</div>
+</div>
+<a id="a25c515f65deab5f48a2a14c9bef9b395"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c515f65deab5f48a2a14c9bef9b395">&#9670;&nbsp;</a></span>hoc_newobj1_err()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a> hoc_newobj1_err </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>unref partially constructed objects controlled by current longjump handle </p>
+
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00553">553</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1291,7 +1359,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00575">575</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00646">646</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1311,7 +1379,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00586">586</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00657">657</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1331,7 +1399,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01778">1778</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01849">1849</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1351,7 +1419,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01273">1273</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01344">1344</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1371,7 +1439,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01318">1318</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01389">1389</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1391,7 +1459,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00957">957</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01028">1028</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1411,7 +1479,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01242">1242</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01313">1313</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1431,7 +1499,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00905">905</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00976">976</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1511,7 +1579,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00846">846</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00917">917</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1571,7 +1639,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00813">813</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00884">884</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1591,7 +1659,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00771">771</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00842">842</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1687,7 +1755,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01418">1418</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01489">1489</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1731,7 +1799,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01554">1554</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01625">1625</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1750,7 +1818,50 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00650">650</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00721">721</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+
+</div>
+</div>
+<a id="a712276a0abd46a7e3bd70c1907f43d15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a712276a0abd46a7e3bd70c1907f43d15">&#9670;&nbsp;</a></span>nrn_get_hoc_jmp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>* nrn_get_hoc_jmp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If one of the two jmp_buf is controlling the longjmp hoc_newobj1_err needs handle to know how much to unwrap the newobj1 stack. </p>
+
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00682">682</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
+
+</div>
+</div>
+<a id="ad079de1b912a6fe86386889dd1a31fb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad079de1b912a6fe86386889dd1a31fb7">&#9670;&nbsp;</a></span>nrn_get_oji()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>* nrn_get_oji </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return handle for the current longjump buffer info. </p>
+<p>Valid until finish is called on the oji_ instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="ivoc_2ocjump_8cpp_source.html#l00126">126</a> of file <a class="el" href="ivoc_2ocjump_8cpp_source.html">ocjump.cpp</a>.</p>
 
 </div>
 </div>
@@ -1792,7 +1903,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01849">1849</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01920">1920</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1912,7 +2023,28 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01839">1839</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01910">1910</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+
+</div>
+</div>
+<a id="a74c2bc03e57a2344913890fef0be0e47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74c2bc03e57a2344913890fef0be0e47">&#9670;&nbsp;</a></span>pop_newobj1_err()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a> pop_newobj1_err </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>pop the now fully constructed object </p>
+
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00547">547</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -1944,6 +2076,36 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="addaaa7876b95bf0d1fdd4efd932ea621"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addaaa7876b95bf0d1fdd4efd932ea621">&#9670;&nbsp;</a></span>push_newobj1_err()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a> push_newobj1_err </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_object.html">Object</a> *&#160;</td>
+          <td class="paramname"><em>ob</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>save partially constructed object and controlling longjump handle </p>
+
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00528">528</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="af77494fe6168180e9ca91506a7f04703"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af77494fe6168180e9ca91506a7f04703">&#9670;&nbsp;</a></span>gui_redirect_obj_</h2>
@@ -1965,7 +2127,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00649">649</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00720">720</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>
@@ -2121,6 +2283,78 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a141075c0fc3528fa586a91f7e4ca3c82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a141075c0fc3528fa586a91f7e4ca3c82">&#9670;&nbsp;</a></span>newobj1_err_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structnewobj1__err__t.html">newobj1_err_t</a>* newobj1_err_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00525">525</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+
+</div>
+</div>
+<a id="ae9ffd034b74b9f6977b000c4f6542c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9ffd034b74b9f6977b000c4f6542c70">&#9670;&nbsp;</a></span>newobj1_err_index_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a> newobj1_err_index_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00523">523</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+
+</div>
+</div>
+<a id="a16b27748d9dda966e2abc5cd57efedd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16b27748d9dda966e2abc5cd57efedd9">&#9670;&nbsp;</a></span>newobj1_err_size_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="nrnmusic_8cpp.html#a61569f2965b7a369eb10b6d75d410d11">int</a> newobj1_err_size_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00524">524</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+
+</div>
+</div>
 <a id="a115f414c1776e95401cf99b48f1dfaa8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a115f414c1776e95401cf99b48f1dfaa8">&#9670;&nbsp;</a></span>obj_stack_</h2>
 
@@ -2166,6 +2400,22 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l00238">238</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+
+</div>
+</div>
+<a id="a5e0eb5e4055c23b410805e300617ca55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e0eb5e4055c23b410805e300617ca55">&#9670;&nbsp;</a></span>oc_jump_target_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="ivoc_2classreg_8cpp.html#ac9c84fa68bbad002983e35ce3663c686">void</a>(* oc_jump_target_) ()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hoc_8c_source.html#l00671">671</a> of file <a class="el" href="hoc_8c_source.html">hoc.c</a>.</p>
 
 </div>
 </div>
@@ -2269,7 +2519,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01434">1434</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="oc_2hoc__oop_8c_source.html#l01505">1505</a> of file <a class="el" href="oc_2hoc__oop_8c_source.html">hoc_oop.c</a>.</p>
 
 </div>
 </div>

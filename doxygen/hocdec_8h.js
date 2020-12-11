@@ -16,6 +16,7 @@ var hocdec_8h =
     [ "HocStateTolerance", "struct_hoc_state_tolerance.html", "struct_hoc_state_tolerance" ],
     [ "HocParmUnits", "struct_hoc_parm_units.html", "struct_hoc_parm_units" ],
     [ "CPLUSOBJECT", "hocdec_8h.html#a8f0c00c44f1cd4357710aea1ad34a3c7", null ],
+    [ "DYNAMICUNITS", "hocdec_8h.html#aba27932e53ad93db3809e18901daa01e", null ],
     [ "ENDGUI", "hocdec_8h.html#ac79f83b8bce5b0f3d37a6d6b5eb5d48f", null ],
     [ "ERRCHK", "hocdec_8h.html#a1b114bd369831da45de34acc2ec6ebaa", null ],
     [ "gargstr", "hocdec_8h.html#a7a3d6351fbc19ee5492fe27273b69d50", null ],

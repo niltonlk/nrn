@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NEURON: /home/travis/build/neuronsimulator/nrn/src/nrniv/kschan.h File Reference</title>
+<title>NEURON: /home/runner/work/nrn/nrn/src/nrniv/kschan.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -98,6 +98,7 @@ $(document).ready(function(){initNavTree('kschan_8h.html','');});
 <code>#include &lt;<a class="el" href="string_8h_source.html">OS/string.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="nrnoc2iv_8h_source.html">nrnoc2iv.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ivocvect_8h_source.html">ivocvect.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="nrnunits__modern_8h_source.html">nrnunits_modern.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="spmatrix_8h_source.html">spmatrix.h</a>&quot;</code><br />
 </div>
 <p><a href="kschan_8h_source.html">Go to the source code of this file.</a></p>
@@ -143,15 +144,35 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:adc5e6da78496c2c434ec935fd888d07f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kschan_8h.html#adc5e6da78496c2c434ec935fd888d07f">ebykt</a>&#160;&#160;&#160;(11.604589/(273.15 + <a class="el" href="neuron_8h.html#a2575c5fd89198ddb2044f884edd03f22">celsius</a>))</td></tr>
+<tr class="memitem:a84ac9c21e5004dc24a76b330949cd26e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kschan_8h.html#a84ac9c21e5004dc24a76b330949cd26e">_e_over_k</a>&#160;&#160;&#160;<a class="el" href="kschan_8h.html#aac4b6c8cceddb0cbb786f033768c971c">_e_over_k_</a>[<a class="el" href="group__hoc__functions.html#gaf4a96e2e39b2fd6ed4630bea69c8fcf4">_nrnunit_use_legacy_</a>]</td></tr>
+<tr class="separator:a84ac9c21e5004dc24a76b330949cd26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc5e6da78496c2c434ec935fd888d07f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kschan_8h.html#adc5e6da78496c2c434ec935fd888d07f">ebykt</a>&#160;&#160;&#160;(<a class="el" href="kschan_8h.html#a84ac9c21e5004dc24a76b330949cd26e">_e_over_k</a>/(273.15 + <a class="el" href="neuron_8h.html#a2575c5fd89198ddb2044f884edd03f22">celsius</a>))</td></tr>
 <tr class="separator:adc5e6da78496c2c434ec935fd888d07f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a2575c5fd89198ddb2044f884edd03f22"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kschan_8h.html#a2575c5fd89198ddb2044f884edd03f22">celsius</a></td></tr>
 <tr class="separator:a2575c5fd89198ddb2044f884edd03f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac4b6c8cceddb0cbb786f033768c971c"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kschan_8h.html#aac4b6c8cceddb0cbb786f033768c971c">_e_over_k_</a> [2] = {<a class="el" href="nrnunits__modern_8h.html#accf01bbc87369e680ed63fee650c7a6c">_e_over_k_codata2018</a>, 11.604589}</td></tr>
+<tr class="separator:aac4b6c8cceddb0cbb786f033768c971c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a84ac9c21e5004dc24a76b330949cd26e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84ac9c21e5004dc24a76b330949cd26e">&#9670;&nbsp;</a></span>_e_over_k</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _e_over_k&#160;&#160;&#160;<a class="el" href="kschan_8h.html#aac4b6c8cceddb0cbb786f033768c971c">_e_over_k_</a>[<a class="el" href="group__hoc__functions.html#gaf4a96e2e39b2fd6ed4630bea69c8fcf4">_nrnunit_use_legacy_</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="kschan_8h_source.html#l00076">76</a> of file <a class="el" href="kschan_8h_source.html">kschan.h</a>.</p>
+
+</div>
+</div>
 <a id="adc5e6da78496c2c434ec935fd888d07f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc5e6da78496c2c434ec935fd888d07f">&#9670;&nbsp;</a></span>ebykt</h2>
 
@@ -159,16 +180,40 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ebykt&#160;&#160;&#160;(11.604589/(273.15 + <a class="el" href="neuron_8h.html#a2575c5fd89198ddb2044f884edd03f22">celsius</a>))</td>
+          <td class="memname">#define ebykt&#160;&#160;&#160;(<a class="el" href="kschan_8h.html#a84ac9c21e5004dc24a76b330949cd26e">_e_over_k</a>/(273.15 + <a class="el" href="neuron_8h.html#a2575c5fd89198ddb2044f884edd03f22">celsius</a>))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="kschan_8h_source.html#l00075">75</a> of file <a class="el" href="kschan_8h_source.html">kschan.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kschan_8h_source.html#l00078">78</a> of file <a class="el" href="kschan_8h_source.html">kschan.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="aac4b6c8cceddb0cbb786f033768c971c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac4b6c8cceddb0cbb786f033768c971c">&#9670;&nbsp;</a></span>_e_over_k_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double _e_over_k_[2] = {<a class="el" href="nrnunits__modern_8h.html#accf01bbc87369e680ed63fee650c7a6c">_e_over_k_codata2018</a>, 11.604589}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="kschan_8h_source.html#l00077">77</a> of file <a class="el" href="kschan_8h_source.html">kschan.h</a>.</p>
+
+</div>
+</div>
 <a id="a2575c5fd89198ddb2044f884edd03f22"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2575c5fd89198ddb2044f884edd03f22">&#9670;&nbsp;</a></span>celsius</h2>
 

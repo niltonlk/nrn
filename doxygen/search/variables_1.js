@@ -58,7 +58,7 @@ var searchData=
   ['araydim',['araydim',['../struct_symbol.html#a66aa32feba92647c5b945817dd9025ca',1,'Symbol']]],
   ['arayinfo',['arayinfo',['../struct_symbol.html#afc28f63d21c1c4137a57287b2a660b12',1,'Symbol::arayinfo()'],['../union_objectdata.html#ad0b305b54eaed320099105137b3bfe63',1,'Objectdata::arayinfo()'],['../struct_psym.html#a85335d8508957be14aebf0a3b85695b8',1,'Psym::arayinfo()']]],
   ['arc',['arc',['../struct_pt3d.html#a48aff1060c563aff88350132fcb3f088',1,'Pt3d']]],
-  ['ardoub',['ardoub',['../hocmodl_8h.html#a10238ef9a9e9dca02a481c02e6ee71ba',1,'hocmodl.h']]],
+  ['ardoub',['ardoub',['../hocmodl_8h.html#a365ccadb77605961f1c459bbb1859dd4',1,'hocmodl.h']]],
   ['area',['area',['../treeset_8c.html#a4329d2992f02e00a6e706a5443269afc',1,'treeset.c']]],
   ['area2buf_5f',['area2buf_',['../class_multi_split_control.html#aee3ec8b27a6ad0273c77ddc564ec0199',1,'MultiSplitControl']]],
   ['area2rt_5f',['area2rt_',['../class_multi_split_control.html#a90c6e128db856c83fc9961add178b8b4',1,'MultiSplitControl']]],

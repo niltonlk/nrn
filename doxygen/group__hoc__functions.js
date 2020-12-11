@@ -198,6 +198,7 @@ var group__hoc__functions =
     [ "vector_set_label", "group__hoc__functions.html#ga61e145e6233fb10394206c0abcacdda0", null ],
     [ "vector_temp_objvar", "group__hoc__functions.html#gab9815aacea2dd61dd0ff5a6301df26e6", null ],
     [ "vector_vec", "group__hoc__functions.html#ga6375e61975eab00e3f1439e2dc85ab4d", null ],
+    [ "_nrnunit_use_legacy_", "group__hoc__functions.html#gaf4a96e2e39b2fd6ed4630bea69c8fcf4", null ],
     [ "hoc_ac_", "group__hoc__functions.html#gaad51b4d03f7b962bba2f117df7668de1", null ],
     [ "hoc_color", "group__hoc__functions.html#gae73a0ebecffc97cc014d4788c7aa9bbc", null ],
     [ "hoc_epsilon", "group__hoc__functions.html#gaf8d382ee83b7ba77b8026776a8b42ed8", null ],

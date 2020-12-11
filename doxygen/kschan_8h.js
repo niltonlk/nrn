@@ -18,6 +18,8 @@ var kschan_8h =
     [ "KSPPIvNonSpec", "class_k_s_p_p_iv_non_spec.html", "class_k_s_p_p_iv_non_spec" ],
     [ "KSState", "class_k_s_state.html", "class_k_s_state" ],
     [ "KSChan", "class_k_s_chan.html", "class_k_s_chan" ],
+    [ "_e_over_k", "kschan_8h.html#a84ac9c21e5004dc24a76b330949cd26e", null ],
     [ "ebykt", "kschan_8h.html#adc5e6da78496c2c434ec935fd888d07f", null ],
+    [ "_e_over_k_", "kschan_8h.html#aac4b6c8cceddb0cbb786f033768c971c", null ],
     [ "celsius", "kschan_8h.html#a2575c5fd89198ddb2044f884edd03f22", null ]
 ];
